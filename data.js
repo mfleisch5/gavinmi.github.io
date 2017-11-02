@@ -1,7 +1,9 @@
+//There's a chance that everything about this is awful I'm not super experienced with JS
+
 //Constructor for Student
 //classes   (HashMap<Int,Class[]>)  all the classes for the student by semester
 //semsester (int)                   current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
-function Schedule(classes, semester) {
+function Student(classes, semester) {
   this.classes = classes;
   this.semester = semester;
 }
@@ -21,3 +23,9 @@ function Class(id, name, credits, coreq, prereq, desc) {
   this.prerequisites = prereq;
   this.description = desc;
 }
+
+// functions we want:
+// 1. Add a class to a Student's schedule (avoid duplicates and adding to finished semester)
+// 2. Remove a class from a Student's schedule
+// 3. Move a class from one semester to another (unless trying to move to already finished semester?) 
+// there's definitely more
