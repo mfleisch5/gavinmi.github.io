@@ -28,4 +28,5 @@ function Class(id, name, credits, coreq, prereq, desc) {
 // 1. Add a class to a Student's schedule (avoid duplicates and adding to finished semester)
 // 2. Remove a class from a Student's schedule
 // 3. Move a class from one semester to another (unless trying to move to already finished semester?) 
+// 4. Draw the calendar from schedule? (not sure exactly how we want to do this) 
 // there's definitely more
