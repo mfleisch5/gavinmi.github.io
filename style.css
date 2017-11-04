@@ -42,7 +42,7 @@ blackout section {
 /******************************************************************************/
 /************* NAVIGATION BAR STYLINGS INCLUDING BUTTONS AND IMAGE ************/
 /******************************************************************************/
-ul#nav_bar {
+menu#nav_bar {
   color: white;
   background-color: #444;
 
@@ -54,18 +54,24 @@ ul#nav_bar {
   margin: 0;
   padding: 0;
 }
-ul#nav_bar img {
+menu#nav_bar img {
   width: 200px;
   height: 200px;
   cursor: pointer;
   background-color: #333;
 }
-ul#nav_bar li {
+menu#nav_bar a {
+  display: block;
   padding: 10px;
+  color: white;
   font-size: 12pt;
-  cursor: pointer;
+  text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
+menu#navbar a:link    { color: white; }
+menu#navbar a:visited { color: white; }
+menu#navbar a:hover   { color: white; }
+menu#navbar a:active  { color: white; }
 
 /******************************************************************************/
 /**************** MAIN BODY STYLINGS STANDARD ACCROSS ALL PAGES ***************/
