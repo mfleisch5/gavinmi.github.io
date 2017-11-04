@@ -1,0 +1,91 @@
+<link rel="stylesheet" type = "text/css" href="style.css">
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Homepage</title>
+
+		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
+		<style>
+			div#prog_bar {
+				margin: 0 auto;
+				height: 75px;
+				background: linear-gradient(#333, #222);
+				border-radius: 5px;
+				overflow: hidden;
+			}
+			div#prog_bar div#bar {
+				background: linear-gradient(#1D992B, darkgreen);
+				width: 0px; height: 100%;
+				transition: 0.5s ease;
+			}
+			div#prog_bar div#percent {
+				color: white;
+				text-align: center;
+				font-size: 21px;
+				text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
+				padding-top: 24px;
+
+				width: calc(100% - 230px);
+				position: absolute;
+			}
+			div#prog_bar label {
+				text-align: center;
+				position: absolute;
+				width: 75px;
+			}
+			div#prog_bar label:nth-of-type(1) { left: calc(25% + 120px); }
+			div#prog_bar label:nth-of-type(2) { left: calc(50% + 63px); }
+			div#prog_bar label:nth-of-type(3) { left: calc(75% + 5px); }
+			div#prog_bar label div:first-child {
+			  width: 0;
+			  height: 0;
+			  border-left: 5px solid transparent;
+			  border-right: 5px solid transparent;
+			  border-bottom: 5px solid #333;
+				margin: 0 auto;
+			}
+			div#prog_bar label div:not(:first-child) {
+				background-color: #333;
+				border-radius: 5px;
+				color: white;
+				padding: 5px;
+			}
+		</style>
+
+		<script>
+		</script>
+	</head>
+	<body>
+
+		<menu id="nav_bar">
+			<img src="">
+			<a href="javascript:null">Home</a>
+			<a href="javascript:null">Classes</a>
+			<a href="javascript:null">Schedule</a>
+			<a href="">Settings</a>
+		</menu>
+
+		<section id="main_body">
+
+			<div id="prog_bar">
+				<div id="percent">Progress - 50%</div>
+				<div id="bar"  style="width: 75%;"></div>
+				<label>
+					<div></div>
+					<div>Sophomore</div>
+				</label>
+				<label>
+					<div></div>
+					<div>Junior</div>
+				</label>
+				<label>
+					<div></div>
+					<div>Senior</div>
+				</label>
+			</div>
+
+		</section>
+
+	</body>
+<html>

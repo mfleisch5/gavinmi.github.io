@@ -80,9 +80,10 @@ section#main_body {
   display: inline-block;
   vertical-align: top;
   margin-left: -7px;
+  padding: 15px;
 
-  width: calc(100% - 201px);
-  height: 100%;
+  width: calc(100% - 231px);
+  height: calc(100% - 30px);
 
   background-color: #ccc;
 }
