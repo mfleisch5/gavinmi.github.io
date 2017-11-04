@@ -1,0 +1,82 @@
+/******************************************************************************/
+/********************** BODY AND BASIC ELEMENT STYLINGS ***********************/
+/********************* PUT ALL NON-CLASSED STYLINGS HERE **********************/
+/******************************************************************************/
+body {
+  margin: 0px;
+  font-family: monospace;
+}
+
+/************************ SUBJECT TO CHANGE OBVIOUSLY *************************/
+input, button {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid gray;
+  display: inline-block;
+}
+
+/************** BLACKOUT ELEMENT OVERLAYED BEHIND DIALOG POP-UPS **************/
+blackout {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 0;
+  display: none;
+}
+blackout.open {
+  display: block;
+}
+blackout section {
+  background-color: white;
+  border-radius: 4px;
+  padding: 15px;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/******************************************************************************/
+/************* NAVIGATION BAR STYLINGS INCLUDING BUTTONS AND IMAGE ************/
+/******************************************************************************/
+ul#nav_bar {
+  color: white;
+  background-color: #444;
+
+  height: 100%;
+  width: 200px;
+  display: inline-block;
+
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ul#nav_bar img {
+  width: 200px;
+  height: 200px;
+  cursor: pointer;
+  background-color: #333;
+}
+ul#nav_bar li {
+  padding: 10px;
+  font-size: 12pt;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/******************************************************************************/
+/**************** MAIN BODY STYLINGS STANDARD ACCROSS ALL PAGES ***************/
+/******************************************************************************/
+section#main_body {
+  display: inline-block;
+  vertical-align: top;
+  margin-left: -7px;
+
+  width: calc(100% - 201px);
+  height: 100%;
+
+  background-color: #ccc;
+}
