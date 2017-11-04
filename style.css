@@ -7,15 +7,38 @@ body {
   font-family: monospace;
 }
 
-/************************ SUBJECT TO CHANGE OBVIOUSLY *************************/
-input, button {
+input,
+button {
   padding: 8px;
   border-radius: 4px;
   border: 1px solid gray;
   display: inline-block;
 }
 
+card {
+  padding: 15px;
+  display: block;
+  border-radius: 4px;
+  background-color: white;
+  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+}
+
+.centered {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+img.expander {
+  content:url("https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png");
+  width: 15px; height: 15px;
+  margin-top: 5px; float: right;
+}
+
+/******************************************************************************/
 /************** BLACKOUT ELEMENT OVERLAYED BEHIND DIALOG POP-UPS **************/
+/******************************************************************************/
 blackout {
   position: absolute;
   height: 100%;
@@ -24,20 +47,7 @@ blackout {
   z-index: 0;
   display: none;
 }
-blackout.open {
-  display: block;
-}
-blackout section {
-  background-color: white;
-  border-radius: 4px;
-  padding: 15px;
-  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.4);
-
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
+blackout.open { display: block; }
 
 /******************************************************************************/
 /************* NAVIGATION BAR STYLINGS INCLUDING BUTTONS AND IMAGE ************/
@@ -50,9 +60,7 @@ menu#nav_bar {
   width: 200px;
   display: inline-block;
 
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+  margin: 0; padding: 0;
 }
 menu#nav_bar img {
   width: 200px;

@@ -8,11 +8,12 @@
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
 			div#prog_bar {
-				margin: 0 auto;
+				margin: 0 auto 75px;
 				height: 75px;
 				background: linear-gradient(#333, #222);
-				border-radius: 5px;
+				border-radius: 4px;
 				overflow: hidden;
+
 			}
 			div#prog_bar div#bar {
 				background: linear-gradient(#1D992B, darkgreen);
@@ -33,6 +34,7 @@
 				text-align: center;
 				position: absolute;
 				width: 75px;
+				user-select: none;
 			}
 			div#prog_bar label:nth-of-type(1) { left: calc(25% + 120px); }
 			div#prog_bar label:nth-of-type(2) { left: calc(50% + 63px); }
@@ -51,9 +53,25 @@
 				color: white;
 				padding: 5px;
 			}
+
+			card {
+				display: inline-block;
+				vertical-align: top;
+				width: 300px; height: 400px;
+			}
+			card h2, card ul { margin-bottom: 5px; }
+			card h2 { user-select: none; cursor: pointer; }
+			card label img { transform: rotate(180deg); }
+			card ul.closed { display: none; }
+			card label.closed img { transform: rotate(0deg); }
+			card ul li:not(:last-child) { margin-bottom: 5px; }
 		</style>
 
 		<script>
+			function openclose(element) {
+				element.classList.toggle("closed");
+				document.getElementById(element.htmlFor).classList.toggle("closed");
+			}
 		</script>
 	</head>
 	<body>
@@ -70,20 +88,34 @@
 
 			<div id="prog_bar">
 				<div id="percent">Progress - 50%</div>
-				<div id="bar"  style="width: 75%;"></div>
-				<label>
-					<div></div>
-					<div>Sophomore</div>
-				</label>
-				<label>
-					<div></div>
-					<div>Junior</div>
-				</label>
-				<label>
-					<div></div>
-					<div>Senior</div>
-				</label>
+				<div id="bar"  style="width: 50%;"></div>
+				<label><div></div><div>Sophomore</div></label>
+				<label><div></div><div>Junior</div></label>
+				<label><div></div><div>Senior</div></label>
 			</div>
+
+			<card>
+				<label for="current_semester" onclick="openclose(this)">
+					<h2>Current Semester (13)<img class="expander"></h2>
+				</label>
+				<ul id="current_semester">
+					<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+					<li><a href="javascript:null">Computers and Society (4)</a></li>
+					<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+					<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+				</ul>
+				<label for="upcoming_semester" onclick="openclose(this)">
+					<h2>Upcoming Semester (13)<img class="expander"></h2>
+				</label>
+				<ul id="upcoming_semester">
+					<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+					<li><a href="javascript:null">Computers and Society (4)</a></li>
+					<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+					<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+				</ul>
+			</card>
+
+			<card></card>
 
 		</section>
 
