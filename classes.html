@@ -3,7 +3,7 @@
 
 <html>
 	<head>
-		<title>DA+ - Class</title>
+		<title>DA+ Class</title>
 
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
@@ -47,6 +47,18 @@
 				 margin-bottom: 15px;
 			}
 			blackout card span { float: right; }
+
+
+			.desc {
+			    margin-top: 2%;
+			    border-top: 1px solid #777;
+			}
+			.desc h4 {margin: 2% 0;}
+			.desc p {margin: 0 0 2% 4%;}
+
+			.class_title.visible > div.desc {display: block;}
+
+			.class_title > div.desc {display: none;}
 		</style>
 
 		<script>
@@ -56,6 +68,10 @@
 			}
 			function dialog() {
 				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+			}
+			function showdesc(element) {
+				element.classList.toggle("visible");
+			    document.getElementById(element.htmlFor).toggleClass("visible");
 			}
 		</script>
 	</head>
@@ -139,7 +155,19 @@
 							<h2>CS Requirements<img class="expander"></h2>
 						</label>
 						<ul id="cs_reqs">
-							<li>Object-Oriented Design <span>(4)</span></li>
+							<li class="class_title" onclick="showdesc(this)">
+								Object-Oriented Design <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>asdfghjkl</p>
+									<br>
+									<h4>Prerequisite</h4>
+									<h4>Co-requisite</h4>
+
+									<h4>Fulfillment</h4>
+									<p> CS Major Requirement</p>
+								</div>
+							</li>
 							<li>Algorithms and Data <span>(4)</span></li>
 							<li>Theory of Computation <span>(4)</span></li>
 							<li>Systems and Networks <span>(4)</span></li>
