@@ -3,7 +3,7 @@
 
 <html>
 	<head>
-		<title>Homepage</title>
+		<title>DA+ - Class</title>
 
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
@@ -29,9 +29,46 @@
 				max-height: calc(100% - 185px);
 				width: 400px;
 			}
+
+			card h2, card ul { margin-bottom: 5px; }
+			card h2 { user-select: none; cursor: pointer; }
+			card label img { transform: rotate(0deg); transition: 0.1s ease; }
+			card ul { margin-right: 10px; padding-left: 20px; }
+			card ul.closed { display: none; }
+			card label.closed img { transform: rotate(-90deg); }
+			card ul li:not(:last-child) { margin-bottom: 5px; }
+
+			.class_name {
+				display: table;
+				width: 100%;
+			}
+
+			.class_name > a {
+				display: table-cell;
+				vertical-align: middle;
+			    width: 85%;
+			    padding-right: 3%;
+			}
+			
+			.class_name > button {
+				display: table-cell;
+				vertical-align: middle;
+			}
+
+			button.add_btn {
+				background-color: #F0F8FF;
+				padding: 4px;
+			}
 		</style>
 
 		<script>
+			function openclose(element) {
+				element.classList.toggle("closed");
+				document.getElementById(element.htmlFor).classList.toggle("closed");
+			}
+			function openpopup() {
+				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+			}
 		</script>
 	</head>
 	<body>
@@ -40,7 +77,7 @@
 			<card class="centered" style="width: 300px; height: 400px;">
 				<h1>And this is about what a basic dialog would look like.</h1>
 				<input type="text" placeholder="text input">
-				<button onclick="openclose()">Exit</button>
+				<button onclick="openpopup()">Exit</button>
 			</card>
 		</blackout>
 
@@ -61,7 +98,31 @@
 				<card class="unpadded">
 					<header>Required Classes</header>
 					<section class="card_body">
-
+						<label class="closed" for="csreq" onclick="openclose(this)">
+							<h2>CS Requirement<img class="expander"></h2>
+						</label>
+						<ul id="csreq">
+							<p class="class_name">
+								<a href="javascript:null">Computer Science/Information Science Overview 1 (1)</a>
+								<button class="add_btn" onclick="openpopup()">Add</button>
+							</p>
+							<p class="class_name">
+								<a href="javascript:null">Fundamentals of Computer Science I (4)</a>
+								<button class="add_btn">Add</button>
+							</p>
+							<p class="class_name">
+								<a href="javascript:null">Lab for Fundamentals of Computer Science I (1)</a>
+								<button class="add_btn">Add</button>
+							</p>
+							<p class="class_name">
+								<a href="javascript:null">Discrete Structure</a>
+								<button class="add_btn" onclick="openpopup()">Add</button>
+							</p>
+							<p class="class_name">
+								<a href="javascript:null">Recitation for Discrete Structures (1)</a>
+								<button class="add_btn">Add</button>
+							</p>
+						</ul>
 					</section>
 				</card>
 
