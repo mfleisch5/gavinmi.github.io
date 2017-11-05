@@ -26,7 +26,7 @@
 			card {
 				display: inline-block;
 				vertical-align: top;
-				max-height: calc(100% - 185px);
+				height: 100%;
 				width: 400px;
 			}
 
@@ -38,27 +38,15 @@
 			card label.closed img { transform: rotate(-90deg); }
 			card ul li:not(:last-child) { margin-bottom: 5px; }
 
-			.class_name {
-				display: table;
-				width: 100%;
-			}
-
-			.class_name > a {
-				display: table-cell;
-				vertical-align: middle;
-			    width: 85%;
-			    padding-right: 3%;
-			}
-			
-			.class_name > button {
-				display: table-cell;
-				vertical-align: middle;
-			}
-
 			button.add_btn {
 				background-color: #F0F8FF;
 				padding: 4px;
 			}
+			blackout card table {
+				 height: calc(100% - 50px);
+				 margin-bottom: 15px;
+			}
+			blackout card span { float: right; }
 		</style>
 
 		<script>
@@ -66,7 +54,7 @@
 				element.classList.toggle("closed");
 				document.getElementById(element.htmlFor).classList.toggle("closed");
 			}
-			function openpopup() {
+			function dialog() {
 				document.getElementsByTagName('blackout')[0].classList.toggle("open");
 			}
 		</script>
@@ -74,10 +62,55 @@
 	<body>
 
 		<blackout>
-			<card class="centered" style="width: 300px; height: 400px;">
-				<h1>And this is about what a basic dialog would look like.</h1>
-				<input type="text" placeholder="text input">
-				<button onclick="openpopup()">Exit</button>
+			<card class="centered" style="width: 50%; height: 50%;">
+				<table>
+					<tr>
+						<th></th>
+						<th>Fall</th>
+						<th>Spring</th>
+						<th>Summer I</th>
+						<th>Summer II</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<span>
+					<button disabled onclick="dialog()">Okay</button>
+					<button onclick="dialog()">Cancel</button>
+				</span>
 			</card>
 		</blackout>
 
@@ -89,39 +122,33 @@
 			<a href="old_index.html">Settings</a>
 		</menu>
 
+
 		<section id="main_body" class="unpadded">
 
-			<div id="search_area"><input type="text" id="search_bar"></div>
+			<div id="search_area">
+				<button onclick="dialog()">Click here to see schedule dialog</button>
+				<input type="text" id="search_bar">
+			</div>
 
 			<section id="info_cards">
 
 				<card class="unpadded">
 					<header>Required Classes</header>
 					<section class="card_body">
-						<label class="closed" for="csreq" onclick="openclose(this)">
-							<h2>CS Requirement<img class="expander"></h2>
+						<label for="cs_reqs" onclick="openclose(this)">
+							<h2>CS Requirements<img class="expander"></h2>
 						</label>
-						<ul id="csreq">
-							<p class="class_name">
-								<a href="javascript:null">Computer Science/Information Science Overview 1 (1)</a>
-								<button class="add_btn" onclick="openpopup()">Add</button>
-							</p>
-							<p class="class_name">
-								<a href="javascript:null">Fundamentals of Computer Science I (4)</a>
-								<button class="add_btn">Add</button>
-							</p>
-							<p class="class_name">
-								<a href="javascript:null">Lab for Fundamentals of Computer Science I (1)</a>
-								<button class="add_btn">Add</button>
-							</p>
-							<p class="class_name">
-								<a href="javascript:null">Discrete Structure</a>
-								<button class="add_btn" onclick="openpopup()">Add</button>
-							</p>
-							<p class="class_name">
-								<a href="javascript:null">Recitation for Discrete Structures (1)</a>
-								<button class="add_btn">Add</button>
-							</p>
+						<ul id="cs_reqs">
+							<li>Object-Oriented Design <span>(4)</span></li>
+							<li>Algorithms and Data <span>(4)</span></li>
+							<li>Theory of Computation <span>(4)</span></li>
+							<li>Systems and Networks <span>(4)</span></li>
+						</ul>
+						<label for="writing_reqs" onclick="openclose(this)">
+							<h2>Writing Requirements<img class="expander"></h2>
+						</label>
+						<ul id="writing_reqs">
+							<li>Advanced Writing in a Technical Field <span>(4)</span></li>
 						</ul>
 					</section>
 				</card>
@@ -129,10 +156,23 @@
 				<card class="unpadded">
 					<header>Electives</header>
 					<section class="card_body">
-
+						<label for="cs_elecs" onclick="openclose(this)">
+							<h2>CS Electives<img class="expander"></h2>
+						</label>
+						<ul id="cs_elecs">
+							<li>Web Development <span>(4)</span></li>
+							<li>Project Management <span>(4)</span></li>
+							<li>The Eloquent Presenter <span>(1)</span></li>
+						</ul>
+						<label for="gen_elecs" onclick="openclose(this)">
+							<h2>General Electives<img class="expander"></h2>
+						</label>
+						<ul id="gen_elecs">
+							<li>European History <span>(4)</span></li>
+							<li>Introduction to Jazz <span>(4)</span></li>
+						</ul>
 					</section>
 				</card>
-				
 			</section>
 
 		</section>

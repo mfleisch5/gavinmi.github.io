@@ -8,7 +8,7 @@
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
 			div#prog_bar {
-				margin: 0 auto 75px;
+				margin: 0 auto 50px;
 				height: 75px;
 				background: linear-gradient(#333, #222);
 				border-radius: 4px;
@@ -53,18 +53,25 @@
 				padding: 5px;
 			}
 
-			#info_cards { text-align: center; }
-			#info_cards * { text-align: left; }
-
 			card {
 				display: inline-block;
 				vertical-align: top;
-				max-height: calc(100% - 185px);
-				min-width: 400px;
+				max-height: calc(100% - 160px);
+				min-height: 162px;
+				width: calc(50% - 34px);
+				margin-bottom: 10px;
 			}
+			/**********************************************************************/
+			/*Trying to make this a little more responsive to smaller window sizes*/
+			/**********************************************************************/
+			/*@media screen and (max-width: 1200px) {
+    		card {
+        	width: calc(100% - 30px);
+					max-height: calc(100% - 435px);
+				}
+			}*/
 			card h2, card ul { margin-bottom: 5px; }
 			card h2 { user-select: none; cursor: pointer; }
-			card label img { transform: rotate(0deg); transition: 0.1s ease; }
 			card ul { margin-right: 40px; }
 			card ul.closed { display: none; }
 			card label.closed img { transform: rotate(-90deg); }
@@ -113,18 +120,18 @@
 						<h2>Current Semester (16)<img class="expander"></h2>
 					</label>
 					<ul id="current_semester">
-						<li><a href="javascript:null">Fundamentals of Computer Science II (4)</a></li>
-						<li><a href="javascript:null">Lab for Fundamentals of Computer Science II (1)</a></li>
-						<li><a href="javascript:null">Technology and Human Values (4)</a></li>
-						<li><a href="javascript:null">Logic and Computation (4)</a></li>
-						<li><a href="javascript:null">Games and Society (4)</a></li>
+						<li>Fundamentals of Computer Science II <span>(4)</span></li>
+						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
+						<li>Technology and Human Values <span>(4)</span></li>
+						<li>Logic and Computation <span>(4)</span></li>
+						<li>Games and Society <span>(4)</span></li>
 					</ul>
 					<label for="upcoming_semester" onclick="openclose(this)">
 						<h2>Upcoming Semester (8)<img class="expander"></h2>
 					</label>
 					<ul id="upcoming_semester">
-						<li><a href="javascript:null">Object Oriented Design (4)</a></li>
-						<li><a href="javascript:null">Algorithms and Data (4)</a></li>
+						<li>Object Oriented Design <span>(4)</span></li>
+						<li>Algorithms and Data <span>(4)</span></li>
 					</ul>
 				</card>
 
@@ -133,23 +140,23 @@
 						<h2>Completed (19)<img class="expander"></h2>
 					</label>
 					<ul id="completed" class="closed">
-						<li><a href="javascript:null">Computer Science/Information Science Overview 1 (1)</a></li>
-						<li><a href="javascript:null">Fundamentals of Computer Science I (4)</a></li>
-						<li><a href="javascript:null">Lab for Fundamentals of Computer Science I (1)</a></li>
-						<li><a href="javascript:null">Discrete Structures (4)</a></li>
-						<li><a href="javascript:null">Recitation for Discrete Structures (1)</a></li>
-						<li><a href="javascript:null">English Language 1 (4)</a></li>
-						<li><a href="javascript:null">Calculus 1 (4)</a></li>
+						<li>Computer Science/Information Science Overview 1 <span>(1)</span></li>
+						<li>Fundamentals of Computer Science I <span>(4)</span></li>
+						<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
+						<li>Discrete Structures <span>(4)</span></li>
+						<li>Recitation for Discrete Structures <span>(1)</span></li>
+						<li>English Language 1 <span>(4)</span></li>
+						<li>Calculus 1 <span>(4)</span></li>
 					</ul>
 					<label class="closed" for="in_progress" onclick="openclose(this)">
 						<h2>In Progress (17)<img class="expander"></h2>
 					</label>
 					<ul id="in_progress" class="closed">
-						<li><a href="javascript:null">Fundamentals of Computer Science II (4)</a></li>
-						<li><a href="javascript:null">Lab for Fundamentals of Computer Science II (1)</a></li>
-						<li><a href="javascript:null">Technology and Human Values (4)</a></li>
-						<li><a href="javascript:null">Logic and Computation (4)</a></li>
-						<li><a href="javascript:null">Games and Society (4)</a></li>
+						<li>Fundamentals of Computer Science II <span>(4)</span></li>
+						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
+						<li>Technology and Human Values <span>(4)</span></li>
+						<li>Logic and Computation <span>(4)</span></li>
+						<li>Games and Society <span>(4)</span></li>
 					</ul>
 					<label class="closed" for="incomplete" onclick="openclose(this)">
 						<h2>Incomplete (0)<img class="expander"></h2>
@@ -159,24 +166,24 @@
 						<h2>Major Requirements (57)<img class="expander"></h2>
 					</label>
 					<ul id="requirements">
-						<li><a href="javascript:null">Computer Science/Information Science Overview 1 (1)</a></li>
-						<li><a href="javascript:null">Fundamentals of Computer Science I (4)</a></li>
-						<li><a href="javascript:null">Lab for Fundamentals of Computer Science I (1)</a></li>
-						<li><a href="javascript:null">Discrete Structures (4)</a></li>
-						<li><a href="javascript:null">Recitation for Discrete Structures (1)</a></li>
-						<li><a href="javascript:null">English Language 1 (4)</a></li>
-						<li><a href="javascript:null">Calculus 1 (4)</a></li>
-						<li><a href="javascript:null">Fundamentals of Computer Science II (4)</a></li>
-						<li><a href="javascript:null">Lab for Fundamentals of Computer Science II (1)</a></li>
-						<li><a href="javascript:null">Technology and Human Values (4)</a></li>
-						<li><a href="javascript:null">Logic and Computation (4)</a></li>
-						<li><a href="javascript:null">Games and Society (4)</a></li>
-						<li><a href="javascript:null">Computer Systems (4)</a></li>
-						<li><a href="javascript:null">Networks and Distributed Systems (4)</a></li>
-						<li><a href="javascript:null">Theory of Computation (4)</a></li>
-						<li><a href="javascript:null">Programming Languages (4)</a></li>
-						<li><a href="javascript:null">Software Development (4)</a></li>
-						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+						<li>Computer Science/Information Science Overview 1 <span>(1)</span></li>
+						<li>Fundamentals of Computer Science I <span>(4)</span></li>
+						<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
+						<li>Discrete Structures <span>(4)</span></li>
+						<li>Recitation for Discrete Structures <span>(1)</span></li>
+						<li>English Language 1 <span>(4)</span></li>
+						<li>Calculus 1 <span>(4)</span></li>
+						<li>Fundamentals of Computer Science II <span>(4)</span></li>
+						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
+						<li>Technology and Human Values <span>(4)</span></li>
+						<li>Logic and Computation <span>(4)</span></li>
+						<li>Games and Society <span>(4)</span></li>
+						<li>Computer Systems <span>(4)</span></li>
+						<li>Networks and Distributed Systems <span>(4)</span></li>
+						<li>Theory of Computation <span>(4)</span></li>
+						<li>Programming Languages <span>(4)</span></li>
+						<li>Software Development <span>(4)</span></li>
+						<li>The Eloquent Presenter <span>(1)</span></li>
 					</ul>
 				</card>
 			</section>
