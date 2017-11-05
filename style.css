@@ -26,7 +26,7 @@ card {
 card::-webkit-scrollbar { display: none; }
 card.unpadded { padding: 0px; }
 card.unpadded header, card.unpadded section.card_body {
-  width: calc(100% - 20px);
+  width: calc(100% - 30px);
   padding: 15px;
 }
 card.unpadded header {
