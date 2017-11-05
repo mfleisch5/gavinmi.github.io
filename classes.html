@@ -32,17 +32,13 @@
 		</style>
 
 		<script>
+			function openclose(element) {
+				element.classList.toggle("closed");
+				document.getElementById(element.htmlFor).classList.toggle("closed");
+			}
 		</script>
 	</head>
 	<body>
-
-		<blackout>
-			<card class="centered" style="width: 300px; height: 400px;">
-				<h1>And this is about what a basic dialog would look like.</h1>
-				<input type="text" placeholder="text input">
-				<button onclick="openclose()">Exit</button>
-			</card>
-		</blackout>
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html';">
@@ -61,17 +57,45 @@
 				<card class="unpadded">
 					<header>Required Classes</header>
 					<section class="card_body">
-
+						<label for="cs_reqs" onclick="openclose(this)">
+							<h2>CS Requirements<img class="expander"></h2>
+						</label>
+						<ul id="cs_reqs">
+							<li>Object-Oriented Design <span>(4)</span></li>
+							<li>Algorithms and Data <span>(4)</span></li>
+							<li>Theory of Computation <span>(4)</span></li>
+							<li>Systems and Networks <span>(4)</span></li>
+						</ul>
+						<label for="writing_reqs" onclick="openclose(this)">
+							<h2>Writing Requirements<img class="expander"></h2>
+						</label>
+						<ul id="writing_reqs">
+							<li>Advanced Writing in a Technical Field <span>(4)</span></li>
+						</ul>
 					</section>
 				</card>
 
 				<card class="unpadded">
 					<header>Electives</header>
 					<section class="card_body">
-
+						<label for="cs_elecs" onclick="openclose(this)">
+							<h2>CS Electives<img class="expander"></h2>
+						</label>
+						<ul id="cs_elecs">
+							<li>Web Development <span>(4)</span></li>
+							<li>Project Management <span>(4)</span></li>
+							<li>The Eloquent Presenter <span>(1)</span></li>
+						</ul>
+						<label for="gen_elecs" onclick="openclose(this)">
+							<h2>General Electives<img class="expander"></h2>
+						</label>
+						<ul id="gen_elecs">
+							<li>European History <span>(4)</span></li>
+							<li>Introduction to Jazz <span>(4)</span></li>
+						</ul>
 					</section>
 				</card>
-				
+
 			</section>
 
 		</section>

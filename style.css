@@ -31,7 +31,7 @@ card.unpadded header, card.unpadded section.card_body {
 }
 card.unpadded header {
   font-size: 24pt;
-  background-color: rgb(75, 75, 255);
+  background-color: rgb(100, 100, 255);
   color: white;
 }
 
@@ -46,6 +46,8 @@ img.expander {
   content:url("https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png");
   width: 15px; height: 15px;
   margin-top: 5px; float: right;
+  transform: rotate(0deg);
+  transition: 0.15s ease;
 }
 
 /******************************************************************************/
@@ -113,3 +115,37 @@ section#main_body.unpadded {
   width: calc(100% - 301px);
   height: 100%;
 }
+
+/******************************************************************************/
+/******************* INFO CARDS AND EXPANDING LISTS STYLINGS ******************/
+/******************************************************************************/
+
+#info_cards { text-align: center; }
+#info_cards * { text-align: left; }
+
+#info_cards card {
+  display: inline-block;
+  vertical-align: top;
+  max-height: calc(100% - 160px);
+  min-height: 162px;
+  width: calc(50% - 34px);
+  margin-bottom: 10px;
+}
+/**********************************************************************/
+/*Trying to make this a little more responsive to smaller window sizes*/
+/**********************************************************************/
+/*@media screen and (max-width: 1200px) {
+  card {
+    width: calc(100% - 30px);
+    max-height: calc(100% - 435px);
+  }
+}*/
+#info_cards card h2, card ul { margin-bottom: 5px; }
+#info_cards card h2 { user-select: none; cursor: pointer; }
+#info_cards card ul { padding: 0; list-style: none; }
+#info_cards card ul.closed { display: none; }
+#info_cards card label.closed img { transform: rotate(-90deg); }
+#info_cards card ul li { padding: 5px 5px 5px 20px; margin: 0; }
+/*#info_cards card ul li:not(:last-child) { margin-bottom: 0px; }*/
+#info_cards card ul li:nth-child(odd) { background-color: #eee; }
+#info_cards card ul li span { float: right; }
