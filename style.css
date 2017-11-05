@@ -51,6 +51,32 @@ img.expander {
 }
 
 /******************************************************************************/
+/***************************** TABLE STYLINGS *********************************/
+/******************************************************************************/
+table {
+  width: 100%; height: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+th:not(:first-child), td {
+  border: 2px solid black;
+}
+th:not(:first-child), td:first-child {
+  background-color: rgb(100, 100, 255);
+  color: white;
+  text-align: center;
+  font-size: 16pt;
+}
+td:not(:first-child) {
+  background-color: white;
+  width: 22.5%; height: 18%;
+  cursor: pointer;
+}
+th:not(:first-child), td:not(:first-child) { margin-left: -8px; }
+
+td.selected { background-color: lightblue; }
+
+/******************************************************************************/
 /************** BLACKOUT ELEMENT OVERLAYED BEHIND DIALOG POP-UPS **************/
 /******************************************************************************/
 blackout {
@@ -58,7 +84,7 @@ blackout {
   height: 100%;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 0;
+  z-index: 1;
   display: none;
 }
 blackout.open { display: block; }
@@ -114,6 +140,7 @@ section#main_body.unpadded {
   padding: 0px;
   width: calc(100% - 301px);
   height: 100%;
+  z-index: 0;
 }
 
 /******************************************************************************/
@@ -131,9 +158,8 @@ section#main_body.unpadded {
   width: calc(50% - 34px);
   margin-bottom: 10px;
 }
-/**********************************************************************/
+
 /*Trying to make this a little more responsive to smaller window sizes*/
-/**********************************************************************/
 /*@media screen and (max-width: 1200px) {
   card {
     width: calc(100% - 30px);

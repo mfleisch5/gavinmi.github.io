@@ -26,9 +26,14 @@
 			card {
 				display: inline-block;
 				vertical-align: top;
-				max-height: calc(100% - 185px);
+				height: 100%;
 				width: 400px;
 			}
+			blackout card table {
+				 height: calc(100% - 50px);
+				 margin-bottom: 15px;
+			}
+			blackout card span { float: right; }
 		</style>
 
 		<script>
@@ -36,9 +41,65 @@
 				element.classList.toggle("closed");
 				document.getElementById(element.htmlFor).classList.toggle("closed");
 			}
+			function dialog() {
+				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+			}
 		</script>
 	</head>
 	<body>
+
+		<blackout>
+			<card class="centered" style="width: 50%; height: 50%;">
+				<table>
+					<tr>
+						<th></th>
+						<th>Fall</th>
+						<th>Spring</th>
+						<th>Summer I</th>
+						<th>Summer II</th>
+					</tr>
+					<tr>
+						<td>1</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>2</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>3</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>4</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>5</td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+					</tr>
+				</table>
+				<span>
+					<button disabled onclick="dialog()">Okay</button>
+					<button onclick="dialog()">Cancel</button>
+				</span>
+			</card>
+		</blackout>
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html';">
@@ -48,9 +109,13 @@
 			<a href="old_index.html">Settings</a>
 		</menu>
 
+
 		<section id="main_body" class="unpadded">
 
-			<div id="search_area"><input type="text" id="search_bar"></div>
+			<div id="search_area">
+				<button onclick="dialog()">Click here to see schedule dialog</button>
+				<input type="text" id="search_bar">
+			</div>
 
 			<section id="info_cards">
 
@@ -95,7 +160,6 @@
 						</ul>
 					</section>
 				</card>
-
 			</section>
 
 		</section>
