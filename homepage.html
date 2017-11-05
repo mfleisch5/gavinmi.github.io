@@ -13,7 +13,6 @@
 				background: linear-gradient(#333, #222);
 				border-radius: 4px;
 				overflow: hidden;
-
 			}
 			div#prog_bar div#bar {
 				background: linear-gradient(#1D992B, darkgreen);
@@ -27,7 +26,7 @@
 				text-shadow: 0px 0px 5px rgba(0, 0, 0, 1);
 				padding-top: 24px;
 
-				width: calc(100% - 230px);
+				width: calc(100% - 330px);
 				position: absolute;
 			}
 			div#prog_bar label {
@@ -36,9 +35,9 @@
 				width: 75px;
 				user-select: none;
 			}
-			div#prog_bar label:nth-of-type(1) { left: calc(25% + 120px); }
-			div#prog_bar label:nth-of-type(2) { left: calc(50% + 63px); }
-			div#prog_bar label:nth-of-type(3) { left: calc(75% + 5px); }
+			div#prog_bar label:nth-of-type(1) { left: calc(25% + 195px); }
+			div#prog_bar label:nth-of-type(2) { left: calc(50% + 112px); }
+			div#prog_bar label:nth-of-type(3) { left: calc(75% + 29.5px); }
 			div#prog_bar label div:first-child {
 			  width: 0;
 			  height: 0;
@@ -54,16 +53,20 @@
 				padding: 5px;
 			}
 
+			#info_cards { text-align: center; }
+			#info_cards * { text-align: left; }
+
 			card {
 				display: inline-block;
 				vertical-align: top;
-				width: 300px; height: 400px;
+				max-height: calc(100% - 185px);
+				width: 400px;
 			}
 			card h2, card ul { margin-bottom: 5px; }
 			card h2 { user-select: none; cursor: pointer; }
-			card label img { transform: rotate(180deg); }
+			card label img { transform: rotate(0deg); transition: 0.1s ease; }
 			card ul.closed { display: none; }
-			card label.closed img { transform: rotate(0deg); }
+			card label.closed img { transform: rotate(-90deg); }
 			card ul li:not(:last-child) { margin-bottom: 5px; }
 		</style>
 
@@ -72,50 +75,111 @@
 				element.classList.toggle("closed");
 				document.getElementById(element.htmlFor).classList.toggle("closed");
 			}
+			// p is number between 0 and 1
+			function updatePercent(p) {
+				document.getElementById("percent").innerHTML = "Progress - " + p*100 + "%";
+				document.getElementById("bar").style.width = p*100 + "%";
+			}
 		</script>
 	</head>
 	<body>
 
 		<menu id="nav_bar">
-			<img src="">
-			<a href="javascript:null">Home</a>
-			<a href="javascript:null">Classes</a>
-			<a href="javascript:null">Schedule</a>
-			<a href="">Settings</a>
+			<img src="" onclick="location.href='homepage.html';">
+			<a class="current" href="homepage.html">Home</a>
+			<a href="classes.html">Classes</a>
+			<a href="schedule.html">Schedule</a>
+			<a href="old_index.html">Settings</a>
 		</menu>
 
 		<section id="main_body">
 
 			<div id="prog_bar">
 				<div id="percent">Progress - 50%</div>
-				<div id="bar"  style="width: 50%;"></div>
+				<div id="bar" style="width: 25%;"></div>
 				<label><div></div><div>Sophomore</div></label>
 				<label><div></div><div>Junior</div></label>
 				<label><div></div><div>Senior</div></label>
 			</div>
 
-			<card>
-				<label for="current_semester" onclick="openclose(this)">
-					<h2>Current Semester (13)<img class="expander"></h2>
-				</label>
-				<ul id="current_semester">
-					<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
-					<li><a href="javascript:null">Computers and Society (4)</a></li>
-					<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
-					<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
-				</ul>
-				<label for="upcoming_semester" onclick="openclose(this)">
-					<h2>Upcoming Semester (13)<img class="expander"></h2>
-				</label>
-				<ul id="upcoming_semester">
-					<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
-					<li><a href="javascript:null">Computers and Society (4)</a></li>
-					<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
-					<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
-				</ul>
-			</card>
+			<!----------------------------------------------------------------------->
+			<!--   This SECTION elements contains the info cards on the homepage   -->
+			<!--   They have already been populated with mock info as an example   -->
+			<!----------------------------------------------------------------------->
+			<section id="info_cards">
+				<card>
+					<label for="current_semester" onclick="openclose(this)">
+						<h2>Current Semester (13)<img class="expander"></h2>
+					</label>
+					<ul id="current_semester">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+					</ul>
+					<label for="upcoming_semester" onclick="openclose(this)">
+						<h2>Upcoming Semester (13)<img class="expander"></h2>
+					</label>
+					<ul id="upcoming_semester">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+					</ul>
+				</card>
 
-			<card></card>
+				<card>
+					<label class="closed" for="completed" onclick="openclose(this)">
+						<h2>Completed (38)<img class="expander"></h2>
+					</label>
+					<ul id="completed" class="closed">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+					</ul>
+					<label class="closed" for="in_progress" onclick="openclose(this)">
+						<h2>In Progress (13)<img class="expander"></h2>
+					</label>
+					<ul id="in_progress" class="closed">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+					</ul>
+					<label class="closed" for="incomplete" onclick="openclose(this)">
+						<h2>Incomplete (4)<img class="expander"></h2>
+					</label>
+					<ul id="incomplete" class="closed">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+					</ul>
+					<label for="requirements" onclick="openclose(this)">
+						<h2>Major Requirements (240)<img class="expander"></h2>
+					</label>
+					<ul id="requirements">
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+						<li><a href="javascript:null">Human Computer Interaction (4)</a></li>
+						<li><a href="javascript:null">Computers and Society (4)</a></li>
+						<li><a href="javascript:null">Math Fundamentals for Games (4)</a></li>
+						<li><a href="javascript:null">The Eloquent Presenter (1)</a></li>
+					</ul>
+				</card>
+			</section>
 
 		</section>
 
