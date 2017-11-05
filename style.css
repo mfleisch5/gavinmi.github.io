@@ -1,6 +1,5 @@
 /******************************************************************************/
 /********************** BODY AND BASIC ELEMENT STYLINGS ***********************/
-/********************* PUT ALL NON-CLASSED STYLINGS HERE **********************/
 /******************************************************************************/
 body {
   margin: 0px;
@@ -21,9 +20,20 @@ card {
   border-radius: 4px;
   background-color: white;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
+  overflow-x: hidden;
   overflow-y: scroll;
 }
 card::-webkit-scrollbar { display: none; }
+card.unpadded { padding: 0px; }
+card.unpadded header, card.unpadded section.card_body {
+  width: calc(100% - 20px);
+  padding: 15px;
+}
+card.unpadded header {
+  font-size: 24pt;
+  background-color: rgb(75, 75, 255);
+  color: white;
+}
 
 .centered {
   position: absolute;
@@ -97,4 +107,9 @@ section#main_body {
   height: calc(100% - 30px);
 
   background-color: #ccc;
+}
+section#main_body.unpadded {
+  padding: 0px;
+  width: calc(100% - 301px);
+  height: 100%;
 }

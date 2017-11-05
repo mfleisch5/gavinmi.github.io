@@ -1,0 +1,80 @@
+<link rel="stylesheet" type = "text/css" href="style.css">
+<!DOCTYPE HTML>
+
+<html>
+	<head>
+		<title>Homepage</title>
+
+		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
+		<style>
+			div#search_area {
+				background-color: #bbb;
+				width: calc(100% - 20px);
+				padding: 10px;
+				text-align: right;
+				margin-bottom: 15px;
+			}
+			div#search_area input#search_bar {
+				width: 250px;
+				background: url("https://image.flaticon.com/icons/png/128/149/149852.png") no-repeat scroll 224px center;
+				background-color: white;
+				background-size: 16px 16px;
+				padding-right: 30px;
+			}
+			#info_cards { text-align: center; }
+			#info_cards * { text-align: left; }
+			card {
+				display: inline-block;
+				vertical-align: top;
+				max-height: calc(100% - 185px);
+				width: 400px;
+			}
+		</style>
+
+		<script>
+		</script>
+	</head>
+	<body>
+
+		<blackout>
+			<card class="centered" style="width: 300px; height: 400px;">
+				<h1>And this is about what a basic dialog would look like.</h1>
+				<input type="text" placeholder="text input">
+				<button onclick="openclose()">Exit</button>
+			</card>
+		</blackout>
+
+		<menu id="nav_bar">
+			<img src="" onclick="location.href='homepage.html';">
+			<a href="homepage.html">Home</a>
+			<a class="current" href="classes.html">Classes</a>
+			<a href="schedule.html">Schedule</a>
+			<a href="old_index.html">Settings</a>
+		</menu>
+
+		<section id="main_body" class="unpadded">
+
+			<div id="search_area"><input type="text" id="search_bar"></div>
+
+			<section id="info_cards">
+
+				<card class="unpadded">
+					<header>Required Classes</header>
+					<section class="card_body">
+
+					</section>
+				</card>
+
+				<card class="unpadded">
+					<header>Electives</header>
+					<section class="card_body">
+
+					</section>
+				</card>
+				
+			</section>
+
+		</section>
+
+	</body>
+<html>
