@@ -39,7 +39,7 @@
 		var sched = {sem1, sem2};
 		var john = new Student(sched, 2); 
 		store(john);
-		console.log(load()); 
+		console.log(load().classes); 
 	}
 
 	//Stores the student in localStorage
