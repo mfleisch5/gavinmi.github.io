@@ -31,7 +31,8 @@ card.unpadded header, card.unpadded section.card_body {
 }
 card.unpadded header {
   font-size: 24pt;
-  background-color: rgb(100, 100, 255);
+  /*background-color: rgb(100, 100, 255);*/
+  background-color: #333;
   color: white;
 }
 
@@ -62,17 +63,18 @@ th:not(:first-child), td {
   border: 2px solid black;
 }
 th:not(:first-child), td:first-child {
-  background-color: rgb(100, 100, 255);
+  /*background-color: rgb(100, 100, 255);*/
+  background-color: #333;
   color: white;
   text-align: center;
   font-size: 16pt;
 }
+td { padding: 0; }
 td:not(:first-child) {
   background-color: white;
   width: 22.5%; height: 18%;
-  cursor: pointer;
+  vertical-align: top;
 }
-th:not(:first-child), td:not(:first-child) { margin-left: -8px; }
 
 td.selected { background-color: lightblue; }
 
@@ -168,10 +170,20 @@ section#main_body.unpadded {
 }*/
 #info_cards card h2, card ul { margin-bottom: 5px; }
 #info_cards card h2 { user-select: none; cursor: pointer; }
-#info_cards card ul { padding: 0; list-style: none; }
+#info_cards card ul, td ul { padding: 0; list-style: none; }
 #info_cards card ul.closed { display: none; }
 #info_cards card label.closed img { transform: rotate(-90deg); }
-#info_cards card ul li { padding: 5px 5px 5px 20px; margin: 0; }
-/*#info_cards card ul li:not(:last-child) { margin-bottom: 0px; }*/
-#info_cards card ul li:nth-child(odd) { background-color: #eee; }
-#info_cards card ul li span { float: right; }
+#info_cards card ul li, td ul li { padding: 5px 5px 5px 20px; margin: 0; }
+#info_cards card ul li:nth-child(odd), td ul li:nth-child(odd) {
+  background-color: #eee;
+}
+#info_cards card ul li span, td ul li span { float: right; }
+
+
+
+/*Progress Color Scheme*/
+.completed_class {color: #228B22;}
+
+.inprogress_class {color: #9b870c;}
+
+.incomplete_class{color: #8b0000;}
