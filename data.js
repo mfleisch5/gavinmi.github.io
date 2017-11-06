@@ -1,8 +1,8 @@
 //There's a chance that everything about this is awful I'm not super experienced with JS
 
 //Constructor for Student
-//classes   (HashMap<Int,Class[]>)  all the classes for the student by semester
-//semsester (int)                   current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
+//classes   (Class[][])  all the classes for the student by semester
+//semsester (int)      current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
 function Student(classes, semester) {
   this.classes = classes;
   this.semester = semester;
@@ -30,3 +30,25 @@ function Class(id, name, credits, coreq, prereq, desc) {
 // 3. Move a class from one semester to another (unless trying to move to already finished semester?) 
 // 4. Draw the calendar from schedule? (not sure exactly how we want to do this) 
 // there's definitely more
+
+function test() {
+	var fundies1 = new Class("CS2500", "Fundies", 4, null, null, "a good one"); 
+	var sem1 = {fundies1}; 
+	var sched = {sem1};
+	var john = new Student(sched, 2); 
+	localStorage.setItem("user", JSON.stringify(john)); 
+	console.log("test: " + localStorage.getItem("user")); 
+}
+
+//Stores the student in localStorage
+//stud (Student) the student to store
+function store(stud) { 
+	localStorage.setItem("user", JSON.stringify(stud)); 
+}
+
+function load() {
+	
+}
+
+
+
