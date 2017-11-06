@@ -1,4 +1,6 @@
 <link rel="stylesheet" type = "text/css" href="style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!DOCTYPE HTML>
 
 <html>
@@ -95,18 +97,53 @@
 			    color: #9b870c;
 			}
 
+			td:not(:first-child) {
+				font-size: 21pt;
+				text-align: center;
+				vertical-align: middle;
+				user-select: none;
+				cursor: pointer;
+			}
+
 		</style>
 
 		<script>
+			var selected = null;
+
 			function openclose(element) {
 				element.classList.toggle("closed");
 				document.getElementById(element.htmlFor).classList.toggle("closed");
 			}
-			function dialog() {
-				document.getElementsByTagName('blackout')[0].classList.toggle("open");
-			}
 			function showdesc(element) {
 				element.classList.toggle("visible");
+			}
+			function clearTable() {
+				selected.classList.remove('selected');
+				selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+			}
+			function dialog() {
+				selected = null;
+				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+				$('td:not(:first-child)').click(function() {
+					if(selected != null) {
+						selected.classList.remove('selected');
+						selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+					}
+					if(this != selected) {
+						selected = this;
+						this.classList.add('selected');
+						selected.innerHTML = parseInt(selected.innerHTML) + 4;
+					}
+					else if(this == selected) { selected = null; }
+					document.getElementById("addButton").disabled = selected == null;
+				});
+			}
+			function addClassToSemester(id) {
+				//TODO: HEY MICHAEL AND/OR GAVIN, THIS IS WHERE THE THING SHOULD GO.
+				//      id (String) - is the year (a number between 1 and 5) and the
+				//	                  semester (either "fall", "spring", "summer1",
+			  //                    or "summer2") separated by an underscore
+				//                    e.g. "4_summer2"
 			}
 		</script>
 	</head>
@@ -124,42 +161,42 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id="1_fall">19</td>
+						<td id="1_spring">18</td>
+						<td id="1_summer1">0</td>
+						<td id="1_summer2">0</td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id="2_fall">8</td>
+						<td id="2_spring">0</td>
+						<td id="2_summer1">0</td>
+						<td id="2_summer2">0</td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id="3_fall">0</td>
+						<td id="3_spring">0</td>
+						<td id="3_summer1">0</td>
+						<td id="3_summer2">0</td>
 					</tr>
 					<tr>
 						<td>4</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id="4_fall">0</td>
+						<td id="4_spring">0</td>
+						<td id="4_summer1">0</td>
+						<td id="4_summer2">0</td>
 					</tr>
 					<tr>
 						<td>5</td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td id="5_fall">0</td>
+						<td id="5_spring">0</td>
+						<td id="5_summer1">0</td>
+						<td id="5_summer2">0</td>
 					</tr>
 				</table>
 				<span>
-					<button disabled onclick="dialog()">Okay</button>
+					<button id="addButton" disabled onclick="addClassToSemester(selected.id); clearTable(); dialog();">Okay</button>
 					<button onclick="dialog()">Cancel</button>
 				</span>
 			</card>
