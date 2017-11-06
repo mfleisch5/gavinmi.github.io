@@ -38,27 +38,46 @@
 			card label.closed img { transform: rotate(-90deg); }
 			card ul li:not(:last-child) { margin-bottom: 5px; }
 
-			button.add_btn {
-				background-color: #F0F8FF;
-				padding: 4px;
-			}
 			blackout card table {
 				 height: calc(100% - 50px);
 				 margin-bottom: 15px;
 			}
+
 			blackout card span { float: right; }
 
 
 			.desc {
 			    margin-top: 2%;
 			    border-top: 1px solid #777;
+			    color: #000;
 			}
-			.desc h4 {margin: 2% 0;}
-			.desc p {margin: 0 0 2% 4%;}
+			
+			.desc h4 {margin: 2% 0 1% 0;}
+			.desc p {margin: 0 4% 2% 4%;}
+
+			.class_title {cursor:pointer;}
 
 			.class_title.visible > div.desc {display: block;}
 
 			.class_title > div.desc {display: none;}
+
+			.add_btn {
+				padding: 4px 10px;
+				background-color: #F0F8FF;
+				margin-bottom: 2%;
+			}
+
+			.complete_sem {
+				padding: 4px 10px;
+			    border: 1px solid #228B22;
+			    display: inline-block;
+			    color: #228B22;
+			}
+
+			.completed_class {color: #228B22;}
+
+			.incomplete_class{color: #8b0000;}
+
 		</style>
 
 		<script>
@@ -155,28 +174,162 @@
 							<h2>CS Requirements<img class="expander"></h2>
 						</label>
 						<ul id="cs_reqs">
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Object-Oriented Design <span>(4)</span>
 								<div class="desc">
 									<h4>Course Descrition</h4>
-									<p>asdfghjkl</p>
-									<br>
-									<h4>Prerequisite</h4>
-									<h4>Co-requisite</h4>
+									<p>Presents a comparative approach to object-oriented programming and design. Discusses the concepts of object, class, meta-class, message, method, inheritance, and genericity. Reviews forms of polymorphism in object-oriented languages.</p>
 
+									<h4>Prerequisite</h4>
+									<p>Fundamentals of Computer Science 2 - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
-							<li>Algorithms and Data <span>(4)</span></li>
-							<li>Theory of Computation <span>(4)</span></li>
-							<li>Systems and Networks <span>(4)</span></li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Computer Systems <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Introduces the basic design of computing systems, computer operating systems, and assembly language using a RISC architecture. Describes caches and virtual memory. Covers the interface between assembly language and high-level languages, including call frames and pointers. Covers the use of system calls and systems programming to show the interaction with the operating system. Covers the basic structures of an operating system, including application interfaces, processes, threads, synchronization, interprocess communication, deadlock, memory management, file systems, and input/output control.</p>
+
+									<h4>Prerequisite</h4>
+									<p>Fundamentals of Computer Science 2 - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p> CS Major Requirement</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Networks and Distributed Systems <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Introduces the basic concepts underlying computer operating systems and computer networks and provides hands-on experience with their implementation. Covers the basic structure of an operating system: application interfaces, processes, threads, synchronization, interprocess communication, processor allocation, deadlocks, memory management, file systems, and input/output control.</p>
+
+									<h4>Prerequisite</h4>
+									<p>None</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p> CS Major Requirement</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Theory of Computation<span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Introduces the theory behind computers and computing aimed at answering the question, “What are the capabilities and limitations of computers?” Covers automata theory, computability, and complexity. The automata theory portion includes finite automata, regular expressions, nondeterminism, nonregular languages, context-free languages, pushdown automata, and noncontext-free languages.</p>
+
+									<h4>Prerequisite</h4>
+									<p>Fundamentals of Computer Science 2 - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p> CS Major Requirement <br>
+									NU Core Math/Anly Think Lvl 2</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Programminng Languages <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Introduces a systematic approach to understanding the behavior of programming languages. Covers interpreters; static and dynamic scope; environments; binding and assignment; functions and recursion; parameter-passing and method dispatch; objects, classes, inheritance, and polymorphism; type rules and type checking; and concurrency. </p>
+
+									<h4>Prerequisite</h4>
+									<p>Object-Oriented Design - Minimum Grade of D- AND <br>
+										Theory of Computation - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p>CS Major Requirement</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
+
+
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Software Development <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>onsiders software development as a systematic process involving specification, design, documentation, implementation, testing, and maintenance. Examines software process models; methods for software specification; modularity, abstraction, and software reuse; and issues of software quality. Students, possibly working in groups, design, document, implement, test, and modify software projects.</p>
+
+									<h4>Prerequisite</h4>
+									<p>Object-Oriented Design - Minimum Grade of D- AND <br>
+										First-Year Writing - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p>CS Major Requirement <br> 
+										NU Core Writing Intsv in Majr <br>
+										NUpath Writing Intensive</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Algorithms and Data <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Introduces the basic principles and techniques for the design, analysis, and implementation of efficient algorithms and data representations. Discusses asymptotic analysis and formal methods for establishing the correctness of algorithms. Considers divide-and-conquer algorithms, graph traversal algorithms, and optimization techniques.</p>
+
+									<h4>Prerequisite</h4>
+									<p>Fundamentals of Computer Science 2 - Minimum Grade of D-</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p>CS Major Requirement <br> 
+										NU Core Math/Anly Think Lvl 2</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
 						</ul>
 						<label for="writing_reqs" onclick="openclose(this)">
-							<h2>Writing Requirements<img class="expander"></h2>
+							<h2>English Requirements<img class="expander"></h2>
 						</label>
 						<ul id="writing_reqs">
-							<li>Advanced Writing in a Technical Field <span>(4)</span></li>
+							<li class="class_title completed_class" onclick="showdesc(this)">
+								First Year Writing<span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Designed for students to study and practice writing in a workshop setting. Students read a range of texts in order to describe and evaluate the choices writers make and apply that knowledge to their own writing and explore how writing functions in a range of academic, professional, and public contexts. Offers students an opportunity to learn how to conduct research using primary and secondary sources; how to write for various purposes and audiences in multiple genres and media; and how to give and receive feedback, to revise their work, and to reflect on their growth as writers. </p>
+
+									<h4>Prerequisite</h4>
+									<p>None</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p> English Requirement<br> NU Core/NUpath 1st Yr Writing</p>
+									<label class="complete_sem">Fall 17</label>
+								</div>
+							</li>
+
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
+								Advanced Writing in a Technical Field   <span>(4)</span>
+								<div class="desc">
+									<h4>Course Descrition</h4>
+									<p>Offers writing instruction for students in the College of Engineering and the College of Computer and Information Science. Students practice and reflect on writing in professional, public, and academic genres—such as technical reports, progress reports, proposals, instructions, presentations, and technical reviews—relevant to technical professions and individual student goals. In a workshop setting, offers students an opportunity to evaluate a wide variety of sources and develop expertise in audience analysis, critical research, peer review, and revision.</p>
+
+									<h4>Prerequisite</h4>
+									<p>First-Year Writing - Minimum Grade of C AND <br>
+										Junior or Senior standing</p>
+									<h4>Co-requisite</h4>
+									<p>None</p>
+									<h4>Fulfillment</h4>
+									<p>English Requirement<br> Advance Writing Requirement</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
+								</div>
+							</li>
 						</ul>
 					</section>
 				</card>
