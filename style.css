@@ -21,9 +21,9 @@ card {
   background-color: white;
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
   overflow-x: hidden;
-  overflow-y: scroll;
 }
-card::-webkit-scrollbar { display: none; }
+card:not(.unpadded), card.unpadded section.card_body { overflow-y: scroll; }
+card::-webkit-scrollbar, card *::-webkit-scrollbar { display: none; }
 card.unpadded { padding: 0px; }
 card.unpadded header, card.unpadded section.card_body {
   width: calc(100% - 30px);
@@ -31,9 +31,11 @@ card.unpadded header, card.unpadded section.card_body {
 }
 card.unpadded header {
   font-size: 24pt;
-  /*background-color: rgb(100, 100, 255);*/
   background-color: #333;
   color: white;
+}
+card.unpadded .card_body {
+    height: calc(100% - 100px);
 }
 
 .centered {
@@ -75,6 +77,7 @@ td:not(:first-child) {
   width: 22.5%; height: 18%;
   vertical-align: top;
 }
+th:not(:first-child), td:not(:first-child) { margin-left: -8px; }
 
 td.selected { background-color: lightblue; }
 
