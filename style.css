@@ -31,7 +31,8 @@ card.unpadded header, card.unpadded section.card_body {
 }
 card.unpadded header {
   font-size: 24pt;
-  background-color: rgb(100, 100, 255);
+  /*background-color: rgb(100, 100, 255);*/
+  background-color: #333;
   color: white;
 }
 
@@ -62,7 +63,8 @@ th:not(:first-child), td {
   border: 2px solid black;
 }
 th:not(:first-child), td:first-child {
-  background-color: rgb(100, 100, 255);
+  /*background-color: rgb(100, 100, 255);*/
+  background-color: #333;
   color: white;
   text-align: center;
   font-size: 16pt;
@@ -175,3 +177,12 @@ section#main_body.unpadded {
 /*#info_cards card ul li:not(:last-child) { margin-bottom: 0px; }*/
 #info_cards card ul li:nth-child(odd) { background-color: #eee; }
 #info_cards card ul li span { float: right; }
+
+
+
+/*Progress Color Scheme*/
+.completed_class {color: #228B22;}
+
+.inprogress_class {color: #9b870c;}
+
+.incomplete_class{color: #8b0000;}
