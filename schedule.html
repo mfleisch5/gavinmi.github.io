@@ -29,34 +29,11 @@
 
 
 		</style>
-		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-		<script src="data.js" type="text/javascript">
-		</script>
-		<script>
-			var student = load();
-			for(var i = 0; i < student.classes.length; i++) {
-                for (var j = 0; i < student.classes[i].length; j++) {
-                    alert(i + " " + student.classes[i][j].name);
-                    var node = document.createElement("LI");
-                    var textnode = document.createTextNode(student.classes[i][j].name);
-                    node.appendChild(textnode);
-                    alert(i.toString() + "  " + document.getElementById(i.toString()));
-                    document.getElementById(i.toString()).appendChild(node);
-                }
-            }
-
-
-            var selectedClass = null;
-            $('body').on('click', 'li', function() {
-                alert("ok");
-                $(this).toggleClass('selected');
-                selectedClass = this;
-            });
-
-		</script>
 	</head>
 	<body>
-
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="data.js" type="text/javascript">
+	</script>
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html';">
 			<a href="homepage.html">Home</a>
@@ -133,6 +110,22 @@
 				</tr>
 			</table>
 		</section>
+	<script>
+        var student = load();
+        for(var i = 0; i < student.classes.length; i++) {
+            for (var j = 0; i < student.classes[i].length; j++) {
+				$("#" + i).children().append("<li>" + student.classes[i][j].name + "<span>(4)</span> </li>");
+            }
+        }
 
+
+        var selectedClass = null;
+        $('body').on('click', 'li', function() {
+            alert("ok");
+            $(this).toggleClass('selected');
+            selectedClass = this;
+        });
+
+	</script>
 	</body>
 <html>
