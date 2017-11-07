@@ -195,7 +195,7 @@
 		}
 		// p is number between 0 and 1
 		function updatePercent(p) {
-			document.getElementById("percent").innerHTML = "Progress - " + Number(Math.round(p*100+'e2')+'e-2'); + "%";
+			document.getElementById("percent").innerHTML = "Progress - " + Number(Math.round(p*100+'e2')+'e-2') + "%";
 			document.getElementById("bar").style.width = p*100 + "%";
 
 			var standings = ["Freshman", "Sophomore", "Junior", "Senior"];
