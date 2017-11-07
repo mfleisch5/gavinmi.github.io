@@ -41,6 +41,7 @@ function getStartingSchedule() {
      new Class(null, "Fundamentals of Computer Science II", 4, null, null, null),
      new Class(null, "Lab for Fundamentals of Computer Science II", 1, null, null, null),
      new Class(null, "Games and Society", 4, null, null, null),
+     new Class(null, "Recitation for Games and Society", 1, null, null, null),
      new Class(null, "Logic and Computation", 4, null, null, null),
      new Class(null, "Technology and Human Values", 4, null, null, null),
    ],[],[],[],

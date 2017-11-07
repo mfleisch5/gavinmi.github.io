@@ -62,7 +62,7 @@
 			background-color: #F5F5F5;
 			margin-bottom: 2%;
 		}
-		.future_sem {
+		/*.future_sem {
 			padding: 4px 10px;
 			background-color: #F5F5F5;
 			border: 1px solid #8b0000;
@@ -80,7 +80,7 @@
 			border: 1px solid #9b870c;
 			display: inline-block;
 			color: #9b870c;
-		}
+		}*/
 		td:not(:first-child) {
 			font-size: 21pt;
 			text-align: center;
@@ -100,13 +100,12 @@
 
         function selectClass(element) {
             selectedClass = $(element).closest('li').attr('id');
-		}
+					}
         function showdesc(element) {
             element.classList.toggle("visible");
-
         }
         function clearTable() {
-            selected.classList.remove('selected');
+            if(selected!=null) { selected.classList.remove('selected'); }
             // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
         }
         function dialog() {
@@ -225,7 +224,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<label class="complete_sem">Fall 17</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -259,7 +258,7 @@
 									<p> CS Major Requirement <br>
 										NUpath Formal/Quant Reasoning <br>
 										NU Core Math/Anly Think Lvl 1</p>
-									<label class="complete_sem">Fall 17</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -275,7 +274,7 @@
 									<p>Discrete Structures</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<label class="complete_sem">Fall 17</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -294,7 +293,7 @@
 										NUpath Formal/Quant Reasoning <br>
 										NUpath Natural/Designed World <br>
 										NU Core Science/Tech Lvl 1 </p>
-									<label class="complete_sem">Fall 17</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -310,7 +309,7 @@
 									<p>Fundamentals of Computer Science I</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<label class="complete_sem">Fall 17</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -328,7 +327,7 @@
 									<p> CS Major Requirement <br>
 										NUpath Analyzing/Using Data <br>
 										NUpath Natural/Designed World</p>
-									<label class="current_sem">Spring 18</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -344,7 +343,7 @@
 									<p>Fundamentals of Computer Science II</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<label class="current_sem">Spring 18</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -361,7 +360,7 @@
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
-									<label class="current_sem">Spring 18</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -377,7 +376,7 @@
 									<p>Logic and Computation</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<label class="current_sem">Spring 18</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -400,7 +399,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="future_sem" onclick="dialog(); selectClass(this);">Fall 18</button>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -503,7 +502,7 @@
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
-									<button class="future_sem" onclick="dialog(); selectClass(this);">Fall 18</button>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -563,7 +562,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> English Requirement<br> NU Core/NUpath 1st Yr Writing</p>
-									<label class="complete_sem">Fall 17</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -604,7 +603,7 @@
 									<p> Mathematics Requirement<br>
 										NUpath Formal/Quant Reasoning<br>
 										NU Core Math/Anly Think Lvl 1</p>
-									<label class="complete_sem">Fall 17</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -677,7 +676,7 @@
 									<p> Computing and Social Issues<br>
 										NUpath Ethical Reasoning<br> NU Core Humanities Lvl 1<br>
 										NUpath Societies/Institutions</p>
-									<label class="current_sem">Spring 18</label>
+										<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -748,7 +747,7 @@
 									<p>Recitation for GAME 1110</p>
 									<h4>Fulfillment</h4>
 									<p>NU Core Arts Lvl 1</p>
-									<label class="current_sem">Spring 18</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -764,7 +763,7 @@
 									<p>Games and Society</p>
 									<h4>Fulfillment</h4>
 									<p>None</p>
-									<label class="current_sem">Spring 18</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
@@ -780,7 +779,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>NU Core Arts Lvl 1</p>
-									<label class="complete_sem">Fall 17</label>
+									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
 
