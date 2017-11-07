@@ -78,28 +78,16 @@
 			card ul li:not(:last-child) { margin-bottom: 5px; }
 		</style>
 
-		<script>
-			function openclose(element) {
-				element.classList.toggle("closed");
-				document.getElementById(element.htmlFor).classList.toggle("closed");
-			}
-			// p is number between 0 and 1
-			function updatePercent(p) {
-				document.getElementById("percent").innerHTML = "Progress - " + p*100 + "%";
-				document.getElementById("bar").style.width = p*100 + "%";
-
-				var standings = ["Freshman", "Sophomore", "Junior", "Senior"];
-				document.getElementById('label').children[1].innerHTML = standings[Math.floor(p*100/25)];
-			}
-		</script>
 	</head>
 	<body>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="data.js" type="text/javascript"></script>
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='index.html'">
 			<a class="current" href="index.html">Home</a>
-			<a href="classes.html">Classes</a>
-			<a href="schedule.html">Schedule</a>
+			<a href="classes.html">Class Search</a>
+			<a href="schedule.html">Semester Plan</a>
 			<a href="old_index.html" disabled>Settings</a>
 		</menu>
 
@@ -118,53 +106,24 @@
 			<section id="info_cards">
 				<card>
 					<label for="current_semester" onclick="openclose(this)">
-						<h2>Current Semester (19)<img class="expander"></h2>
+						<h2 id="current_label">Current Semester (0)<img class="expander"></h2>
 					</label>
-					<ul id="current_semester">
-						<li>Fundamentals of Computer Science II <span>(4)</span></li>
-						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
-						<li>Logic and Computation <span>(4)</span></li>
-						<li>Lab for Fundamentals of Logic and Computation <span>(1)</span></li>
-						<li>Technology and Human Values <span>(4)</span></li>
-						<li>Games and Society <span>(4)</span></li>
-						<li>Recitation for Games and Society <span>(1)</span></li>
-
-					</ul>
+					<ul id="current_semester"></ul>
 					<label for="upcoming_semester" onclick="openclose(this)">
-						<h2>Upcoming Semester (8)<img class="expander"></h2>
+						<h2 id="upcoming_label">Upcoming Semester (0)<img class="expander"></h2>
 					</label>
-					<ul id="upcoming_semester">
-						<li>Object-Oriented Design <span>(4)</span></li>
-						<li>Algorithms and Data <span>(4)</span></li>
-					</ul>
+					<ul id="upcoming_semester"></ul>
 				</card>
 
 				<card>
 					<label class="closed completed_class" for="completed" onclick="openclose(this)">
-						<h2>Completed (19)<img class="expander"></h2>
+						<h2 id="completed_label">Completed (0)<img class="expander"></h2>
 					</label>
-					<ul id="completed" class="closed">
-						<li>Computer Science/Information Science Overview 1 <span>(1)</span></li>
-						<li>Fundamentals of Computer Science I <span>(4)</span></li>
-						<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
-						<li>Discrete Structures <span>(4)</span></li>
-						<li>Recitation for Discrete Structures <span>(1)</span></li>
-						<li>First-Year Writing <span>(4)</span></li>
-						<li>Calculus 1 for Science and Engineering <span>(4)</span></li>
-						<li>CS/IS Overview 1 <span>(1)</span></li>
-					</ul>
+					<ul id="completed" class="closed"></ul>
 					<label class="closed inprogress_class" for="in_progress" onclick="openclose(this)">
-						<h2>In Progress (19)<img class="expander"></h2>
+						<h2 id="inprogress_label">In Progress (0)<img class="expander"></h2>
 					</label>
-					<ul id="in_progress" class="closed">
-						<li>Fundamentals of Computer Science II <span>(4)</span></li>
-						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
-						<li>Logic and Computation <span>(4)</span></li>
-						<li>Lab for Fundamentals of Logic and Computation <span>(1)</span></li>
-						<li>Technology and Human Values <span>(4)</span></li>
-						<li>Games and Society <span>(4)</span></li>
-						<li>Recitation for Games and Society <span>(1)</span></li>
-					</ul>
+					<ul id="in_progress" class="closed"></ul>
 					<label class="closed incomplete_class" for="incomplete" onclick="openclose(this)">
 						<h2>Incomplete (0)<img class="expander"></h2>
 					</label>
@@ -197,6 +156,50 @@
 			</section>
 
 		</section>
+		<script>
+		function draw() {
+			student = load();
+			var completed = 0, current = 0, upcoming = 0;
+
+			for (var j = 0; j < student.classes[1].length; j++) {
+				var newC = document.createElement("li");
+				newC.innerHTML = student.classes[1][j].name + "<span>(" + student.classes[1][j].credits + ")</span>";
+				document.getElementById("completed").appendChild(newC);
+				completed += student.classes[1][j].credits;
+			}
+			document.getElementById("completed_label").innerHTML = "Completed (" + completed + ")<img class='expander'>";
+			for (var j = 0; j < student.classes[2].length; j++) {
+				var newC = document.createElement("li");
+				newC.innerHTML = student.classes[2][j].name + "<span>(" + student.classes[2][j].credits + ")</span>";
+				document.getElementById("current_semester").appendChild(newC);
+				$(newC).clone().appendTo(document.getElementById("in_progress"));
+				current += student.classes[2][j].credits;
+			}
+			document.getElementById("current_label").innerHTML = "Current Semester (" + current + ")<img class='expander'>";
+			document.getElementById("inprogress_label").innerHTML = "Current Semester (" + current + ")<img class='expander'>";
+			for (var j = 0; j < student.classes[5].length; j++) {
+				var newC = document.createElement("li");
+				newC.innerHTML = student.classes[5][j].name + "<span>(" + student.classes[5][j].credits + ")</span>";
+				document.getElementById("upcoming_semester").appendChild(newC);
+				upcoming += student.classes[5][j].credits;
+			}
+			document.getElementById("upcoming_label").innerHTML = "Upcoming Semester (" + upcoming + ")<img class='expander'>";
+		}
+		draw();
+
+		function openclose(element) {
+			element.classList.toggle("closed");
+			document.getElementById(element.htmlFor).classList.toggle("closed");
+		}
+		// p is number between 0 and 1
+		function updatePercent(p) {
+			document.getElementById("percent").innerHTML = "Progress - " + p*100 + "%";
+			document.getElementById("bar").style.width = p*100 + "%";
+
+			var standings = ["Freshman", "Sophomore", "Junior", "Senior"];
+			document.getElementById('label').children[1].innerHTML = standings[Math.floor(p*100/25)];
+		}
+		</script>
 
 	</body>
 <html>

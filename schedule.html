@@ -14,14 +14,11 @@
 			    width: auto;
 			    margin: 0px;
 			}
-			td ul li { padding: 5px; }
+			td ul li { padding: 5px; cursor: pointer; }
 			#past_semester, #current_semester { cursor: default; }
 			#main_body { background-color: #222; }
 
-			td ul li:hover
-			{
-				background-color:lightblue;
-			}
+			td ul li:hover { background-color:lightblue; }
 
 
 
@@ -33,8 +30,8 @@
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='index.html';">
 			<a href="index.html">Home</a>
-			<a href="classes.html">Classes</a>
-			<a class="current" href="schedule.html">Schedule</a>
+			<a href="classes.html">Class Search</a>
+			<a class="current" href="schedule.html">Semester Plan</a>
 			<a href="old_index.html" disabled>Settings</a>
 		</menu>
 
@@ -92,7 +89,8 @@
         $("ul").each( function() { $(this).empty(); });
         for (var i = 0; i < student.classes.length; i++) {
             for (var j = 0; j < student.classes[i].length; j++) {
-                $("#" + i).children().append("<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
+                $("#" + i).children().append("<li>" + student.classes[i][j].name
+								 	+ "<span>(" + student.classes[i][j].credits + ")</span></li>");
 								// console.log($("#" + i), "<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
 						}
         }
@@ -108,9 +106,16 @@
     });
 
     function moveIt(element) {
-        if (selectedClass != null) {
-            moveClass(selectedClass, selectedSemester, $(element).attr('id'));
-						draw();
+        if (selectedClass != null && $(element).attr('id') != selectedSemester) {
+          moveClass(selectedClass.substring(0, selectedClass.indexOf("(")), selectedSemester, $(element).attr('id'));
+					draw();
+					selectedClass=null;
+					selectedSemester=null;
+					$("li").click( function() {
+			        selectedClass = $(this).text();
+			        selectedSemester = $(this).closest('td').attr('id');
+			        $(this).css('background', 'lightblue');
+			    });
 				}
 		}
 

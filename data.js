@@ -30,10 +30,10 @@ function Class(id, name, credits, coreq, prereq, desc) {
 //Changes the semester a class is in. This will just add the class if it is called with a class that doesn't exist in the semesterFrom semester
 //className    (String) the name of the class
 //semesterFrom (int)    the semester the class is in
-//semesterTo   (int)	the semester to move the class to
+//semesterTo   (int)	  the semester to move the class to
 function moveClass(className, semesterFrom, semesterTo) {
-	removeClass(className, semesterFrom);
-	addClass(className, semesterTo);
+	  addClass(className, semesterTo);
+    removeClass(className, semesterFrom);
 }
 
 //Adds a class to the schedule. Also stores the change in localStorage
@@ -48,7 +48,6 @@ function addClass(className, semester) {
 	}
 
 	classArray[semester].push(new Class(null, className, 4, null, null, null));
-	//console.log(classArray);
 	var ret = new Student(classArray, stud.semester);
 
 	store(ret);
@@ -61,15 +60,13 @@ function removeClass(className, semester) {
 	var stud = load();
 	var classArray = stud.classes;
 
-	if (semester > classArray.length) {
-		return;
-	}
+	if (semester > classArray.length) { return; }
 
 	var index = -1;
 
 	for (var i = 0; i < classArray[semester].length; i++) {
 		var cur = classArray[semester][i];
-		if (cur.name === className) {
+		if (cur.name === className.substring(0, selectedClass.indexOf("("))) {
 			index = i;
 		}
 	}
@@ -78,7 +75,7 @@ function removeClass(className, semester) {
 		classArray[semester].splice(index, 1);
 	}
 
-	console.log(classArray);
+	// console.log(classArray);
 	var ret = new Student(classArray, stud.semester);
 	store(ret);
 }
@@ -88,8 +85,8 @@ function removeClass(className, semester) {
 //Stores the student in localStorage
 //stud (Student) the student to store
 function store(stud) {
-    console.log("storing");
-    console.log(stud);
+    // console.log("storing");
+    // console.log(stud);
     localStorage.setItem("user", JSON.stringify(stud));
 }
 
@@ -178,9 +175,9 @@ function test() {
     var sched = [transfer, sem1, sem2];
     var john = new Student(sched, 2);
     store(john);
-    console.log(load());
+    // console.log(load());
     addClass("OOD", 7);
-    console.log(load());
+    // console.log(load());
     moveClass("OOD", 7, 2);
-    console.log(load());
+    // console.log(load());
 }
