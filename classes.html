@@ -1,4 +1,6 @@
 <link rel="stylesheet" type = "text/css" href="style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!DOCTYPE HTML>
 
 <html>
@@ -59,7 +61,7 @@
 			    border-top: 1px solid #777;
 			    color: #000;
 			}
-			
+
 			.desc h4 {margin: 2% 0 1% 0;}
 			.desc p {margin: 0 4% 2% 4%;}
 
@@ -97,6 +99,14 @@
 			    color: #9b870c;
 			}
 
+			td:not(:first-child) {
+				font-size: 21pt;
+				text-align: center;
+				vertical-align: middle;
+				user-select: none;
+				cursor: pointer;
+			}
+
 		</style>
 
 		<script>
@@ -109,10 +119,21 @@
 			function dialog(element) {
                 document.getElementsByTagName('blackout')[0].classList.toggle("open");
 			    currClass = $(element).closest('li').attr('id');
-			}
+
 			function showdesc(element) {
 				element.classList.toggle("visible");
-			    document.getElementById(element.htmlFor).toggleClass("visible");
+			}
+			function clearTable() {
+				selected.classList.remove('selected');
+				selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+
+			}
+			function addClassToSemester(id) {
+				//TODO: HEY MICHAEL AND/OR GAVIN, THIS IS WHERE THE THING SHOULD GO.
+				//      id (String) - is the year (a number between 1 and 5) and the
+				//	                  semester (either "fall", "spring", "summer1",
+			  //                    or "summer2") separated by an underscore
+				//                    e.g. "4_summer2"
 			}
 			function addclass(element) {
 				alert(this.currClass + "   " + $(element).attr('id'))
@@ -133,6 +154,7 @@
 					</tr>
 					<tr>
 						<td>1</td>
+<<<<<<< HEAD
 						<td id="1" onclick="addclass(this)"></td>
 						<td id="2" onclick="addclass(this)"></td>
 						<td id="3" onclick="addclass(this)"></td>
@@ -185,10 +207,8 @@
 
 		<section id="main_body" class="unpadded">
 
-			<div id="search_area">
-				<button onclick="dialog(this)">Click here to see schedule dialog</button>
-				<input type="text" id="search_bar">
-			</div>
+			<div id="search_area"><input type="text" id="search_bar"></div>
+
 
 			<section id="info_cards">
 
@@ -244,8 +264,8 @@
 									<h4>Co-requisite</h4>
 									<p>Recitation for CS 1800</p>
 									<h4>Fulfillment</h4>
-									<p> CS Major Requirement <br> 
-										NUpath Formal/Quant Reasoning <br> 
+									<p> CS Major Requirement <br>
+										NUpath Formal/Quant Reasoning <br>
 										NU Core Math/Anly Think Lvl 1</p>
 									<label class="complete_sem">Fall 17</label>
 								</div>
@@ -278,9 +298,9 @@
 									<h4>Co-requisite</h4>
 									<p>Lab for CS2500</p>
 									<h4>Fulfillment</h4>
-									<p> CS Major Requirement <br> 
-										NUpath Formal/Quant Reasoning <br> 
-										NUpath Natural/Designed World <br> 
+									<p> CS Major Requirement <br>
+										NUpath Formal/Quant Reasoning <br>
+										NUpath Natural/Designed World <br>
 										NU Core Science/Tech Lvl 1 </p>
 									<label class="complete_sem">Fall 17</label>
 								</div>
@@ -313,7 +333,7 @@
 									<h4>Co-requisite</h4>
 									<p>Recitation for CS 1800</p>
 									<h4>Fulfillment</h4>
-									<p> CS Major Requirement <br> 
+									<p> CS Major Requirement <br>
 										NUpath Analyzing/Using Data <br>
 										NUpath Natural/Designed World</p>
 									<label class="current_sem">Spring 18</label>
@@ -347,7 +367,7 @@
 									<h4>Co-requisite</h4>
 									<p>Lab for CS 2800</p>
 									<h4>Fulfillment</h4>
-									<p> CS Major Requirement <br> 
+									<p> CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
 									<label class="current_sem">Spring 18</label>
 								</div>
@@ -471,7 +491,7 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p>CS Major Requirement <br> 
+									<p>CS Major Requirement <br>
 										NU Core Writing Intsv in Majr <br>
 										NUpath Writing Intensive</p>
 									<button class="add_btn" onclick="dialog(this)">Add</button>
@@ -489,7 +509,7 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p>CS Major Requirement <br> 
+									<p>CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
 									<button class="future_sem" onclick="dialog(this)">Fall 18</button>
 								</div>
@@ -497,11 +517,11 @@
 						</ul>
 
 						<!--CS Senior Seminar-->
-						<label for="cs_elecs" onclick="openclose(this)">
+						<label for="cs_sem" onclick="openclose(this)">
 							<h2>CS Senior Seminar<img class="expander"></h2>
-							<p>Choose one of the following course</p>
 						</label>
-						<ul id="cs_elecs">
+						<ul id="cs_sem">
+							<b><i>Choose one of the following courses:</i></b>
 							<li class="class_title" onclick="showdesc(this)">
 								Senior Seminar<span>(1)</span>
 								<div class="desc">
@@ -589,8 +609,8 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p> Mathematics Requirement<br> 
-										NUpath Formal/Quant Reasoning<br> 
+									<p> Mathematics Requirement<br>
+										NUpath Formal/Quant Reasoning<br>
 										NU Core Math/Anly Think Lvl 1</p>
 									<label class="complete_sem">Fall 17</label>
 								</div>
@@ -607,7 +627,7 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p>Mathematics Requirement<br> NUpath Formal/Quant Reasoning<br> 
+									<p>Mathematics Requirement<br> NUpath Formal/Quant Reasoning<br>
 										NU Core Math/Anly Think Lvl 1</p>
 									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
@@ -662,7 +682,7 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p> Computing and Social Issues<br> 
+									<p> Computing and Social Issues<br>
 										NUpath Ethical Reasoning<br> NU Core Humanities Lvl 1<br>
 										 NUpath Societies/Institutions</p>
 									<label class="current_sem">Spring 18</label>
@@ -679,10 +699,10 @@
 
 						<!--CS Electives-->
 						<label for="cs_elecs" onclick="openclose(this)">
-							<h2>CS Electives<img class="expander"></h2>							
-							<p>Take a total of _ courses</p>					
+							<h2>CS Electives<img class="expander"></h2>
 						</label>
 						<ul id="cs_elecs">
+							<b><i>Take a total of _ courses</i></b>
 							<li class="class_title" onclick="showdesc(this)">
 								Programming in C++ <span>(4)</span>
 								<div class="desc">
@@ -709,8 +729,8 @@
 									<h4>Co-requisite</h4>
 									<p>None</p>
 									<h4>Fulfillment</h4>
-									<p>CS Major Requirement <br> 
-										NU Core Capstone <br> NUpath Capstone Experience<br> 
+									<p>CS Major Requirement <br>
+										NU Core Capstone <br> NUpath Capstone Experience<br>
 										NU Core Writing Intsv in Majr<br> NUpath Writing Intensive</p>
 									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
@@ -720,10 +740,10 @@
 
 						<!--General Electives-->
 						<label for="gen_elecs" onclick="openclose(this)">
-							<h2>General Electives<img class="expander"></h2>	
-							<p>Complete a total of 8 courses</p>						
+							<h2>General Electives<img class="expander"></h2>
 						</label>
 						<ul id="gen_elecs">
+							<b><i>Complete a total of 8 courses</i></b>
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Games and Society <span>(4)</span>
 								<div class="desc">

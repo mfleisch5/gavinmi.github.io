@@ -8,26 +8,14 @@
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
 
-			#info_cards card {
+			td ul {
 			    max-height: 100%;
 			    min-height: auto;
 			    width: auto;
-			    margin-bottom: 0px;
+			    margin: 0px;
 			}
-
-
-			#info_cards card ul li {
-			    padding: 5px;
-			}
-
-			card {
-				box-shadow: none;
-			}
-
-			#past_semester, #current_semester {
-				cursor: default;
-			}
-
+			td ul li { padding: 5px; }
+			#past_semester, #current_semester { cursor: default; }
 			#main_body { background-color: #222; }
 		</style>
 
@@ -55,49 +43,37 @@
 				</tr>
 				<tr>
 					<td>1</td>
-					<td id="1">
-						<div id="info_cards">
-							<card>
-								<ul id="past_semester" class="completed_class">
-									<li>Fundamentals of Computer Science I <span>(4)</span></li>
-									<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
-									<li>Discrete Structure <span>(4)</span></li>
-									<li>Recitation for Discrete Structure <span>(1)</span></li>
-									<li>First-Year Writing <span>(4)</span></li>
-									<li>Calculus 1 for Science and Engineering <span>(4)</span></li>
-									<li>CS/IS Overview 1 <span>(1)</span></li>
-								</ul>
-							</card>
-						</div>
+					<td>
+						<ul id="past_semester" class="completed_class">
+							<li>Fundamentals of Computer Science I <span>(4)</span></li>
+							<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
+							<li>Discrete Structure <span>(4)</span></li>
+							<li>Recitation for Discrete Structure <span>(1)</span></li>
+							<li>First-Year Writing <span>(4)</span></li>
+							<li>Calculus 1 for Science and Engineering <span>(4)</span></li>
+							<li>CS/IS Overview 1 <span>(1)</span></li>
+						</ul>
 					</td>
 					<td>
-						<div id="info_cards">
-							<card>
-								<ul id="current_semester" class="inprogress_class">
-									<li>Fundamentals of Computer Science II <span>(4)</span></li>
-									<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
-									<li>Lab for Fundamentals of Logic and Computation <span>(1)</span></li>
-									<li>Technology and Human Values <span>(4)</span></li>
-									<li>Games and Society <span>(4)</span></li>
-									<li>Recitation for Games and Society <span>(1)</span></li>
-								</ul>
-							</card>
-						</div>
+						<ul id="current_semester" class="inprogress_class">
+							<li>Fundamentals of Computer Science II <span>(4)</span></li>
+							<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
+							<li>Lab for Fundamentals of Logic and Computation <span>(1)</span></li>
+							<li>Technology and Human Values <span>(4)</span></li>
+							<li>Games and Society <span>(4)</span></li>
+							<li>Recitation for Games and Society <span>(1)</span></li>
+						</ul>
 					</td>
 					<td></td>
 					<td></td>
 				</tr>
 				<tr>
 					<td>2</td>
-					<td id="2">
-						<div id="info_cards">
-							<card>
-								<ul id="current_semester" class="incomplete_class">
-									<li>Object-Oriented Design <span>(4)</span></li>
-									<li>Algorithms and Data <span>(4)</span></li>
-								</ul>
-							</card>
-						</div>
+					<td>
+						<ul id="current_semester" class="incomplete_class">
+							<li>Object-Oriented Design <span>(4)</span></li>
+							<li>Algorithms and Data <span>(4)</span></li>
+						</ul>
 					</td>
 					<td></td>
 					<td></td>
