@@ -33,53 +33,53 @@ function Class(id, name, credits, coreq, prereq, desc) {
 //semesterTo   (int)	the semester to move the class to
 function moveClass(className, semesterFrom, semesterTo) {
 	removeClass(className, semesterFrom);
-	addClass(className, semesterTo); 
+	addClass(className, semesterTo);
 }
 
 //Adds a class to the schedule. Also stores the change in localStorage
 //className (String) The class to add
 //semester  (int)    The semester to add it to
 function addClass(className, semester) {
-	var stud = load(); 
-	//console.log(stud); 
-	var classArray = stud.classes; 		
+	var stud = load();
+	//console.log(stud);
+	var classArray = stud.classes;
 	while (semester + 1 > classArray.length) {
-		classArray[classArray.length] = []; 
+		classArray[classArray.length] = [];
 	}
 
 	classArray[semester].push(new Class(null, className, 4, null, null, null));
 	//console.log(classArray);
 	var ret = new Student(classArray, stud.semester);
-	
-	store(ret); 
+
+	store(ret);
 }
 
 //Removes a class from the schedule. Also stores the change in localStorage
 //className (String) The class to remove
 //semester  (int)    The semester to remove it from
 function removeClass(className, semester) {
-	var stud = load(); 
-	var classArray = stud.classes; 	
-	
+	var stud = load();
+	var classArray = stud.classes;
+
 	if (semester > classArray.length) {
-		return; 
+		return;
 	}
-	
+
 	var index = -1;
-	
+
 	for (var i = 0; i < classArray[semester].length; i++) {
 		var cur = classArray[semester][i];
 		if (cur.name === className) {
 			index = i;
 		}
-	}	
+	}
 
 	if (index > -1) {
 		classArray[semester].splice(index, 1);
-	}	
+	}
 
 	console.log(classArray);
-	var ret = new Student(classArray, stud.semester); 
+	var ret = new Student(classArray, stud.semester);
 	store(ret);
 }
 
@@ -118,12 +118,12 @@ function parseSemesterArray(sems) {
     var ret = [];
     var cur = sems;
     //console.log("Schedule:" + sems);
-    cur = cur.substring(cur.indexOf("[") + 1);	
+    cur = cur.substring(cur.indexOf("[") + 1);
     while(1) {
 	cur = cur.substring(cur.indexOf("["));
 	//console.log(cur);
 	if (cur.indexOf("[]") === 0) {
-		cur = cur.substring(2); 
+		cur = cur.substring(2);
 		var mt = [];
 		ret.push(mt);
 	}
@@ -160,7 +160,7 @@ function parseSemester(sem) {
 //Parses a single class
 //c (String) a class in JSON format in a String
 function parseClass(c) {
-    //console.log("Class:  " + c);
+    // console.log("Class:  " + c);
     var j = JSON.parse(c);
     return new Class(j.id, j.name, j.credits, j.corequisites, j.prerequisites, j.description);
 }
@@ -179,12 +179,8 @@ function test() {
     var john = new Student(sched, 2);
     store(john);
     console.log(load());
-    addClass("OOD", 7); 
+    addClass("OOD", 7);
     console.log(load());
-    moveClass("OOD", 7, 2); 
+    moveClass("OOD", 7, 2);
     console.log(load());
 }
-
-
-
-

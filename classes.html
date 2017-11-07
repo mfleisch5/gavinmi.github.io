@@ -107,7 +107,7 @@
         }
         function clearTable() {
             selected.classList.remove('selected');
-            selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+            // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
         }
         function dialog() {
             selected = null;
@@ -115,12 +115,12 @@
             $('td:not(:first-child)').click(function() {
                 if(selected != null) {
                     selected.classList.remove('selected');
-                    selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+                    // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
                 }
                 if(this != selected) {
                     selected = this;
                     this.classList.add('selected');
-                    selected.innerHTML = parseInt(selected.innerHTML) + 4;
+                    // selected.innerHTML = parseInt(selected.innerHTML) + 4;
                 }
                 else if(this == selected) { selected = null; }
                 document.getElementById("addButton").disabled = selected == null;
@@ -128,9 +128,9 @@
         }
         function addclass(id) {
             if(selectedClass != null) {
-                addClass(selectedClass, id);
-		}
-	    selectedClass = null; 
+              addClass(selectedClass, id);
+						}
+	    			selectedClass = null;
         }
 	</script>
 </head>
