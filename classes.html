@@ -1,140 +1,131 @@
 <link rel="stylesheet" type = "text/css" href="style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+<!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!DOCTYPE HTML>
 
 <html>
-	<head>
-		<title>DA+ Class</title>
+<head>
+	<title>DA+ Class</title>
 
-		<script type="text/javascript" src="data.js"></script>
-		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
-		<style>
-			div#search_area {
-				background-color: #bbb;
-				width: calc(100% - 20px);
-				padding: 10px;
-				text-align: right;
-				margin-bottom: 15px;
-			}
-			div#search_area input#search_bar {
-				width: 250px;
-				background: url("https://image.flaticon.com/icons/png/128/149/149852.png") no-repeat scroll 224px center;
-				background-color: white;
-				background-size: 16px 16px;
-				padding-right: 30px;
-			}
+	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
+	<style>
+		div#search_area {
+			background-color: #bbb;
+			width: calc(100% - 20px);
+			padding: 10px;
+			text-align: right;
+			margin-bottom: 15px;
+		}
+		div#search_area input#search_bar {
+			width: 250px;
+			background: url("https://image.flaticon.com/icons/png/128/149/149852.png") no-repeat scroll 224px center;
+			background-color: white;
+			background-size: 16px 16px;
+			padding-right: 30px;
+		}
+		#info_cards > card {
+			max-height: calc(100% - 100px);
+		}
+		#info_cards { text-align: center; }
+		#info_cards * { text-align: left; }
+		card {
+			display: inline-block;
+			vertical-align: top;
+			height: 100%;
+			width: 400px;
+		}
+		card h2, card ul { margin-bottom: 5px; }
+		card h2 { user-select: none; cursor: pointer; }
+		card label img { transform: rotate(0deg); transition: 0.1s ease; }
+		card ul { margin-right: 10px; padding-left: 20px; }
+		card ul.closed { display: none; }
+		card label.closed img { transform: rotate(-90deg); }
+		card ul li:not(:last-child) { margin-bottom: 5px; }
+		blackout card table {
+			height: calc(100% - 50px);
+			margin-bottom: 15px;
+		}
+		blackout card span { float: right; }
+		.card_body > label > p {margin-top: 5px; margin-bottom: -5px; color: #777;}
+		.desc {
+			margin-top: 2%;
+			border-top: 1px solid #777;
+			color: #000;
+		}
+		.desc h4 {margin: 2% 0 1% 0;}
+		.desc p {margin: 0 4% 2% 4%;}
+		.class_title {cursor:pointer;}
+		.class_title.visible > div.desc {display: block;}
+		.class_title > div.desc {display: none;}
+		.add_btn {
+			padding: 4px 10px;
+			background-color: #F5F5F5;
+			margin-bottom: 2%;
+		}
+		.future_sem {
+			padding: 4px 10px;
+			background-color: #F5F5F5;
+			border: 1px solid #8b0000;
+			display: inline-block;
+			color: #8b0000;
+		}
+		.complete_sem {
+			padding: 4px 10px;
+			border: 1px solid #228B22;
+			display: inline-block;
+			color: #228B22;
+		}
+		.current_sem {
+			padding: 4px 10px;
+			border: 1px solid #9b870c;
+			display: inline-block;
+			color: #9b870c;
+		}
+		td:not(:first-child) {
+			font-size: 21pt;
+			text-align: center;
+			vertical-align: middle;
+			user-select: none;
+			cursor: pointer;
+		}
+	</style>
 
-			#info_cards > card {
-  				max-height: calc(100% - 100px);
-			}
-
-			#info_cards { text-align: center; }
-			#info_cards * { text-align: left; }
-
-			card {
-				display: inline-block;
-				vertical-align: top;
-				height: 100%;
-				width: 400px;
-			}
-
-			card h2, card ul { margin-bottom: 5px; }
-			card h2 { user-select: none; cursor: pointer; }
-			card label img { transform: rotate(0deg); transition: 0.1s ease; }
-			card ul { margin-right: 10px; padding-left: 20px; }
-			card ul.closed { display: none; }
-			card label.closed img { transform: rotate(-90deg); }
-			card ul li:not(:last-child) { margin-bottom: 5px; }
-
-			blackout card table {
-				 height: calc(100% - 50px);
-				 margin-bottom: 15px;
-			}
-
-			blackout card span { float: right; }
-
-			.card_body > label > p {margin-top: 5px; margin-bottom: -5px; color: #777;}
-			.desc {
-			    margin-top: 2%;
-			    border-top: 1px solid #777;
-			    color: #000;
-			}
-
-			.desc h4 {margin: 2% 0 1% 0;}
-			.desc p {margin: 0 4% 2% 4%;}
-
-			.class_title {cursor:pointer;}
-
-			.class_title.visible > div.desc {display: block;}
-
-			.class_title > div.desc {display: none;}
-
-			.add_btn {
-				padding: 4px 10px;
-				background-color: #F5F5F5;
-				margin-bottom: 2%;
-			}
-
-			.future_sem {
-				padding: 4px 10px;
-				background-color: #F5F5F5;
-			    border: 1px solid #8b0000;
-			    display: inline-block;
-			    color: #8b0000;
-			}
-
-			.complete_sem {
-				padding: 4px 10px;
-			    border: 1px solid #228B22;
-			    display: inline-block;
-			    color: #228B22;
-			}
-
-			.current_sem {
-				padding: 4px 10px;
-			    border: 1px solid #9b870c;
-			    display: inline-block;
-			    color: #9b870c;
-			}
-
-			td:not(:first-child) {
-				font-size: 21pt;
-				text-align: center;
-				vertical-align: middle;
-				user-select: none;
-				cursor: pointer;
-			}
-
-		</style>
-
-		<script>
-			var currClass = null;
-
-			function openclose(element) {
-				element.classList.toggle("closed");
-				document.getElementById(element.htmlFor).classList.toggle("closed");
-			}
-			function dialog(element) {
-                document.getElementsByTagName('blackout')[0].classList.toggle("open");
-                currClass = $(element).closest('li').attr('id');
-            }
-			function showdesc(element) {
-				element.classList.toggle("visible");
-			}
-			function clearTable() {
-				selected.classList.remove('selected');
-				selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-
-			}
-			function addclass(element) {
-				addClass(this.currClass, $(element).attr('id'))
-			}
-		</script>
-	</head>
-	<body>
-
+	<script>
+        var selected = null;
+        function openclose(element) {
+            element.classList.toggle("closed");
+            document.getElementById(element.htmlFor).classList.toggle("closed");
+        }
+        function showdesc(element) {
+            element.classList.toggle("visible");
+        }
+        function clearTable() {
+            selected.classList.remove('selected');
+            selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+        }
+        function dialog() {
+            selected = null;
+            document.getElementsByTagName('blackout')[0].classList.toggle("open");
+            $('td:not(:first-child)').click(function() {
+                if(selected != null) {
+                    selected.classList.remove('selected');
+                    selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+                }
+                if(this != selected) {
+                    selected = this;
+                    this.classList.add('selected');
+                    selected.innerHTML = parseInt(selected.innerHTML) + 4;
+                }
+                else if(this == selected) { selected = null; }
+                document.getElementById("addButton").disabled = selected == null;
+            });
+        }
+        function addClass(id) {
+            alert(id)
+        }
+	</script>
+</head>
+<body>
 		<blackout>
 			<card class="centered" style="width: 50%; height: 50%;">
 				<table>
@@ -147,46 +138,47 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td id="1" onclick="addclass(this)"></td>
-						<td id="2" onclick="addclass(this)"></td>
-						<td id="3" onclick="addclass(this)"></td>
-						<td id="4" onclick="addclass(this)"></td>
+						<td id="1"></td>
+						<td id="2"></td>
+						<td id="3"></td>
+						<td id="4"></td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td id="5" onclick="addclass(this)"></td>
-						<td id="6" onclick="addclass(this)"></td>
-						<td id="7" onclick="addclass(this)"></td>
-						<td id="8" onclick="addclass(this)"></td>
+						<td id="5"></td>
+						<td id="6"></td>
+						<td id="7"></td>
+						<td id="8"></td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td id="9" onclick="addclass(this)"></td>
-						<td id="10" onclick="addclass(this)"></td>
-						<td id="11" onclick="addclass(this)"></td>
-						<td id="12" onclick="addclass(this)"></td>
+						<td id="9"></td>
+						<td id="10"></td>
+						<td id="11"></td>
+						<td id="12"></td>
 					</tr>
 					<tr>
 						<td>4</td>
-						<td id="13" onclick="addclass(this)"></td>
-						<td id="14" onclick="addclass(this)"></td>
-						<td id="15" onclick="addclass(this)"></td>
-						<td id="16" onclick="addclass(this)"></td>
+						<td id="13"></td>
+						<td id="14"></td>
+						<td id="15"></td>
+						<td id="16"></td>
 					</tr>
 					<tr>
 						<td>5</td>
-						<td id="17" onclick="addclass(this)"></td>
-						<td id="18" onclick="addclass(this)"></td>
-						<td id="19" onclick="addclass(this)"></td>
-						<td id="20" onclick="addclass(this)"></td>
+						<td id="17"></td>
+						<td id="18"></td>
+						<td id="19"></td>
+						<td id="20"></td>
 					</tr>
 				</table>
 				<span>
-					<button disabled onclick="dialog(this)">Okay</button>
-					<button onclick="dialog(this)">Cancel</button>
+			<button id="addButton" onclick="addclass(selected.id); clearTable(); dialog();">Okay</button>
+					<button onclick="clearTable(); dialog();">Cancel</button>
 				</span>
 			</card>
 		</blackout>
+
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html';">
@@ -200,7 +192,6 @@
 		<section id="main_body" class="unpadded">
 
 			<div id="search_area"><input type="text" id="search_bar"></div>
-
 
 			<section id="info_cards">
 
@@ -241,11 +232,11 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title completed_class" id="CS1800" onclick="showdesc(this)">
+							<li class="class_title completed_class" onclick="showdesc(this)">
 								Discrete Structures<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -388,7 +379,7 @@
 							<h2>CS Requirements<img class="expander"></h2>
 						</label>
 						<ul id="cs_reqs">
-							<li class="class_title incomplete_class" id="Object-Oriented Design" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Object-Oriented Design <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -400,11 +391,11 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="future_sem" onclick="dialog(this)">Fall 18</button>
+									<button class="future_sem" onclick="dialog()">Fall 18</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" id="Computer Systems" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Computer Systems <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -416,11 +407,11 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" id="Networks and Distributed Systems" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Networks and Distributed Systems <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -432,11 +423,11 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" id="Theory of Computation" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Theory of Computation<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -448,12 +439,12 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement <br>
-									NU Core Math/Anly Think Lvl 2</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+										NU Core Math/Anly Think Lvl 2</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" id="Programminng Languages" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Programminng Languages <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -466,12 +457,12 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
 
-							<li class="class_title incomplete_class" id = "Software Development" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Software Development <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -486,11 +477,11 @@
 									<p>CS Major Requirement <br>
 										NU Core Writing Intsv in Majr <br>
 										NUpath Writing Intensive</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" id="Algorithms and Data" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Algorithms and Data <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -503,7 +494,7 @@
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
-									<button class="future_sem" onclick="dialog(this)">Fall 18</button>
+									<button class="future_sem" onclick="dialog()">Fall 18</button>
 								</div>
 							</li>
 						</ul>
@@ -526,7 +517,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 							<li class="class_title" onclick="showdesc(this)">
@@ -541,7 +532,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -580,7 +571,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>English Requirement<br> Advance Writing Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -621,7 +612,7 @@
 									<h4>Fulfillment</h4>
 									<p>Mathematics Requirement<br> NUpath Formal/Quant Reasoning<br>
 										NU Core Math/Anly Think Lvl 1</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
@@ -637,7 +628,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>NU Core Math/Anly Think Lvl 2</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
@@ -653,7 +644,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>NUpath Analyzing/Using Data</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -676,7 +667,7 @@
 									<h4>Fulfillment</h4>
 									<p> Computing and Social Issues<br>
 										NUpath Ethical Reasoning<br> NU Core Humanities Lvl 1<br>
-										 NUpath Societies/Institutions</p>
+										NUpath Societies/Institutions</p>
 									<label class="current_sem">Spring 18</label>
 								</div>
 							</li>
@@ -707,10 +698,10 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
-							<li class="class_title" id="Web Development" onclick="showdesc(this)">
+							<li class="class_title" onclick="showdesc(this)">
 								Web Development <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -724,7 +715,7 @@
 									<p>CS Major Requirement <br>
 										NU Core Capstone <br> NUpath Capstone Experience<br>
 										NU Core Writing Intsv in Majr<br> NUpath Writing Intensive</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 							<li class="class_title" onclick="showdesc(this)">Project Management <span>(4)</span></li>
@@ -753,7 +744,7 @@
 							</li>
 
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
-							Recitation for GAME 1110 <span>(4)</span>
+								Recitation for GAME 1110 <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Provides small-group discussion format to cover material in GAME 1110.</p>
@@ -784,7 +775,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" id="Europe: Empires, Revolutions, Wars, and Their Aftermath" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
+							<li class="class_title" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines major themes in the history of Europe from 1500 to the present, emphasizing the conceptual tools historians use to think about European history, and drawing on historical documents, literature, and film. Examines the emergence of states and nations as theoretical constructs and political realities; men’s and women’s experience of social conflict-rebellions, revolutions, and wars-and the complex relationships between Europeans and non-Europeans. Attention is given to how race, class, and gender shaped the way people made and understood their history.</p>
@@ -795,11 +786,11 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CAS Core MOI: Social World<br> NU Core Social Science Lvl 1</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)" id="Introduction to Jazz">Introduction to Jazz <span>(4)</span>
+							<li class="class_title" onclick="showdesc(this)">Introduction to Jazz <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines the evolution of the creative improvisational musical styles commonly called jazz, from its African-American roots to its status as one of America’s classical musics and an internationally valued art form. Explores the contributions of African and European musical traditions and African-American spirituals, work songs, and blues. Examines major contributors and stylistic development and change through selected audio and audio-visual presentations. Also considers the sociocultural dynamics that have affected musical evolution and acceptance. </p>
@@ -810,8 +801,8 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CAS Core MOI: Arts Context<br>NU Core Comp Stdy of Cultures<br>
-									NU Core Arts Lvl 1</p>
-									<button class="add_btn" onclick="dialog(this)">Add</button>
+										NU Core Arts Lvl 1</p>
+									<button class="add_btn" onclick="dialog()">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -821,5 +812,5 @@
 
 		</section>
 
-	</body>
+</body>
 <html>
