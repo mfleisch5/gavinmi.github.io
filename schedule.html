@@ -114,17 +114,18 @@
         var student = load();
         for(var i = 0; i < student.classes.length; i++) {
             for (var j = 0; i < student.classes[i].length; j++) {
-				$("#" + i).children().append("<li>" + student.classes[i][j].name + "<span>(4)</span> </li>");
+                alert(student.classes[i][j]);
             }
         }
-
-
-        var selectedClass = null;
-        $('body').on('click', 'li', function() {
+        for(var i = 0; i < student.classes.length; i++) {
+            for (var j = 0; i < student.classes[i].length; j++) {
+                $("#" + i).children().append("<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
+			}
+		}
+        $("li").click( function() {
             alert("ok");
-            $(this).toggleClass('selected');
-            selectedClass = this;
         });
+
 
 	</script>
 	</body>
