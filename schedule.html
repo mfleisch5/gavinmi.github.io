@@ -29,8 +29,7 @@
 	</head>
 	<body>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="data.js" type="text/javascript">
-	</script>
+	<script src="data.js" type="text/javascript"></script>
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='index.html';">
 			<a href="index.html">Home</a>
@@ -126,7 +125,7 @@
         $("li").click( function() {
             selectedClass = $(this).text();
             selectedSemester = $(this).closest('td').attr('id');
-            $(this).css('background', 'darkslategrey');
+            $(this).css('background', 'lightblue');
         });
 
         function moveIt(element) {
