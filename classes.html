@@ -7,6 +7,8 @@
 	<head>
 		<title>DA+ Class</title>
 
+		<script type="text/javascript" src="data.js"></script>
+		<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 		<style>
 			div#search_area {
@@ -108,35 +110,23 @@
 		</style>
 
 		<script>
-			var selected = null;
+			var currClass = null;
 
 			function openclose(element) {
 				element.classList.toggle("closed");
 				document.getElementById(element.htmlFor).classList.toggle("closed");
 			}
+			function dialog(element) {
+                document.getElementsByTagName('blackout')[0].classList.toggle("open");
+			    currClass = $(element).closest('li').attr('id');
+
 			function showdesc(element) {
 				element.classList.toggle("visible");
 			}
 			function clearTable() {
 				selected.classList.remove('selected');
 				selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-			}
-			function dialog() {
-				selected = null;
-				document.getElementsByTagName('blackout')[0].classList.toggle("open");
-				$('td:not(:first-child)').click(function() {
-					if(selected != null) {
-						selected.classList.remove('selected');
-						selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-					}
-					if(this != selected) {
-						selected = this;
-						this.classList.add('selected');
-						selected.innerHTML = parseInt(selected.innerHTML) + 4;
-					}
-					else if(this == selected) { selected = null; }
-					document.getElementById("addButton").disabled = selected == null;
-				});
+
 			}
 			function addClassToSemester(id) {
 				//TODO: HEY MICHAEL AND/OR GAVIN, THIS IS WHERE THE THING SHOULD GO.
@@ -144,6 +134,9 @@
 				//	                  semester (either "fall", "spring", "summer1",
 			  //                    or "summer2") separated by an underscore
 				//                    e.g. "4_summer2"
+			}
+			function addclass(element) {
+				alert(this.currClass + "   " + $(element).attr('id'))
 			}
 		</script>
 	</head>
@@ -161,43 +154,49 @@
 					</tr>
 					<tr>
 						<td>1</td>
-						<td id="1_fall">19</td>
-						<td id="1_spring">18</td>
-						<td id="1_summer1">0</td>
-						<td id="1_summer2">0</td>
+<<<<<<< HEAD
+						<td id="1" onclick="addclass(this)"></td>
+						<td id="2" onclick="addclass(this)"></td>
+						<td id="3" onclick="addclass(this)"></td>
+						<td id="4" onclick="addclass(this)"></td>
 					</tr>
 					<tr>
 						<td>2</td>
-						<td id="2_fall">8</td>
-						<td id="2_spring">0</td>
-						<td id="2_summer1">0</td>
-						<td id="2_summer2">0</td>
+						<td id="5"></td>
+						<td id="6"></td>
+						<td id="7"></td>
+						<td id="8"></td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td id="3_fall">0</td>
-						<td id="3_spring">0</td>
-						<td id="3_summer1">0</td>
-						<td id="3_summer2">0</td>
+						<td id="9"></td>
+						<td id="10"></td>
+						<td id="11"></td>
+						<td id="12"></td>
 					</tr>
 					<tr>
 						<td>4</td>
-						<td id="4_fall">0</td>
-						<td id="4_spring">0</td>
-						<td id="4_summer1">0</td>
-						<td id="4_summer2">0</td>
+						<td id="13"></td>
+						<td id="14"></td>
+						<td id="15"></td>
+						<td id="16"></td>
 					</tr>
 					<tr>
 						<td>5</td>
-						<td id="5_fall">0</td>
-						<td id="5_spring">0</td>
-						<td id="5_summer1">0</td>
-						<td id="5_summer2">0</td>
+						<td id="17"></td>
+						<td id="18"></td>
+						<td id="19"></td>
+						<td id="20"></td>
 					</tr>
 				</table>
 				<span>
+<<<<<<< HEAD
 					<button id="addButton" disabled onclick="addClassToSemester(selected.id); clearTable(); dialog();">Okay</button>
 					<button onclick="clearTable(); dialog();">Cancel</button>
+=======
+					<button disabled onclick="dialog(this)">Okay</button>
+					<button onclick="dialog(this)">Cancel</button>
+>>>>>>> 91d41b2796d79804a1268b1745993c92cd394b1a
 				</span>
 			</card>
 		</blackout>
@@ -215,6 +214,7 @@
 
 			<div id="search_area"><input type="text" id="search_bar"></div>
 
+
 			<section id="info_cards">
 
 				<card class="unpadded">
@@ -229,7 +229,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								CS/IS Overview 1<span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces students to the College of Computer and Information Science (CCIS) and begins their preparation for careers in the computing and information fields. Offers students an opportunity to learn how to thrive at Northeastern and within CCIS by developing academic, professional, and interpersonal skills. Covers the variety of careers available in the high-technology professions. Students work in groups to create and deliver presentations on careers in the field.</p>
 
 									<h4>Prerequisite</h4>
@@ -245,7 +245,7 @@
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								CS/IS Overview 2: Co-op Preparation   <span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Continues the preparation of students for careers in the computing and information fields by discussing co-op and co-op processes. Offers students an opportunity to prepare a professional résumé; practice proper interviewing techniques; explore current job opportunities; learn how to engage in the job and referral process; and to understand co-op policies, procedures, and expectations. Discusses professional behavior and ethical issues in the workplace.</p>
 
 									<h4>Prerequisite</h4>
@@ -254,14 +254,14 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id="CS1800" onclick="showdesc(this)">
 								Discrete Structures<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the mathematical structures and methods that form the foundation of computer science. Studies structures such as sets, tuples, sequences, lists, trees, and graphs. Discusses functions, relations, ordering, and equivalence relations. Examines inductive and recursive definitions of structures and functions. Discusses principles of proof such as truth tables, inductive proof, and basic logic. Also covers the counting techniques and arguments needed to estimate the size of sets, the growth of functions, and the space-time complexity of algorithms.</p>
 
 									<h4>Prerequisite</h4>
@@ -279,7 +279,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								Recitation for CS1800 <span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p> Provides students with additional opportunities to ask questions and to see sample problems solved in detail.</p>
 
 									<h4>Prerequisite</h4>
@@ -295,7 +295,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								Fundamentals of Computer Science I<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the fundamental ideas of computing and the principles of programming. Discusses a systematic approach to word problems, including analytic reading, synthesis, goal setting, planning, plan execution, and testing. Presents several models of computing, starting from nothing more than expression evaluation in the spirit of high school algebra. No prior programming experience is assumed; therefore, suitable for freshman students, majors and nonmajors alike who wish to explore the intellectual ideas in the discipline.</p>
 
 									<h4>Prerequisite</h4>
@@ -314,7 +314,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								Lab for CS2500 <span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p> Accompanies CS 2500. Covers topics from the course through various experiments.</p>
 
 									<h4>Prerequisite</h4>
@@ -330,7 +330,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Fundamentals of Computer Science II<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Continues CS 2500. Examines object-oriented programming and associated algorithms using more complex data structures as the focus. Discusses nested structures and nonlinear structures including hash tables, trees, and graphs. Emphasizes abstraction, encapsulation, inheritance, polymorphism, recursion, and object-oriented design patterns. Applies these ideas to sample applications that illustrate the breadth of computer science.</p>
 
 									<h4>Prerequisite</h4>
@@ -348,7 +348,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Lab for CS2510 <span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p> Accompanies CS 2510. Covers topics from the course through various experiments.</p>
 
 									<h4>Prerequisite</h4>
@@ -364,7 +364,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Logic and Computation<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces formal logic and its connections to computer and information science. Offers an opportunity to learn to translate statements about the behavior of computer programs into logical claims and to gain the ability to prove such assertions both by hand and using automated tools. Considers approaches to proving termination, correctness, and safety for programs. Discusses notations used in logic, propositional and first order logic, logical inference, mathematical induction, and structural induction. Introduces the use of logic for modeling the range of artifacts and phenomena that arise in computer and information science.</p>
 
 									<h4>Prerequisite</h4>
@@ -381,7 +381,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Lab for CS2800 <span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Accompanies CS 2510. Covers topics from the course through various experiments.</p>
 
 									<h4>Prerequisite</h4>
@@ -401,10 +401,10 @@
 							<h2>CS Requirements<img class="expander"></h2>
 						</label>
 						<ul id="cs_reqs">
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="CS3500" onclick="showdesc(this)">
 								Object-Oriented Design <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Presents a comparative approach to object-oriented programming and design. Discusses the concepts of object, class, meta-class, message, method, inheritance, and genericity. Reviews forms of polymorphism in object-oriented languages.</p>
 
 									<h4>Prerequisite</h4>
@@ -413,14 +413,14 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="future_sem" onclick="dialog()">Fall 18</button>
+									<button class="future_sem" onclick="dialog(this)">Fall 18</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="CS3650" onclick="showdesc(this)">
 								Computer Systems <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the basic design of computing systems, computer operating systems, and assembly language using a RISC architecture. Describes caches and virtual memory. Covers the interface between assembly language and high-level languages, including call frames and pointers. Covers the use of system calls and systems programming to show the interaction with the operating system. Covers the basic structures of an operating system, including application interfaces, processes, threads, synchronization, interprocess communication, deadlock, memory management, file systems, and input/output control.</p>
 
 									<h4>Prerequisite</h4>
@@ -429,14 +429,14 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="CS3700" onclick="showdesc(this)">
 								Networks and Distributed Systems <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the basic concepts underlying computer operating systems and computer networks and provides hands-on experience with their implementation. Covers the basic structure of an operating system: application interfaces, processes, threads, synchronization, interprocess communication, processor allocation, deadlocks, memory management, file systems, and input/output control.</p>
 
 									<h4>Prerequisite</h4>
@@ -445,14 +445,14 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Theory of Computation<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the theory behind computers and computing aimed at answering the question, “What are the capabilities and limitations of computers?” Covers automata theory, computability, and complexity. The automata theory portion includes finite automata, regular expressions, nondeterminism, nonregular languages, context-free languages, pushdown automata, and noncontext-free languages.</p>
 
 									<h4>Prerequisite</h4>
@@ -462,14 +462,14 @@
 									<h4>Fulfillment</h4>
 									<p> CS Major Requirement <br>
 									NU Core Math/Anly Think Lvl 2</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="CS4400" onclick="showdesc(this)">
 								Programminng Languages <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces a systematic approach to understanding the behavior of programming languages. Covers interpreters; static and dynamic scope; environments; binding and assignment; functions and recursion; parameter-passing and method dispatch; objects, classes, inheritance, and polymorphism; type rules and type checking; and concurrency. </p>
 
 									<h4>Prerequisite</h4>
@@ -479,15 +479,15 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "CS4500" onclick="showdesc(this)">
 								Software Development <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>onsiders software development as a systematic process involving specification, design, documentation, implementation, testing, and maintenance. Examines software process models; methods for software specification; modularity, abstraction, and software reuse; and issues of software quality. Students, possibly working in groups, design, document, implement, test, and modify software projects.</p>
 
 									<h4>Prerequisite</h4>
@@ -499,14 +499,14 @@
 									<p>CS Major Requirement <br>
 										NU Core Writing Intsv in Majr <br>
 										NUpath Writing Intensive</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Algorithms and Data <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the basic principles and techniques for the design, analysis, and implementation of efficient algorithms and data representations. Discusses asymptotic analysis and formal methods for establishing the correctness of algorithms. Considers divide-and-conquer algorithms, graph traversal algorithms, and optimization techniques.</p>
 
 									<h4>Prerequisite</h4>
@@ -516,7 +516,7 @@
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement <br>
 										NU Core Math/Anly Think Lvl 2</p>
-									<button class="future_sem" onclick="dialog()">Fall 18</button>
+									<button class="future_sem" onclick="dialog(this)">Fall 18</button>
 								</div>
 							</li>
 						</ul>
@@ -530,7 +530,7 @@
 							<li class="class_title" onclick="showdesc(this)">
 								Senior Seminar<span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Requires students to give a twenty- to thirty-minute formal presentation on a topic of their choice in computer science. Prepares students for this talk by discussing methods of oral presentation, how to present technical material, how to choose what topics to present, overall organization of a talk, and use of presentation software and other visual aids. </p>
 
 									<h4>Prerequisite</h4>
@@ -539,13 +539,13 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 							<li class="class_title" onclick="showdesc(this)">
 								The Eloquent Presenter<span>(1)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Designed to help students to enhance the effectiveness with which they present themselves in front of an audience. Uses the application of theatre training exercises and practical tools to offer students an opportunity to improve the quality of their spoken voice, the clarity with which they articulate their ideas, and their ability to command the attention of audiences in diverse interpersonal and professional interactions.</p>
 
 									<h4>Prerequisite</h4>
@@ -554,7 +554,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -567,7 +567,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								First-Year Writing<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Designed for students to study and practice writing in a workshop setting. Students read a range of texts in order to describe and evaluate the choices writers make and apply that knowledge to their own writing and explore how writing functions in a range of academic, professional, and public contexts. Offers students an opportunity to learn how to conduct research using primary and secondary sources; how to write for various purposes and audiences in multiple genres and media; and how to give and receive feedback, to revise their work, and to reflect on their growth as writers. </p>
 
 									<h4>Prerequisite</h4>
@@ -583,7 +583,7 @@
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Advanced Writing in a Technical Field   <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Offers writing instruction for students in the College of Engineering and the College of Computer and Information Science. Students practice and reflect on writing in professional, public, and academic genres—such as technical reports, progress reports, proposals, instructions, presentations, and technical reviews—relevant to technical professions and individual student goals. In a workshop setting, offers students an opportunity to evaluate a wide variety of sources and develop expertise in audience analysis, critical research, peer review, and revision.</p>
 
 									<h4>Prerequisite</h4>
@@ -593,7 +593,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>English Requirement<br> Advance Writing Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -606,7 +606,7 @@
 							<li class="class_title completed_class" onclick="showdesc(this)">
 								Calculus 1 for Science and Engineering<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Covers definition, calculation, and major uses of the derivative, as well as an introduction to integration. Topics include limits; the derivative as a limit; rules for differentiation; and formulas for the derivatives of algebraic, trigonometric, and exponential/logarithmic functions. Also discusses applications of derivatives to motion, density, optimization, linear approximations, and related rates. Topics on integration include the definition of the integral as a limit of sums, antidifferentiation, the fundamental theorem of calculus, and integration by substitution. </p>
 
 									<h4>Prerequisite</h4>
@@ -624,7 +624,7 @@
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Calculus 2 for Science and Engineering  <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Covers further techniques and applications of integration, infinite series, and introduction to vectors. Topics include integration by parts; numerical integration; improper integrals; separable differential equations; and areas, volumes, and work as integrals. Also discusses convergence of sequences and series of numbers, power series representations and approximations, 3D coordinates, parameterizations, vectors and dot products, tangent and normal vectors, velocity, and acceleration in space. </p>
 
 									<h4>Prerequisite</h4>
@@ -634,14 +634,14 @@
 									<h4>Fulfillment</h4>
 									<p>Mathematics Requirement<br> NUpath Formal/Quant Reasoning<br>
 										NU Core Math/Anly Think Lvl 1</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Linear Algebra  <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Uses the Gauss-Jordan elimination algorithm to analyze and find bases for subspaces such as the image and kernel of a linear transformation. Covers the geometry of linear transformations: orthogonality, the Gram-Schmidt process, rotation matrices, and least squares fit. Examines diagonalization and similarity, and the spectral theorem and the singular value decomposition. Is primarily for math and science majors; applications are drawn from many technical fields. </p>
 
 									<h4>Prerequisite</h4>
@@ -650,14 +650,14 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>NU Core Math/Anly Think Lvl 2</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 							<li class="class_title incomplete_class" onclick="showdesc(this)">
 								Probability and Statistics  <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Focuses on probability theory. Topics include sample space; conditional probability and independence; discrete and continuous probability distributions for one and for several random variables; expectation; variance; special distributions including binomial, Poisson, and normal distributions; law of large numbers; and central limit theorem. Also introduces basic statistical theory including estimation of parameters, confidence intervals, and hypothesis testing. </p>
 
 									<h4>Prerequisite</h4>
@@ -666,7 +666,7 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>NUpath Analyzing/Using Data</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 						</ul>
@@ -679,7 +679,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Technology and Human Values<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Studies philosophy of technology, as well as ethics and modern technology. Considers the relationship between technology and humanity, the social dimensions of technology, and ethical issues raised by emerging technologies. Discusses emerging technologies such as biotechnology, information technology, nanotechnology, and virtual reality.</p>
 
 									<h4>Prerequisite</h4>
@@ -711,7 +711,7 @@
 							<li class="class_title" onclick="showdesc(this)">
 								Programming in C++ <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Introduces the basic principles and techniques for the design, analysis, and implementation of efficient algorithms and data representations. Discusses asymptotic analysis and formal methods for establishing the correctness of algorithms. Considers divide-and-conquer algorithms, graph traversal algorithms, and optimization techniques.</p>
 
 									<h4>Prerequisite</h4>
@@ -720,13 +720,13 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CS Major Requirement</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 							<li class="class_title" onclick="showdesc(this)">
 								Web Development <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Discusses Web development for sites that are dynamic, data driven, and interactive. Focuses on the software development issues of integrating multiple languages, assorted data technologies, and Web interaction. Considers ASP.NET, C#, HTTP, HTML, CSS, XML, XSLT, JavaScript, AJAX, RSS/Atom, SQL, and Web services. Requires each student to deploy individually designed Web experiments that illustrate the Web technologies and at least one major integrative Web site project.</p>
 
 									<h4>Prerequisite</h4>
@@ -737,7 +737,7 @@
 									<p>CS Major Requirement <br>
 										NU Core Capstone <br> NUpath Capstone Experience<br>
 										NU Core Writing Intsv in Majr<br> NUpath Writing Intensive</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 							<li class="class_title" onclick="showdesc(this)">Project Management <span>(4)</span></li>
@@ -752,7 +752,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 								Games and Society <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Provides an historical and cultural perspective on games and other forms of interactive entertainment. Examines the present state and future directions of paper, card, and board games; physical games and sports; and video games. Introduces students to current issues, experiments, and directions in the field of game design. Through weekly lectures and small-group labs, students have an opportunity to develop a critical basis for analyzing game play.</p>
 
 									<h4>Prerequisite</h4>
@@ -768,7 +768,7 @@
 							<li class="class_title inprogress_class" onclick="showdesc(this)">
 							Recitation for GAME 1110 <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Provides small-group discussion format to cover material in GAME 1110.</p>
 
 									<h4>Prerequisite</h4>
@@ -784,7 +784,7 @@
 							<li class="class_title" onclick="showdesc(this)">
 								Interactive Media and Society <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Offers a critical historical survey of interactive media from analog to digital techniques and from physical to virtual spaces. Examines the social, ethical, and cultural impact of interactive media. Concludes with a study of current issues and directions in interactive media. Through weekly lectures, research projects, and critical analyses, offers students an opportunity to consider current and historical aspects of interactive media and design. </p>
 
 									<h4>Prerequisite</h4>
@@ -799,7 +799,7 @@
 
 							<li class="class_title" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Examines major themes in the history of Europe from 1500 to the present, emphasizing the conceptual tools historians use to think about European history, and drawing on historical documents, literature, and film. Examines the emergence of states and nations as theoretical constructs and political realities; men’s and women’s experience of social conflict-rebellions, revolutions, and wars-and the complex relationships between Europeans and non-Europeans. Attention is given to how race, class, and gender shaped the way people made and understood their history.</p>
 
 									<h4>Prerequisite</h4>
@@ -808,13 +808,13 @@
 									<p>None</p>
 									<h4>Fulfillment</h4>
 									<p>CAS Core MOI: Social World<br> NU Core Social Science Lvl 1</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 
 							<li class="class_title" onclick="showdesc(this)">Introduction to Jazz <span>(4)</span>
 								<div class="desc">
-									<h4>Course Descrition</h4>
+									<h4>Course Description</h4>
 									<p>Examines the evolution of the creative improvisational musical styles commonly called jazz, from its African-American roots to its status as one of America’s classical musics and an internationally valued art form. Explores the contributions of African and European musical traditions and African-American spirituals, work songs, and blues. Examines major contributors and stylistic development and change through selected audio and audio-visual presentations. Also considers the sociocultural dynamics that have affected musical evolution and acceptance. </p>
 
 									<h4>Prerequisite</h4>
@@ -824,7 +824,7 @@
 									<h4>Fulfillment</h4>
 									<p>CAS Core MOI: Arts Context<br>NU Core Comp Stdy of Cultures<br>
 									NU Core Arts Lvl 1</p>
-									<button class="add_btn" onclick="dialog()">Add</button>
+									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
 						</ul>
