@@ -127,11 +127,10 @@
             });
         }
         function addclass(id) {
-            alert("ok");
             if(selectedClass != null) {
                 addClass(selectedClass, id);
-			}
-            alert("ok2");
+		}
+	    selectedClass = null; 
         }
 	</script>
 </head>
@@ -246,7 +245,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Discrete Structures" "onclick="showdesc(this)">
 								Discrete Structures<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -264,7 +263,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Recitation for CS1800" onclick="showdesc(this)">
 								Recitation for CS1800 <span>(1)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -280,7 +279,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Fundamentals of Computer Science I" onclick="showdesc(this)">
 								Fundamentals of Computer Science I<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -299,7 +298,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Lab for CS2500" onclick="showdesc(this)">
 								Lab for CS2500 <span>(1)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -315,7 +314,7 @@
 								</div>
 							</li>
 
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Fundamentals of Computer Science II" onclick="showdesc(this)">
 								Fundamentals of Computer Science II<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -333,7 +332,7 @@
 								</div>
 							</li>
 
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Lab for CS2510" onclick="showdesc(this)">
 								Lab for CS2510 <span>(1)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -349,7 +348,7 @@
 								</div>
 							</li>
 
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Logic and Computation" onclick="showdesc(this)">
 								Logic and Computation<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -366,7 +365,7 @@
 								</div>
 							</li>
 
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Lab for CS2800" onclick="showdesc(this)">
 								Lab for CS2800 <span>(1)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -530,7 +529,7 @@
 									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title" id = "The Eloquent Presenter" onclick="showdesc(this)">
 								The Eloquent Presenter<span>(1)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -552,7 +551,7 @@
 							<h2>English Requirements<img class="expander"></h2>
 						</label>
 						<ul id="english_reqs">
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "First-Year Writing" onclick="showdesc(this)">
 								First-Year Writing<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -568,7 +567,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "Advanced Writing in a Technical Field" onclick="showdesc(this)">
 								Advanced Writing in a Technical Field   <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -591,7 +590,7 @@
 							<h2>Mathematics Requirements<img class="expander"></h2>
 						</label>
 						<ul id="mathematics_reqs">
-							<li class="class_title completed_class" onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Calculus 1 for Science and Engineering" onclick="showdesc(this)">
 								Calculus 1 for Science and Engineering<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -609,7 +608,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "Calculus 2 for Science and Engineering" onclick="showdesc(this)">
 								Calculus 2 for Science and Engineering  <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -626,7 +625,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "Linear Algebra" onclick="showdesc(this)">
 								Linear Algebra  <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -642,7 +641,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "Probability and Statistics" onclick="showdesc(this)">
 								Probability and Statistics  <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -664,7 +663,7 @@
 							<h2>Computing and Social Issues<img class="expander"></h2>
 						</label>
 						<ul id="computing_social">
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Technology and Human Values" onclick="showdesc(this)">
 								Technology and Human Values<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -696,7 +695,7 @@
 						</label>
 						<ul id="cs_elecs">
 							<b><i>Take a total of _ courses</i></b>
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title" id = "Programming in C++" onclick="showdesc(this)">
 								Programming in C++ <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -711,7 +710,7 @@
 									<button class="add_btn" onclick="dialog(); selectClass(this);">Add</button>
 								</div>
 							</li>
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title" id = "Web Development" onclick="showdesc(this)">
 								Web Development <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -737,7 +736,7 @@
 						</label>
 						<ul id="gen_elecs">
 							<b><i>Complete a total of 8 courses</i></b>
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Games and Society" onclick="showdesc(this)">
 								Games and Society <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -753,7 +752,7 @@
 								</div>
 							</li>
 
-							<li class="class_title inprogress_class" onclick="showdesc(this)">
+							<li class="class_title inprogress_class" id = "Recitation for GAME 1110" onclick="showdesc(this)">
 								Recitation for GAME 1110 <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -769,7 +768,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title" id = "Interactive Media and Society" onclick="showdesc(this)">
 								Interactive Media and Society <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -785,7 +784,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
+							<li class="class_title" id = "Europe: Empires, Revolutions, Wars, and Their Aftermath" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines major themes in the history of Europe from 1500 to the present, emphasizing the conceptual tools historians use to think about European history, and drawing on historical documents, literature, and film. Examines the emergence of states and nations as theoretical constructs and political realities; men’s and women’s experience of social conflict-rebellions, revolutions, and wars-and the complex relationships between Europeans and non-Europeans. Attention is given to how race, class, and gender shaped the way people made and understood their history.</p>
@@ -800,7 +799,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)">Introduction to Jazz <span>(4)</span>
+							<li class="class_title" id = "Introduction to Jazz" onclick="showdesc(this)">Introduction to Jazz <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines the evolution of the creative improvisational musical styles commonly called jazz, from its African-American roots to its status as one of America’s classical musics and an internationally valued art form. Explores the contributions of African and European musical traditions and African-American spirituals, work songs, and blues. Examines major contributors and stylistic development and change through selected audio and audio-visual presentations. Also considers the sociocultural dynamics that have affected musical evolution and acceptance. </p>
