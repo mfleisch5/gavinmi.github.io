@@ -176,7 +176,7 @@
 				current += student.classes[2][j].credits;
 			}
 			document.getElementById("current_label").innerHTML = "Current Semester (" + current + ")<img class='expander'>";
-			document.getElementById("inprogress_label").innerHTML = "Current Semester (" + current + ")<img class='expander'>";
+			document.getElementById("inprogress_label").innerHTML = "In Progress (" + current + ")<img class='expander'>";
 			for (var j = 0; j < student.classes[5].length; j++) {
 				var newC = document.createElement("li");
 				newC.innerHTML = student.classes[5][j].name + "<span>(" + student.classes[5][j].credits + ")</span>";

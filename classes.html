@@ -90,48 +90,6 @@
 		}
 	</style>
 	<script src="data.js" type="text/javascript"></script>
-	<script>
-        var selected = null;
-        var selectedClass = null;
-        function openclose(element) {
-            element.classList.toggle("closed");
-            document.getElementById(element.htmlFor).classList.toggle("closed");
-        }
-
-        function selectClass(element) {
-            selectedClass = $(element).closest('li').attr('id');
-					}
-        function showdesc(element) {
-            element.classList.toggle("visible");
-        }
-        function clearTable() {
-            if(selected!=null) { selected.classList.remove('selected'); }
-            // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-        }
-        function dialog() {
-            selected = null;
-            document.getElementsByTagName('blackout')[0].classList.toggle("open");
-            $('td:not(:first-child)').click(function() {
-                if(selected != null) {
-                    selected.classList.remove('selected');
-                    // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-                }
-                if(this != selected) {
-                    selected = this;
-                    this.classList.add('selected');
-                    // selected.innerHTML = parseInt(selected.innerHTML) + 4;
-                }
-                else if(this == selected) { selected = null; }
-                document.getElementById("addButton").disabled = selected == null;
-            });
-        }
-        function addclass(id) {
-            if(selectedClass != null) {
-              addClass(selectedClass, id);
-						}
-	    			selectedClass = null;
-        }
-	</script>
 </head>
 <body>
 		<blackout>
@@ -244,7 +202,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" id = "Discrete Structures" "onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Discrete Structures" onclick="showdesc(this)">
 								Discrete Structures<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -819,6 +777,59 @@
 			</section>
 
 		</section>
+		<script>
+			var selected = null;
+			var selectedClass = null;
+			var selectedCredits = 0;
+			function openclose(element) {
+				element.classList.toggle("closed");
+				document.getElementById(element.htmlFor).classList.toggle("closed");
+			}
+
+			function selectClass(element) {
+				selectedClass = $(element).closest('li').attr('id');
+				selectedCredits = $(element).closest('li').children()[0].innerHTML;
+			}
+			function showdesc(element) {
+				element.classList.toggle("visible");
+			}
+			function clearTable() {
+				if(selected!=null) {
+					selected.classList.remove('selected');
+					selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits.substring(1, 2)));
+				}
+			}
+			function loadTable() {
+				for(var i = 1; i < 21; i++) {
+					document.getElementById(i).innerHTML = semCredits(i);
+				}
+			}
+			function dialog() {
+				selected = null;
+				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+				loadTable();
+				$('td:not(:first-child)').click(function() {
+					if(selected != null) {
+						selected.classList.remove('selected');
+						selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits.substring(1, 2)));
+					}
+					if(this != selected) {
+						selected = this;
+						this.classList.add('selected');
+						selected.innerHTML = parseInt(selected.innerHTML) + parseInt(selectedCredits.substring(1, 2));
+					}
+					else if(this == selected) { selected = null; }
+					document.getElementById("addButton").disabled = selected == null;
+				});
+			}
+			function addclass(id) {
+				if(selectedClass != null) {
+					addClass(selectedClass, id);
+				}
+				selectedClass = null;
+				selectedCredits = 0;
+			}
+		</script>
 
 </body>
 <html>

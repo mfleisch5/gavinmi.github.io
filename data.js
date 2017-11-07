@@ -186,6 +186,16 @@ function parseClass(c) {
     return new Class(j.id, j.name, j.credits, j.corequisites, j.prerequisites, j.description);
 }
 
+//Get number of credits scheduled to be taken in a given semester
+//sem (int) identifies which semester (0-19)
+function semCredits(sem) {
+  var classes = load().classes[sem];
+  var result = 0;
+  for(var i =0; i < load().classes[sem].length; i++) {
+    result += load().classes[sem][i].credits;
+  }
+  return result;
+}
 
 
 //misc. function used for testing
