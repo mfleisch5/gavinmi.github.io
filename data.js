@@ -24,6 +24,30 @@ function Class(id, name, credits, coreq, prereq, desc) {
     this.description = desc;
 }
 
+//Makes a sample schedule for testing
+function getStartingSchedule() {
+  return [
+    [],
+    [
+     new Class(null, "Fundamentals of Computer Science I", 4, null, null, null),
+     new Class(null, "Lab for Fundamentals of Computer Science I", 1, null, null, null),
+     new Class(null, "Discrete Structures", 4, null, null, null),
+     new Class(null, "Recitation for Discrete Structures", 1, null, null, null),
+     new Class(null, "First-Year Writing", 4, null, null, null),
+     new Class(null, "Introduction to Psychology", 4, null, null, null),
+     new Class(null, "CS/IS Overview 1", 1, null, null, null),
+   ],
+   [
+     new Class(null, "Fundamentals of Computer Science II", 4, null, null, null),
+     new Class(null, "Lab for Fundamentals of Computer Science II", 1, null, null, null),
+     new Class(null, "Games and Society", 4, null, null, null),
+     new Class(null, "Logic and Computation", 4, null, null, null),
+     new Class(null, "Technology and Human Values", 4, null, null, null),
+     new Class(null, "CS/IS Overview 2: Co-op Preparation", 1, null, null, null),
+   ],
+  ];
+}
+
 
 //Right now Class adding is represented as just a String for the class name- this is ok for now since they just need to see it on the schedule
 
@@ -95,9 +119,9 @@ function store(stud) {
 function load() {
     var j = JSON.parse(localStorage.getItem("user"));
     if (j === null) {
-		var classes = [[]];
-		var stud = new Student(classes, 1);
-		return stud;
+  		var classes = getStartingSchedule();
+  		var stud = new Student(classes, 1);
+  		return stud;
     }
     var sem = j.semester;
 
