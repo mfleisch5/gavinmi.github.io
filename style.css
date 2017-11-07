@@ -120,12 +120,18 @@ menu#nav_bar a {
   font-size: 12pt;
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  user-select: none;
+  outline: none;
 }
 menu#nav_bar a:link    { color: white; }
 menu#nav_bar a:visited { color: white; }
 menu#nav_bar a:hover   { color: white; }
 menu#nav_bar a:active  { color: white; }
 menu#nav_bar a.current { background-color: #555; }
+menu#nav_bar a[disabled] {
+  pointer-events: none;
+  color: rgba(255, 255, 255, 0.25);
+}
 
 /******************************************************************************/
 /**************** MAIN BODY STYLINGS STANDARD ACCROSS ALL PAGES ***************/
@@ -146,6 +152,7 @@ section#main_body.unpadded {
   width: calc(100% - 301px);
   height: 100%;
   z-index: 0;
+  overflow: hidden;
 }
 
 /******************************************************************************/
