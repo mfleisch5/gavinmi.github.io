@@ -24,13 +24,6 @@ function Class(id, name, credits, coreq, prereq, desc) {
     this.description = desc;
 }
 
-// functions we want:
-// 1. Add a class to a Student's schedule (avoid duplicates and adding to finished semester)
-// 2. Remove a class from a Student's schedule
-// 3. Move a class from one semester to another (unless trying to move to already finished semester?)
-// 4. Draw the calendar from schedule? (not sure exactly how we want to do this)
-// there's definitely more
-
 function test() {
     localStorage.removeItem("user");
     var fundies1 = new Class("CS2500", "Fundies", 4, null, null, "a good one");
@@ -106,6 +99,11 @@ function removeClass(className, semester) {
 	console.log(classArray);
 	var ret = new Student(classArray, stud.semester); 
 	store(ret);
+}
+
+function moveClass(className, semesterFrom, semesterTo) {
+	removeClass(className, semesterFrom);
+	addClass(className, semesterTo); 
 }
 
 
