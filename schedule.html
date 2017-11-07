@@ -17,17 +17,37 @@
 			td ul li { padding: 5px; }
 			#past_semester, #current_semester { cursor: default; }
 			#main_body { background-color: #222; }
-		</style>
 
+			td ul li:hover
+			{
+				background-color:slategrey;
+			}
+
+			.selected {
+				background-color:black;
+			}
+
+
+		</style>
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 		<script src="data.js" type="text/javascript">
 		</script>
 		<script>
-			var student = load();
+			/*var student = load();
 			for(var i = 0; i < student.classes.length; i++) {
                 for (var j = 0; i < student.classes[i].length; j++) {
-                    $('#' + i).append("<li>" + student.classes[i][j].name + "<span>(4)</span></li>")
+                    $('#' + i).append("<li onclick=selectClass(this)><span>(4)</span></li>").text(student.classes[i][j].name)
                 }
-            }
+            }*/
+
+
+            var selectedClass = null;
+            alert("ok");
+            $('body').on('click', 'li', function() {
+                $(this).toggleClass('selected');
+                selectedClass = this;
+            });
+
 		</script>
 	</head>
 	<body>

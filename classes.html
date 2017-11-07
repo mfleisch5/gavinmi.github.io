@@ -128,13 +128,6 @@
 				selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
 
 			}
-			function addClassToSemester(id) {
-				//TODO: HEY MICHAEL AND/OR GAVIN, THIS IS WHERE THE THING SHOULD GO.
-				//      id (String) - is the year (a number between 1 and 5) and the
-				//	                  semester (either "fall", "spring", "summer1",
-			  //                    or "summer2") separated by an underscore
-				//                    e.g. "4_summer2"
-			}
 			function addclass(element) {
 				alert(this.currClass + "   " + $(element).attr('id'))
 			}
@@ -161,31 +154,31 @@
 					</tr>
 					<tr>
 						<td>2</td>
-						<td id="5"></td>
-						<td id="6"></td>
-						<td id="7"></td>
-						<td id="8"></td>
+						<td id="5" onclick="addclass(this)"></td>
+						<td id="6" onclick="addclass(this)"></td>
+						<td id="7" onclick="addclass(this)"></td>
+						<td id="8" onclick="addclass(this)"></td>
 					</tr>
 					<tr>
 						<td>3</td>
-						<td id="9"></td>
-						<td id="10"></td>
-						<td id="11"></td>
-						<td id="12"></td>
+						<td id="9" onclick="addclass(this)"></td>
+						<td id="10" onclick="addclass(this)"></td>
+						<td id="11" onclick="addclass(this)"></td>
+						<td id="12" onclick="addclass(this)"></td>
 					</tr>
 					<tr>
 						<td>4</td>
-						<td id="13"></td>
-						<td id="14"></td>
-						<td id="15"></td>
-						<td id="16"></td>
+						<td id="13" onclick="addclass(this)"></td>
+						<td id="14" onclick="addclass(this)"></td>
+						<td id="15" onclick="addclass(this)"></td>
+						<td id="16" onclick="addclass(this)"></td>
 					</tr>
 					<tr>
 						<td>5</td>
-						<td id="17"></td>
-						<td id="18"></td>
-						<td id="19"></td>
-						<td id="20"></td>
+						<td id="17" onclick="addclass(this)"></td>
+						<td id="18" onclick="addclass(this)"></td>
+						<td id="19" onclick="addclass(this)"></td>
+						<td id="20" onclick="addclass(this)"></td>
 					</tr>
 				</table>
 				<span>
@@ -443,7 +436,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="Theory of Computation" onclick="showdesc(this)">
 								Theory of Computation<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -478,7 +471,7 @@
 							</li>
 
 
-							<li class="class_title incomplete_class" id = "CS4500" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id = "Software Development" onclick="showdesc(this)">
 								Software Development <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -497,7 +490,7 @@
 								</div>
 							</li>
 
-							<li class="class_title incomplete_class" onclick="showdesc(this)">
+							<li class="class_title incomplete_class" id="Algorithms and Data" onclick="showdesc(this)">
 								Algorithms and Data <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -717,7 +710,7 @@
 									<button class="add_btn" onclick="dialog(this)">Add</button>
 								</div>
 							</li>
-							<li class="class_title" onclick="showdesc(this)">
+							<li class="class_title" id="Web Development" onclick="showdesc(this)">
 								Web Development <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
@@ -791,7 +784,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
+							<li class="class_title" id="Europe: Empires, Revolutions, Wars, and Their Aftermath" onclick="showdesc(this)">Europe: Empires, Revolutions, Wars, and Their Aftermath<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines major themes in the history of Europe from 1500 to the present, emphasizing the conceptual tools historians use to think about European history, and drawing on historical documents, literature, and film. Examines the emergence of states and nations as theoretical constructs and political realities; men’s and women’s experience of social conflict-rebellions, revolutions, and wars-and the complex relationships between Europeans and non-Europeans. Attention is given to how race, class, and gender shaped the way people made and understood their history.</p>
@@ -806,7 +799,7 @@
 								</div>
 							</li>
 
-							<li class="class_title" onclick="showdesc(this)">Introduction to Jazz <span>(4)</span>
+							<li class="class_title" onclick="showdesc(this)" id="Introduction to Jazz">Introduction to Jazz <span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
 									<p>Examines the evolution of the creative improvisational musical styles commonly called jazz, from its African-American roots to its status as one of America’s classical musics and an internationally valued art form. Explores the contributions of African and European musical traditions and African-American spirituals, work songs, and blues. Examines major contributors and stylistic development and change through selected audio and audio-visual presentations. Also considers the sociocultural dynamics that have affected musical evolution and acceptance. </p>
