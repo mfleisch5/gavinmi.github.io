@@ -50,7 +50,7 @@
 				</tr>
 				<tr>
 					<td>1</td>
-					<td id="1">
+					<td id="1" onclick=moveIt(this)>
 						<ul id="past_semester" class="completed_class">
 							<li>Fundamentals of Computer Science I <span>(4)</span></li>
 							<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
@@ -59,7 +59,7 @@
 							<li>CS/IS Overview 1 <span>(1)</span></li>
 						</ul>
 					</td>
-					<td id="2">
+					<td id="2" onclick=moveIt(this)>
 						<ul id="current_semester" class="inprogress_class">
 							<li>Fundamentals of Computer Science II <span>(4)</span></li>
 							<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
@@ -69,64 +69,73 @@
 							<li>Recitation for Games and Society <span>(1)</span></li>
 						</ul>
 					</td>
-					<td id="3"></td>
-					<td id="4"></td>
+					<td id="3" onclick=moveIt(this)></td>
+					<td id="4" onclick=moveIt(this)></td>
 				</tr>
 				<tr>
 					<td>2</td>
-					<td id="5">
+					<td id="5" onclick=moveIt(this)>
 						<ul id="current_semester" class="incomplete_class">
 							<li>Object-Oriented Design <span>(4)</span></li>
 							<li>Algorithms and Data <span>(4)</span></li>
 						</ul>
 					</td>
-					<td id="6"></td>
-					<td id="7"></td>
-					<td id="8"></td>
+					<td id="6" onclick=moveIt(this)></td>
+					<td id="7" onclick=moveIt(this)></td>
+					<td id="8" onclick=moveIt(this)></td>
 				</tr>
 				<tr>
 					<td>3</td>
-					<td id="9"></td>
-					<td id="10"></td>
-					<td id="11"></td>
-					<td id="12"></td>
+					<td id="9" onclick=moveIt(this)></td>
+					<td id="10" onclick=moveIt(this)></td>
+					<td id="11" onclick=moveIt(this)></td>
+					<td id="12" onclick=moveIt(this)></td>
 				</tr>
 				<tr>
 					<td>4</td>
-					<td id="13"></td>
-					<td id="14"></td>
-					<td id="15"></td>
-					<td id="16"></td>
+					<td id="13" onclick=moveIt(this)></td>
+					<td id="14" onclick=moveIt(this)></td>
+					<td id="15" onclick=moveIt(this)></td>
+					<td id="16" onclick=moveIt(this)></td>
 				</tr>
 				<tr>
 					<td>5</td>
-					<td id="17"></td>
-					<td id="18"></td>
-					<td id="19"></td>
-					<td id="20"></td>
+					<td id="17" onclick=moveIt(this)></td>
+					<td id="18" onclick=moveIt(this)></td>
+					<td id="19" onclick=moveIt(this)></td>
+					<td id="20" onclick=moveIt(this)></td>
 				</tr>
 			</table>
 		</section>
 	<script>
         function draw() {
             student = load();
+            $("ul").each( function() {
+                $(this).empty();
+			});
             for (var i = 0; i < student.classes.length; i++) {
                 for (var j = 0; j < student.classes[i].length; j++) {
                     $("#" + i).children().append("<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
                 }
             }
         }
+        draw();
 
 		var selectedClass = null;
+        var selectedSemester = null;
         $("li").click( function() {
-            selectedClass = this;
+            selectedClass = $(this).text();
+            selectedSemester = $(this).closest('td').attr('id');
             $(this).css('background', 'darkslategrey');
         });
 
-        if(selectedClass != null) {
+        function moveIt(element) {
+            if (selectedClass != null) {
+                moveClass(selectedClass, selectedSemester, $(element).attr('id'));
+				draw();
 
+			}
 		}
-
 
 	</script>
 	</body>
