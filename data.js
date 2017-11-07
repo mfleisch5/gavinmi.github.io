@@ -2,7 +2,7 @@
 
 //Constructor for Student
 //classes   (Class[][])  all the classes for the student by semester
-//semsester (int)      current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
+//semester (int)      current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
 function Student(classes, semester) {
     this.classes = classes;
     this.semester = semester;
@@ -13,7 +13,7 @@ function Student(classes, semester) {
 //name    (String)   class name (ex: "Fundamanetals of Computer Science 1")
 //credits (int)      credits for class
 //coreq   (Class[])  corequisites for class (can there be more than one? not sure. if not don't need array)
-//prereq  (Clqass[])  prerequisites for class
+//prereq  (Class[])  prerequisites for class
 //desc    (String)   class description
 function Class(id, name, credits, coreq, prereq, desc) {
     this.id = id;
@@ -41,13 +41,14 @@ function moveClass(className, semesterFrom, semesterTo) {
 //semester  (int)    The semester to add it to
 function addClass(className, semester) {
 	var stud = load(); 
+	//console.log(stud); 
 	var classArray = stud.classes; 		
 	while (semester + 1 > classArray.length) {
 		classArray[classArray.length] = []; 
 	}
 
 	classArray[semester].push(new Class(null, className, 4, null, null, null));
-	
+	//console.log(classArray);
 	var ret = new Student(classArray, stud.semester);
 	
 	store(ret); 
@@ -68,7 +69,7 @@ function removeClass(className, semester) {
 	
 	for (var i = 0; i < classArray[semester].length; i++) {
 		var cur = classArray[semester][i];
-		if (cur.name == className) { 
+		if (cur.name === className) {
 			index = i;
 		}
 	}	
@@ -87,6 +88,8 @@ function removeClass(className, semester) {
 //Stores the student in localStorage
 //stud (Student) the student to store
 function store(stud) {
+    console.log("storing");
+    console.log(stud);
     localStorage.setItem("user", JSON.stringify(stud));
 }
 
@@ -94,16 +97,17 @@ function store(stud) {
 //Returns a Student
 function load() {
     var j = JSON.parse(localStorage.getItem("user"));
-    if (j == null) {
-	var classes = [[]];
-	var stud = new Student(classes, 1); 
-	store(stud); 
-	return stud; 
-    }	
+    if (j === null) {
+		var classes = [[]];
+		var stud = new Student(classes, 1);
+		return stud;
+    }
     var sem = j.semester;
 
     var classArray = parseSemesterArray(JSON.stringify(j.classes));
-    return new Student(classArray, sem);
+    var stud = new Student(classArray, sem);
+    //console.log(stud);
+    return stud;
 }
 
 //The following 3 functions are weird things to parse a JSON object turned into a String back into a Student
@@ -118,7 +122,7 @@ function parseSemesterArray(sems) {
     while(1) {
 	cur = cur.substring(cur.indexOf("["));
 	//console.log(cur);
-	if (cur.indexOf("[]") == 0) {
+	if (cur.indexOf("[]") === 0) {
 		cur = cur.substring(2); 
 		var mt = [];
 		ret.push(mt);
@@ -129,7 +133,7 @@ function parseSemesterArray(sems) {
 		cur = cur.substring(cur.indexOf("}]"));
 	}
 
-	if (cur.indexOf(",") == -1) {
+	if (cur.indexOf(",") === -1) {
 	    break;
 	}
     }
@@ -146,7 +150,7 @@ function parseSemester(sem) {
 	c = cur.substring(0, cur.indexOf("}") + 1);
 	ret.push(parseClass(c));
 	cur = cur.substring(cur.indexOf("}") + 2);
-	if (cur.indexOf("{") == -1) {
+	if (cur.indexOf("{") === -1) {
 	    break;
 	}
     }
@@ -177,7 +181,7 @@ function test() {
     console.log(load());
     addClass("OOD", 7); 
     console.log(load());
-    removeClass("OOD", 7); 
+    moveClass("OOD", 7, 2); 
     console.log(load());
 }
 
