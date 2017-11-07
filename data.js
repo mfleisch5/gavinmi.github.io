@@ -43,7 +43,7 @@ function getStartingSchedule() {
      new Class(null, "Games and Society", 4, null, null, null),
      new Class(null, "Logic and Computation", 4, null, null, null),
      new Class(null, "Technology and Human Values", 4, null, null, null),
-   ],
+   ],[],[],[],
   ];
 }
 
