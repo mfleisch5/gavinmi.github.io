@@ -24,43 +24,21 @@ function Class(id, name, credits, coreq, prereq, desc) {
     this.description = desc;
 }
 
-function test() {
-    localStorage.removeItem("user");
-    var fundies1 = new Class("CS2500", "Fundies", 4, null, null, "a good one");
-    var fundies2 = new Class("CS2510", "Fundies 2", 4, null, null, "a bad one");
-    var transfer = [];
-    var sem1 = [fundies1, fundies2];
-    var sem2 = [fundies2];
-    var sched = [transfer, sem1, sem2];
-    var john = new Student(sched, 2);
-    store(john);
-    console.log(load());
-    addClass("OOD", 7); 
-    console.log(load());
-    removeClass("OOD", 7); 
-    console.log(load());
+
+//Right now Class adding is represented as just a String for the class name- this is ok for now since they just need to see it on the schedule
+
+//Changes the semester a class is in. This will just add the class if it is called with a class that doesn't exist in the semesterFrom semester
+//className    (String) the name of the class
+//semesterFrom (int)    the semester the class is in
+//semesterTo   (int)	the semester to move the class to
+function moveClass(className, semesterFrom, semesterTo) {
+	removeClass(className, semesterFrom);
+	addClass(className, semesterTo); 
 }
 
-//Stores the student in localStorage
-//stud (Student) the student to store
-function store(stud) {
-    localStorage.setItem("user", JSON.stringify(stud));
-}
-
-function load() {
-    var j = JSON.parse(localStorage.getItem("user"));
-    if (j == null) {
-	var classes = [[]];
-	var stud = new Student(classes, 1); 
-	store(stud); 
-	return stud; 
-    }	
-    var sem = j.semester;
-
-    var classArray = parseSemesterArray(JSON.stringify(j.classes));
-    return new Student(classArray, sem);
-}
-
+//Adds a class to the schedule. Also stores the change in localStorage
+//className (String) The class to add
+//semester  (int)    The semester to add it to
 function addClass(className, semester) {
 	var stud = load(); 
 	var classArray = stud.classes; 		
@@ -75,6 +53,9 @@ function addClass(className, semester) {
 	store(ret); 
 }
 
+//Removes a class from the schedule. Also stores the change in localStorage
+//className (String) The class to remove
+//semester  (int)    The semester to remove it from
 function removeClass(className, semester) {
 	var stud = load(); 
 	var classArray = stud.classes; 	
@@ -101,12 +82,34 @@ function removeClass(className, semester) {
 	store(ret);
 }
 
-function moveClass(className, semesterFrom, semesterTo) {
-	removeClass(className, semesterFrom);
-	addClass(className, semesterTo); 
+
+
+//Stores the student in localStorage
+//stud (Student) the student to store
+function store(stud) {
+    localStorage.setItem("user", JSON.stringify(stud));
 }
 
+//Retrieves the student from localStorage
+//Returns a Student
+function load() {
+    var j = JSON.parse(localStorage.getItem("user"));
+    if (j == null) {
+	var classes = [[]];
+	var stud = new Student(classes, 1); 
+	store(stud); 
+	return stud; 
+    }	
+    var sem = j.semester;
 
+    var classArray = parseSemesterArray(JSON.stringify(j.classes));
+    return new Student(classArray, sem);
+}
+
+//The following 3 functions are weird things to parse a JSON object turned into a String back into a Student
+
+//Parses a full schedule
+//sems (String) a schedule in JSON format in a String
 function parseSemesterArray(sems) {
     var ret = [];
     var cur = sems;
@@ -133,7 +136,8 @@ function parseSemesterArray(sems) {
     return ret;
 }
 
-
+//Parses a single semester
+//sem (String) a semester in JSON format in a String
 function parseSemester(sem) {
     var ret = [];
     var cur = sem;
@@ -149,13 +153,34 @@ function parseSemester(sem) {
     return ret;
 }
 
-
+//Parses a single class
+//c (String) a class in JSON format in a String
 function parseClass(c) {
     //console.log("Class:  " + c);
     var j = JSON.parse(c);
     return new Class(j.id, j.name, j.credits, j.corequisites, j.prerequisites, j.description);
 }
-test();
+
+
+
+//misc. function used for testing
+function test() {
+    localStorage.removeItem("user");
+    var fundies1 = new Class("CS2500", "Fundies", 4, null, null, "a good one");
+    var fundies2 = new Class("CS2510", "Fundies 2", 4, null, null, "a bad one");
+    var transfer = [];
+    var sem1 = [fundies1, fundies2];
+    var sem2 = [fundies2];
+    var sched = [transfer, sem1, sem2];
+    var john = new Student(sched, 2);
+    store(john);
+    console.log(load());
+    addClass("OOD", 7); 
+    console.log(load());
+    removeClass("OOD", 7); 
+    console.log(load());
+}
+
 
 
 
