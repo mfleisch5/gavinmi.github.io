@@ -39,10 +39,10 @@
 		    var sem2 = [fundies2];
 		    var sched = [transfer, sem1, sem2];
 		    var john = new Student(sched, 2);
-		    store(john);
+		    //store(john);
 		    console.log(load());
-		    addClass("OOD", 7); 
-		    console.log(load());
+		    //addClass("OOD", 7); 
+		    //console.log(load());
 		}
 
 		//Stores the student in localStorage
@@ -53,6 +53,12 @@
 
 		function load() {
 		    var j = JSON.parse(localStorage.getItem("user"));
+	            if (j == null) {
+			var classes = [[]];
+			var stud = new Student(classes, 1); 
+			store(stud); 
+			return stud; 
+		    }	
 		    var sem = j.semester;
 
 		    var classArray = parseSemesterArray(JSON.stringify(j.classes));
