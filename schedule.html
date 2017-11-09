@@ -97,34 +97,33 @@
     }
     draw();
 
-		var selectedClass = null;
+	var selectedClass = null;
     var selectedSemester = null;
-    $("li").click( function(e) {
-			if(!this.classList.contains('selected')) {
-				$("li.selected").removeClass("selected");
-	      selectedClass = $(this).text();
-	      selectedSemester = $(this).closest('td').attr('id');
-	      $(this).addClass('selected');
-			}
-			else {
-				selectedClass=null;
-				selectedSemester=null;
-				$(this).removeClass("selected");
-			}
-    });
+    function clickit() {
+        $("li").click(function () {
+            if (!this.classList.contains('selected')) {
+                $("li.selected").removeClass("selected");
+                selectedClass = $(this).text();
+                selectedSemester = $(this).closest('td').attr('id');
+                $(this).addClass('selected');
+            } else {
+                selectedClass = null;
+                selectedSemester = null;
+                $(this).removeClass("selected");
+            }
+        });
+    }
+
+    clickit();
 
     function moveIt(element) {
         if (selectedClass != null && $(element).attr('id') != selectedSemester) {
-          moveClass(selectedClass.substring(0, selectedClass.indexOf("(")), selectedSemester, $(element).attr('id'));
+          			moveClass(selectedClass.substring(0, selectedClass.indexOf("(")), selectedSemester, $(element).attr('id'));
 					draw();
 					selectedClass=null;
 					selectedSemester=null;
 					$("li.selected").removeClass("selected");
-					$("li").click( function() {
-			        selectedClass = $(this).text();
-			        selectedSemester = $(this).closest('td').attr('id');
-			        $(this).addClass('selected');
-			    });
+					clickit();
 				}
 		}
 
