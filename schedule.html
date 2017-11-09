@@ -89,43 +89,49 @@
         $("ul").each( function() { $(this).empty(); });
         for (var i = 0; i < student.classes.length; i++) {
             for (var j = 0; j < student.classes[i].length; j++) {
-                $("#" + i).children().append("<li>" + student.classes[i][j].name
-								 	+ "<span>(" + student.classes[i][j].credits + ")</span></li>");
+                $("#" + i).children().append("<li><div title='" + student.classes[i][j].name + "'>"
+									+ student.classes[i][j].name + "</div><button><span>(" + student.classes[i][j].credits
+									+ ")</span></button></li>");
 								// console.log($("#" + i), "<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
 						}
         }
 				$("#" + student.semester).addClass('current');
+				$("td ul li button").click(function() {
+					removeClass($(this).parent().children()[0].innerHTML, $(this).closest('td').attr('id'));
+					$(this).closest('li').remove();
+				});
     }
     draw();
 
-	var selectedClass = null;
+		var selectedClass = null;
     var selectedSemester = null;
     function clickit() {
-        $("li").click(function () {
-            if (!this.classList.contains('selected')) {
-                $("li.selected").removeClass("selected");
-                selectedClass = $(this).text();
-                selectedSemester = $(this).closest('td').attr('id');
-                $(this).addClass('selected');
-            } else {
-                selectedClass = null;
-                selectedSemester = null;
-                $(this).removeClass("selected");
-            }
-        });
+      $("li div").click(function () {
+        if (!this.classList.contains('selected')) {
+          $("li.selected").removeClass("selected");
+          selectedClass = this.innerHTML;
+					console.log(selectedClass);
+          selectedSemester = $(this).closest('td').attr('id');
+          $(this).addClass('selected');
+        } else {
+          selectedClass = null;
+          selectedSemester = null;
+          $(this).removeClass("selected");
+        }
+      });
     }
 
     clickit();
 
     function moveIt(element) {
-        if (selectedClass != null && $(element).attr('id') != selectedSemester) {
-          			moveClass(selectedClass.substring(0, selectedClass.indexOf("(")), selectedSemester, $(element).attr('id'));
-					draw();
-					selectedClass=null;
-					selectedSemester=null;
-					$("li.selected").removeClass("selected");
-					clickit();
-				}
+      if (selectedClass != null && $(element).attr('id') != selectedSemester) {
+        moveClass(selectedClass, selectedSemester, $(element).attr('id'));
+				draw();
+				selectedClass=null;
+				selectedSemester=null;
+				$("li.selected").removeClass("selected");
+				clickit();
+			}
 		}
 
 	</script>

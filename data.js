@@ -90,7 +90,7 @@ function removeClass(className, semester) {
 
 	for (var i = 0; i < classArray[semester].length; i++) {
 		var cur = classArray[semester][i];
-		if (cur.name === className.substring(0, selectedClass.indexOf("("))) {
+		if (cur.name === className) {
 			index = i;
 		}
 	}
