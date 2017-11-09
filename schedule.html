@@ -110,7 +110,6 @@
         if (!this.classList.contains('selected')) {
           $("li.selected").removeClass("selected");
           selectedClass = this.innerHTML;
-					console.log(selectedClass);
           selectedSemester = $(this).closest('td').attr('id');
           $(this).addClass('selected');
         } else {

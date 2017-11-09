@@ -79,7 +79,7 @@
 			}*/
 			card h2, card ul { margin-bottom: 5px; }
 			card h2 { user-select: none; cursor: pointer; }
-			card ul { margin-right: 40px; }
+			card ul { margin-right: 30px; }
 			card ul.closed { display: none; }
 			card label.closed img { transform: rotate(-90deg); }
 			card ul li:not(:last-child) { margin-bottom: 5px; }
@@ -136,29 +136,9 @@
 					</label>
 					<ul id="incomplete" class="closed"></ul>
 					<label for="requirements" onclick="openclose(this)">
-						<h2>Major Requirements (57)<img class="expander"></h2>
+						<h2 id="reqs_label">Major Requirements (0)<img class="expander"></h2>
 					</label>
-					<ul id="requirements">
-						<li>CS/IS Overview 1 <span>(1)</span></li>
-						<li>Fundamentals of Computer Science I <span>(4)</span></li>
-						<li>Lab for Fundamentals of Computer Science I <span>(1)</span></li>
-						<li>Discrete Structures <span>(4)</span></li>
-						<li>Recitation for Discrete Structures <span>(1)</span></li>
-						<li>First-Year Writing <span>(4)</span></li>
-						<li>Calculus 1 for Science and Engineering <span>(4)</span></li>
-						<li>Fundamentals of Computer Science II <span>(4)</span></li>
-						<li>Lab for Fundamentals of Computer Science II <span>(1)</span></li>
-						<li>Logic and Computation <span>(4)</span></li>
-						<li>Lab for Fundamentals of Logic and Computation <span>(1)</span></li>
-						<li>Technology and Human Values <span>(4)</span></li>
-						<li>Games and Society <span>(4)</span></li>
-						<li>Computer Systems <span>(4)</span></li>
-						<li>Networks and Distributed Systems <span>(4)</span></li>
-						<li>Theory of Computation <span>(4)</span></li>
-						<li>Programming Languages <span>(4)</span></li>
-						<li>Software Development <span>(4)</span></li>
-						<li>The Eloquent Presenter <span>(1)</span></li>
-					</ul>
+					<ul id="requirements"></ul>
 				</card>
 			</section>
 
@@ -166,18 +146,20 @@
 		<script>
 		function draw() {
 			student = load();
-			var completed = 0, current = 0, upcoming = 0;
+			var completed = 0, current = 0, upcoming = 0, total = 0;
 
 			for (var j = 0; j < student.classes[1].length; j++) {
 				var newC = document.createElement("li");
-				newC.innerHTML = student.classes[1][j].name + "<span>(" + student.classes[1][j].credits + ")</span>";
+				newC.innerHTML = "<div title='" + student.classes[1][j].name + "'>"
+					+ student.classes[1][j].name + "</div><span>(" + student.classes[1][j].credits + ")</span>";
 				document.getElementById("completed").appendChild(newC);
 				completed += student.classes[1][j].credits;
 			}
 			document.getElementById("completed_label").innerHTML = "Completed (" + completed + ")<img class='expander'>";
 			for (var j = 0; j < student.classes[2].length; j++) {
 				var newC = document.createElement("li");
-				newC.innerHTML = student.classes[2][j].name + "<span>(" + student.classes[2][j].credits + ")</span>";
+				newC.innerHTML = "<div title='" + student.classes[2][j].name + "'>"
+					+ student.classes[2][j].name + "</div><span>(" + student.classes[2][j].credits + ")</span>";
 				document.getElementById("current_semester").appendChild(newC);
 				$(newC).clone().appendTo(document.getElementById("in_progress"));
 				current += student.classes[2][j].credits;
@@ -186,11 +168,20 @@
 			document.getElementById("inprogress_label").innerHTML = "In Progress (" + current + ")<img class='expander'>";
 			for (var j = 0; j < student.classes[5].length; j++) {
 				var newC = document.createElement("li");
-				newC.innerHTML = student.classes[5][j].name + "<span>(" + student.classes[5][j].credits + ")</span>";
-				document.getElementById("upcoming_semester").appendChild(newC);
+				newC.innerHTML = "<div title='" + student.classes[5][j].name + "'>"
+					+ student.classes[5][j].name + "</div><span>(" + student.classes[5][j].credits + ")</span>";
+				document.getElementById("in_progress").appendChild(newC);
 				upcoming += student.classes[5][j].credits;
 			}
 			document.getElementById("upcoming_label").innerHTML = "Upcoming Semester (" + upcoming + ")<img class='expander'>";
+			for (var j = 0; j < student.reqs.length; j++) {
+				var newC = document.createElement("li");
+				newC.innerHTML = "<div title='" + student.reqs[j].name + "'>"
+					+ student.reqs[j].name + "</div><span>(" + student.reqs[j].credits + ")</span>";
+				total += student.reqs[j].credits;
+				document.getElementById("requirements").appendChild(newC);
+			}
+			document.getElementById("reqs_label").innerHTML = "Major Requirements (" + total + ")<img class='expander'>";
 
 			updatePercent(completed/113);
 		}
@@ -220,7 +211,6 @@
 				document.getElementById('label').classList.remove("right");
 				document.getElementById('label').classList.remove("left");
 			}
-			console.log(document.getElementById('label').classList);
 		}
 		</script>
 

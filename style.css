@@ -100,7 +100,7 @@ blackout.open { display: block; }
 /******************************************************************************/
 menu#nav_bar {
   color: white;
-  background-color: #444;
+  background-color: #333;
 
   height: 100%;
   width: 300px;
@@ -112,7 +112,7 @@ menu#nav_bar img {
   width: 300px;
   height: 150px;
   cursor: pointer;
-  background-color: #333;
+  background-color: rgba(0, 0, 0, 0.25);
 }
 menu#nav_bar a {
   display: block;
@@ -127,7 +127,7 @@ menu#nav_bar a:link    { color: white; }
 menu#nav_bar a:visited { color: white; }
 menu#nav_bar a:hover   { color: white; }
 menu#nav_bar a:active  { color: white; }
-menu#nav_bar a.current { background-color: #555; }
+menu#nav_bar a.current { background-color: rgba(255, 255, 255, 0.25); }
 menu#nav_bar a[disabled] {
   pointer-events: none;
   color: rgba(255, 255, 255, 0.25);
@@ -171,13 +171,6 @@ section#main_body.unpadded {
   margin-bottom: 10px;
 }
 
-/*Trying to make this a little more responsive to smaller window sizes*/
-/*@media screen and (max-width: 1200px) {
-  card {
-    width: calc(100% - 30px);
-    max-height: calc(100% - 435px);
-  }
-}*/
 #info_cards card h2, card ul { margin-bottom: 5px; }
 #info_cards card h2 { user-select: none; cursor: pointer; }
 #info_cards card ul, td ul { padding: 0; list-style: none; }
@@ -188,7 +181,7 @@ section#main_body.unpadded {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-td ul li div {
+#info_cards card ul li div, td ul li div {
   height: 15px; max-height: 15px;
   max-width: calc(100% - 30px);
   overflow: hidden;

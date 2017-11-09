@@ -6,6 +6,7 @@
 function Student(classes, semester) {
     this.classes = classes;
     this.semester = semester;
+    this.reqs = getCSRequirements();
 }
 
 //Constructor for Class
@@ -45,6 +46,31 @@ function getStartingSchedule() {
      new Class(null, "Logic and Computation", 4, null, null, null),
      new Class(null, "Technology and Human Values", 4, null, null, null),
    ],[],[],[],
+  ];
+}
+
+//Sets up a sample list of requirements tailored for CS students
+function getCSRequirements() {
+  return [
+    new Class(null, "CS/IS Overview 1", 1, null, null, null),
+    new Class(null, "Fundamentals of Computer Science I", 4, null, null, null),
+    new Class(null, "Lab for Fundamentals of Computer Science I", 1, null, null, null),
+    new Class(null, "Discrete Structures", 4, null, null, null),
+    new Class(null, "Recitation for Discrete Structures", 1, null, null, null),
+    new Class(null, "First-Year Writing", 4, null, null, null),
+    new Class(null, "Calculus 1 for Science and Engineering", 4, null, null, null),
+    new Class(null, "Fundamentals of Computer Science II", 4, null, null, null),
+    new Class(null, "Lab for Fundamentals of Computer Science II", 1, null, null, null),
+    new Class(null, "Logic and Computation", 4, null, null, null),
+    new Class(null, "Lab for Fundamentals of Logic and Computation", 1, null, null, null),
+    new Class(null, "Technology and Human Values", 4, null, null, null),
+    new Class(null, "Games and Society", 4, null, null, null),
+    new Class(null, "Computer Systems", 4, null, null, null),
+    new Class(null, "Networks and Distributed Systems", 4, null, null, null),
+    new Class(null, "Theory of Computation", 4, null, null, null),
+    new Class(null, "Programming Languages", 4, null, null, null),
+    new Class(null, "Software Development", 4, null, null, null),
+    new Class(null, "The Eloquent Presenter", 1, null, null, null),
   ];
 }
 
