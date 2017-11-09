@@ -51,7 +51,12 @@
 				border-radius: 5px;
 				color: white;
 				padding: 5px;
+				text-align: center;
 			}
+			div#prog_bar label.left { margin-left: -15px; text-align: left; }
+			div#prog_bar label.left div:first-child { margin: 0; margin-left: 10px; }
+			div#prog_bar label.right { margin-left: -60px; text-align: right; }
+			div#prog_bar label.right div:first-child { margin: 0; margin-left: 55px; }
 
 			card {
 				display: inline-block;
@@ -94,8 +99,8 @@
 		<section id="main_body">
 
 			<div id="prog_bar">
-				<div id="percent">Progress - 16%</div>
-				<div id="bar" style="width: 16%;"></div>
+				<div id="percent">Progress - 0%</div>
+				<div id="bar" style="width: 0;"></div>
 				<label id="label"><div></div><div>Freshman</div></label>
 			</div>
 
@@ -198,8 +203,22 @@
 			document.getElementById("percent").innerHTML = "Progress - " + Number(Math.round(p*100+'e2')+'e-2') + "%";
 			document.getElementById("bar").style.width = p*100 + "%";
 
-			var standings = ["Freshman", "Sophomore", "Junior", "Senior"];
+			var standings = ["Freshman", "Sophomore", "Junior", "Senior", "Senior"];
 			document.getElementById('label').children[1].innerHTML = standings[Math.floor(p*100/25)];
+
+			if(p < 3/113) {
+				document.getElementById('label').classList.remove("right");
+				document.getElementById('label').classList.add("left");
+			}
+			else if(p > 110/113) {
+				document.getElementById('label').classList.remove("left");
+				document.getElementById('label').classList.add("right");
+			}
+			else {
+				document.getElementById('label').classList.remove("right");
+				document.getElementById('label').classList.remove("left");
+			}
+			console.log(document.getElementById('label').classList);
 		}
 		</script>
 

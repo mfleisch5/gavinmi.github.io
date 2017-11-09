@@ -111,6 +111,7 @@
         function dialog() {
             selected = null;
             document.getElementsByTagName('blackout')[0].classList.toggle("open");
+						$('#' + load().semester).addClass('current');
             $('td:not(:first-child)').click(function() {
                 if(selected != null) {
                     selected.classList.remove('selected');
@@ -244,7 +245,7 @@
 								</div>
 							</li>
 
-							<li class="class_title completed_class" id = "Discrete Structures" "onclick="showdesc(this)">
+							<li class="class_title completed_class" id = "Discrete Structures" onclick="showdesc(this)">
 								Discrete Structures<span>(4)</span>
 								<div class="desc">
 									<h4>Course Description</h4>
