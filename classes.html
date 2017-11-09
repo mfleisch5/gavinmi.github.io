@@ -111,6 +111,7 @@
         function dialog() {
             selected = null;
             document.getElementsByTagName('blackout')[0].classList.toggle("open");
+						$('#' + load().semester).addClass('current');
             $('td:not(:first-child)').click(function() {
                 if(selected != null) {
                     selected.classList.remove('selected');

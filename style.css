@@ -79,6 +79,7 @@ td:not(:first-child) {
 }
 th:not(:first-child), td:not(:first-child) { margin-left: -8px; }
 
+td.current { background-color: rgb(200, 255, 200); }
 td.selected { background-color: lightblue; }
 
 /******************************************************************************/
@@ -121,7 +122,6 @@ menu#nav_bar a {
   text-decoration: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   user-select: none;
-  outline: none;
 }
 menu#nav_bar a:link    { color: white; }
 menu#nav_bar a:visited { color: white; }
@@ -144,6 +144,7 @@ section#main_body {
 
   width: calc(100% - 331px);
   height: calc(100% - 30px);
+  white-space: nowrap;
 
   background-color: #ccc;
 }
@@ -185,7 +186,7 @@ section#main_body.unpadded {
 #info_cards card label.closed img { transform: rotate(-90deg); }
 #info_cards card ul li, td ul li { padding: 5px 5px 5px 20px; margin: 0; }
 #info_cards card ul li:nth-child(odd), td ul li:nth-child(odd) {
-  background-color: #eee;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 #info_cards card ul li span, td ul li span { float: right; }
 

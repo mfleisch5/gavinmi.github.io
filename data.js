@@ -120,7 +120,7 @@ function load() {
     var j = JSON.parse(localStorage.getItem("user"));
     if (j === null) {
   		var classes = getStartingSchedule();
-  		var stud = new Student(classes, 1);
+  		var stud = new Student(classes, 2);
   		return stud;
     }
     var sem = j.semester;
