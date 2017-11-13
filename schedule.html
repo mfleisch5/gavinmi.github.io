@@ -46,93 +46,96 @@
 				</tr>
 				<tr>
 					<td>1</td>
-					<td id="1" onclick=moveIt(this)><ul class="completed_class"></ul></td>
-					<td id="2" onclick=moveIt(this)><ul class="inprogress_class"></ul></td>
-					<td id="3" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="4" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
+					<td id="1"><ul></ul></td>
+					<td id="2"><ul></ul></td>
+					<td id="3"><ul></ul></td>
+					<td id="4"><ul></ul></td>
 				</tr>
 				<tr>
 					<td>2</td>
-					<td id="5" onclick=moveIt(this)>
-						<ul class="incomplete_class"></ul>
-					</td>
-					<td id="6" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="7" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="8" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
+					<td id="5"><ul></ul></td>
+					<td id="6"><ul></ul></td>
+					<td id="7"><ul></ul></td>
+					<td id="8"><ul></ul></td>
 				</tr>
 				<tr>
 					<td>3</td>
-					<td id="9" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="10" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="11" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="12" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
+					<td id="9"><ul></ul></td>
+					<td id="10"><ul></ul></td>
+					<td id="11"><ul></ul></td>
+					<td id="12"><ul></ul></td>
 				</tr>
 				<tr>
 					<td>4</td>
-					<td id="13" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="14" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="15" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="16" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
+					<td id="13"><ul></ul></td>
+					<td id="14"><ul></ul></td>
+					<td id="15"><ul></ul></td>
+					<td id="16"><ul></ul></td>
 				</tr>
 				<tr>
 					<td>5</td>
-					<td id="17" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="18" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="19" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
-					<td id="20" onclick=moveIt(this)><ul class="incomplete_class"></ul></td>
+					<td id="17"><ul></ul></td>
+					<td id="18"><ul></ul></td>
+					<td id="19"><ul></ul></td>
+					<td id="20"><ul></ul></td>
 				</tr>
 			</table>
 		</section>
 	<script>
+		//Draw function to be called on load and on refresh
     function draw() {
         student = load();
+				for(var i = 1; i < 21; i++) {
+					if(i < student.semester) { $("#" + i).children().addClass("completed_class"); }
+					else if(i > student.semester) { $("#" + i).children().addClass("inprogress_class"); }
+					else { $("#" + i).children().addClass("incomplete_class"); }
+				}
+				//Draw all classes
         $("ul").each( function() { $(this).empty(); });
         for (var i = 0; i < student.classes.length; i++) {
-            for (var j = 0; j < student.classes[i].length; j++) {
-                var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
-								title.title = student.classes[i][j].name; title.innerHTML = title.title;
-								credits.innerHTML = "(" + student.classes[i][j].credits + ")";
-								$(course).append([title, $(document.createElement('button')).append(credits)]);
-								$("#" + i).children().append(course);
-						}
+          for (var j = 0; j < student.classes[i].length; j++) {
+            var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+						title.title = student.classes[i][j].name; title.innerHTML = title.title;
+						credits.innerHTML = "(" + student.classes[i][j].credits + ")";
+						$(course).append([title, $(document.createElement('button')).append(credits)]);
+						$("#" + i).children().append(course);
+					}
         }
-				$("#" + student.semester).addClass('current');
+				//Onclick for each class set to enable move functionality
+				$("li div").click(function () {
+					if (!$(this).parent().hasClass('selected')) {
+						$("li.selected").removeClass("selected");
+						selectedClass = this.innerHTML;
+						selectedSemester = $(this).closest('td').attr('id');
+						$(this).parent().addClass('selected');
+					} else {
+						selectedClass = null;
+						selectedSemester = null;
+						$(this).parent().removeClass("selected");
+					}
+				});
+				//Onclick for delete buttons set to delete class
 				$("td ul li button").click(function() {
 					removeClass($(this).parent().children()[0].innerHTML, $(this).closest('td').attr('id'));
 					$(this).closest('li').remove();
 				});
+				//Set current semester to current
+				$("#" + student.semester).addClass('current');
     }
     draw();
 
 		var selectedClass = null;
     var selectedSemester = null;
-    function clickit() {
-      $("li div").click(function () {
-        if (!this.classList.contains('selected')) {
-          $("li.selected").removeClass("selected");
-          selectedClass = this.innerHTML;
-          selectedSemester = $(this).closest('td').attr('id');
-          $(this).addClass('selected');
-        } else {
-          selectedClass = null;
-          selectedSemester = null;
-          $(this).removeClass("selected");
-        }
-      });
-    }
-
-    clickit();
-
-    function moveIt(element) {
-      if (selectedClass != null && $(element).attr('id') != selectedSemester) {
-        moveClass(selectedClass, selectedSemester, $(element).attr('id'));
+		//Onclick for semester set to complete move function
+		$('td:not(:first-child)').click(function () {
+      if (selectedClass != null && $(this).attr('id') != selectedSemester) {
+        moveClass(selectedClass, selectedSemester, $(this).attr('id'));
 				draw();
 				selectedClass=null;
 				selectedSemester=null;
 				$("li.selected").removeClass("selected");
-				clickit();
 			}
-		}
+		});
 
 	</script>
 	</body>

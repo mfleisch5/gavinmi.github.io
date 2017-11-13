@@ -133,25 +133,26 @@
 
 		</section>
 		<script>
-		function draw() {
 			student = load();
 			var completed = 0, current = 0, upcoming = 0, total = 0;
 
-			for (var j = 0; j < student.classes[1].length; j++) {
-				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
-				title.title = student.classes[1][j].name; title.innerHTML = title.title;
-				credits.innerHTML = "(" + student.classes[1][j].credits + ")";
-				$("#completed").append($(course).append([title, credits]));
-				completed += student.classes[1][j].credits;
+			for (var i = 1; i < student.semester; i++) {
+				for (var j = 0; j < student.classes[i].length; j++) {
+					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+					title.title = student.classes[i][j].name; title.innerHTML = title.title;
+					credits.innerHTML = "(" + student.classes[i][j].credits + ")";
+					$("#completed").append($(course).append([title, credits]));
+					completed += student.classes[i][j].credits;
+				}
 			}
 			$("#completed_label").html("Completed (" + completed + ")");
-			for (var j = 0; j < student.classes[2].length; j++) {
+			for (var j = 0; j < student.classes[student.semester].length; j++) {
 				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
-				title.title = student.classes[2][j].name; title.innerHTML = title.title;
-				credits.innerHTML = "(" + student.classes[2][j].credits + ")";
+				title.title = student.classes[student.semester][j].name; title.innerHTML = title.title;
+				credits.innerHTML = "(" + student.classes[student.semester][j].credits + ")";
 				$("#current_semester").append($(course).append([title, credits]));
 				$("#in_progress").append($(course).append([title, credits]).clone());
-				current += student.classes[2][j].credits;
+				current += student.classes[student.semester][j].credits;
 			}
 			$("#current_label").html("Current Semester (" + current + ")");
 			$("#inprogress_label").html("In Progress (" + current + ")");
@@ -173,30 +174,19 @@
 			$("#reqs_label").html("Major Requirements (" + total + ")");
 
 			updatePercent(completed/113);
-		}
-		draw();
 
-		// p is number between 0 and 1
-		function updatePercent(p) {
-			document.getElementById("percent").innerHTML = "Progress - " + Number(Math.round(p*100+'e2')+'e-2') + "%";
-			document.getElementById("bar").style.width = p*100 + "%";
+			// p is number between 0 and 1
+			function updatePercent(p) {
+				$("#percent").html("Progress - " + Number(Math.round(p*100+'e2')+'e-2') + "%");
+				$("#bar").css("width", p*100 + "%");
 
-			var standings = ["Freshman", "Sophomore", "Junior", "Senior", "Senior"];
-			document.getElementById('label').children[1].innerHTML = standings[Math.floor(p*100/25)];
+				var standings = ["Freshman", "Sophomore", "Junior", "Senior", "Senior"];
+				$('#label').find(">:nth-child(2)").html(standings[Math.floor(p*100/25)]);
 
-			if(p < 3/113) {
-				document.getElementById('label').classList.remove("right");
-				document.getElementById('label').classList.add("left");
+				if(p < 3/113) { $('#label').removeClass("right"); $('#label').addClass("left"); }
+				else if(p > 110/113) { $('#label').removeClass("left"); $('#label').addClass("right"); }
+				else { $('#label').removeClass("right"); $('#label').removeClass("left"); }
 			}
-			else if(p > 110/113) {
-				document.getElementById('label').classList.remove("left");
-				document.getElementById('label').classList.add("right");
-			}
-			else {
-				document.getElementById('label').classList.remove("right");
-				document.getElementById('label').classList.remove("left");
-			}
-		}
 		</script>
 
 	</body>
