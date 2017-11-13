@@ -176,7 +176,6 @@ section#main_body.unpadded {
   display: inline-block;
   vertical-align: top;
   max-height: calc(100% - 160px);
-  /*min-height: 162px;*/
   width: calc(50% - 34px);
   margin-bottom: 10px;
 }
@@ -184,19 +183,21 @@ section#main_body.unpadded {
 #info_cards card summary, card ul { margin-bottom: 5px; }
 #info_cards card summary { user-select: none; cursor: pointer; }
 #info_cards card ul, td ul { padding: 0; list-style: none; }
-#info_cards card ul li, td ul li { padding: 5px 5px 5px 20px; margin: 0; }
+#info_cards card ul li, { padding: 5px 5px 5px 20px; margin: 0; }
 #info_cards card ul li:nth-child(odd), td ul li:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
 #info_cards card ul li div:first-child, td ul li div {
   height: 15px; max-height: 15px;
-  max-width: calc(100% - 30px);
+  width: calc(100% - 35px);
+  max-width: calc(100% - 35px);
   overflow: hidden;
   display: inline-block;
 }
 #info_cards card ul li span { float: right; }
 
+td ul li { padding: 0px; margin: 0px; }
 td ul li button  {
   background-color: transparent; text-align: center;
   border: none; border-radius: 50%; padding: 0px;
