@@ -34,9 +34,7 @@ card.unpadded header {
   background-color: #333;
   color: white;
 }
-card.unpadded .card_body {
-    height: calc(100% - 100px);
-}
+card.unpadded .card_body { height: calc(100% - 100px); }
 
 .centered {
   position: absolute;
@@ -45,13 +43,25 @@ card.unpadded .card_body {
   transform: translate(-50%, -50%);
 }
 
-img.expander {
-  content:url("https://cdn3.iconfinder.com/data/icons/faticons/32/arrow-down-01-128.png");
-  width: 15px; height: 15px;
-  margin-top: 5px; float: right;
-  transform: rotate(0deg);
+/******************************************************************************/
+/************************* DETAILS/SUMMARY STYLINGS ***************************/
+/******************************************************************************/
+details { margin-top: 20px; }
+summary {
+  font-size: 1.5em;
+  font-weight: bold;
+  outline: none;
+  height: 23px; max-height: 23px;
+  max-width: calc(100%);
+  overflow: hidden;
+}
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: '\25B2';
+  float: right;
   transition: 0.15s ease;
 }
+details[open] summary::after { transform: rotate(180deg) translate(0, -5px); }
 
 /******************************************************************************/
 /***************************** TABLE STYLINGS *********************************/
@@ -166,22 +176,20 @@ section#main_body.unpadded {
   display: inline-block;
   vertical-align: top;
   max-height: calc(100% - 160px);
-  min-height: 162px;
+  /*min-height: 162px;*/
   width: calc(50% - 34px);
   margin-bottom: 10px;
 }
 
-#info_cards card h2, card ul { margin-bottom: 5px; }
-#info_cards card h2 { user-select: none; cursor: pointer; }
+#info_cards card summary, card ul { margin-bottom: 5px; }
+#info_cards card summary { user-select: none; cursor: pointer; }
 #info_cards card ul, td ul { padding: 0; list-style: none; }
-#info_cards card ul.closed { display: none; }
-#info_cards card label.closed img { transform: rotate(-90deg); }
 #info_cards card ul li, td ul li { padding: 5px 5px 5px 20px; margin: 0; }
 #info_cards card ul li:nth-child(odd), td ul li:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-#info_cards card ul li div, td ul li div {
+#info_cards card ul li div:first-child, td ul li div {
   height: 15px; max-height: 15px;
   max-width: calc(100% - 30px);
   overflow: hidden;
@@ -201,7 +209,6 @@ td ul li:hover button {
   background-size: 12px 12px; background-repeat: no-repeat; background-position: center;
 }
 td ul li:hover span:not(:first-child) { display: none; }
-
 
 /*Progress Color Scheme*/
 /*.completed_class {color: #228B22;}

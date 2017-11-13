@@ -61,27 +61,16 @@
 			card {
 				display: inline-block;
 				vertical-align: top;
+				min-height: 180px;
 				max-height: calc(100% - 160px);
-				min-height: 162px;
 				width: calc(50% - 34px);
 				margin-bottom: 10px;
 			}
 
 			#main_body { white-space: nowrap; }
-			/**********************************************************************/
-			/*Trying to make this a little more responsive to smaller window sizes*/
-			/**********************************************************************/
-			/*@media screen and (max-width: 1200px) {
-    		card {
-        	width: calc(100% - 30px);
-					max-height: calc(100% - 435px);
-				}
-			}*/
-			card h2, card ul { margin-bottom: 5px; }
-			card h2 { user-select: none; cursor: pointer; }
+			card summary, card ul { margin-bottom: 5px; }
+			card summary { user-select: none; cursor: pointer; }
 			card ul { margin-right: 30px; }
-			card ul.closed { display: none; }
-			card label.closed img { transform: rotate(-90deg); }
 			card ul li:not(:last-child) { margin-bottom: 5px; }
 		</style>
 
@@ -112,33 +101,33 @@
 			<!----------------------------------------------------------------------->
 			<section id="info_cards">
 				<card>
-					<label for="current_semester" onclick="openclose(this)">
-						<h2 id="current_label">Current Semester (0)<img class="expander"></h2>
-					</label>
-					<ul id="current_semester"></ul>
-					<label for="upcoming_semester" onclick="openclose(this)">
-						<h2 id="upcoming_label">Upcoming Semester (0)<img class="expander"></h2>
-					</label>
-					<ul id="upcoming_semester"></ul>
+					<details open>
+						<summary id="current_label">Current Semester (0)</summary>
+						<ul id="current_semester"></ul>
+					</details>
+					<details open>
+						<summary id="upcoming_label">Upcoming Semester (0)</summary>
+						<ul id="upcoming_semester"></ul>
+					</details>
 				</card>
 
 				<card>
-					<label class="closed completed_class" for="completed" onclick="openclose(this)">
-						<h2 id="completed_label">Completed (0)<img class="expander"></h2>
-					</label>
-					<ul id="completed" class="closed"></ul>
-					<label class="closed inprogress_class" for="in_progress" onclick="openclose(this)">
-						<h2 id="inprogress_label">In Progress (0)<img class="expander"></h2>
-					</label>
-					<ul id="in_progress" class="closed"></ul>
-					<label class="closed incomplete_class" for="incomplete" onclick="openclose(this)">
-						<h2>Incomplete (0)<img class="expander"></h2>
-					</label>
-					<ul id="incomplete" class="closed"></ul>
-					<label for="requirements" onclick="openclose(this)">
-						<h2 id="reqs_label">Major Requirements (0)<img class="expander"></h2>
-					</label>
-					<ul id="requirements"></ul>
+					<details class="completed_class">
+						<summary id="completed_label">Completed (0)</summary>
+						<ul id="completed" class="closed"></ul>
+					</details>
+					<details class="inprogress_class">
+						<summary id="inprogress_label">In Progress (0)</summary>
+						<ul id="in_progress" class="closed"></ul>
+					</details>
+					<details class="incomplete_class">
+						<summary id="incomplete_label">Incomplete (0)</summary>
+						<ul id="incomplete" class="closed"></ul>
+					</details>
+					<details open>
+						<summary id="reqs_label">Major Requirements (0)</summary>
+						<ul id="requirements"></ul>
+					</details>
 				</card>
 			</section>
 
@@ -149,48 +138,44 @@
 			var completed = 0, current = 0, upcoming = 0, total = 0;
 
 			for (var j = 0; j < student.classes[1].length; j++) {
-				var newC = document.createElement("li");
-				newC.innerHTML = "<div title='" + student.classes[1][j].name + "'>"
-					+ student.classes[1][j].name + "</div><span>(" + student.classes[1][j].credits + ")</span>";
-				document.getElementById("completed").appendChild(newC);
+				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+				title.title = student.classes[1][j].name; title.innerHTML = title.title;
+				credits.innerHTML = "(" + student.classes[1][j].credits + ")";
+				$("#completed").append($(course).append([title, credits]));
 				completed += student.classes[1][j].credits;
 			}
-			document.getElementById("completed_label").innerHTML = "Completed (" + completed + ")<img class='expander'>";
+			$("#completed_label").html("Completed (" + completed + ")");
 			for (var j = 0; j < student.classes[2].length; j++) {
-				var newC = document.createElement("li");
-				newC.innerHTML = "<div title='" + student.classes[2][j].name + "'>"
-					+ student.classes[2][j].name + "</div><span>(" + student.classes[2][j].credits + ")</span>";
-				document.getElementById("current_semester").appendChild(newC);
-				$(newC).clone().appendTo(document.getElementById("in_progress"));
+				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+				title.title = student.classes[2][j].name; title.innerHTML = title.title;
+				credits.innerHTML = "(" + student.classes[2][j].credits + ")";
+				$("#current_semester").append($(course).append([title, credits]));
+				$("#in_progress").append($(course).append([title, credits]).clone());
 				current += student.classes[2][j].credits;
 			}
-			document.getElementById("current_label").innerHTML = "Current Semester (" + current + ")<img class='expander'>";
-			document.getElementById("inprogress_label").innerHTML = "In Progress (" + current + ")<img class='expander'>";
+			$("#current_label").html("Current Semester (" + current + ")");
+			$("#inprogress_label").html("In Progress (" + current + ")");
 			for (var j = 0; j < student.classes[5].length; j++) {
-				var newC = document.createElement("li");
-				newC.innerHTML = "<div title='" + student.classes[5][j].name + "'>"
-					+ student.classes[5][j].name + "</div><span>(" + student.classes[5][j].credits + ")</span>";
-				document.getElementById("in_progress").appendChild(newC);
+				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+				title.title = student.classes[5][j].name; title.innerHTML = title.title;
+				credits.innerHTML = "(" + student.classes[5][j].credits + ")";
+				$("#upcoming_semester").append($(course).append([title, credits]));
 				upcoming += student.classes[5][j].credits;
 			}
-			document.getElementById("upcoming_label").innerHTML = "Upcoming Semester (" + upcoming + ")<img class='expander'>";
+			$("#upcoming_label").html("Upcoming Semester (" + upcoming + ")");
 			for (var j = 0; j < student.reqs.length; j++) {
-				var newC = document.createElement("li");
-				newC.innerHTML = "<div title='" + student.reqs[j].name + "'>"
-					+ student.reqs[j].name + "</div><span>(" + student.reqs[j].credits + ")</span>";
+				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+				title.title = student.reqs[j].name; title.innerHTML = title.title;
+				credits.innerHTML = "(" + student.reqs[j].credits + ")";
+				$("#requirements").append($(course).append([title, credits]));
 				total += student.reqs[j].credits;
-				document.getElementById("requirements").appendChild(newC);
 			}
-			document.getElementById("reqs_label").innerHTML = "Major Requirements (" + total + ")<img class='expander'>";
+			$("#reqs_label").html("Major Requirements (" + total + ")");
 
 			updatePercent(completed/113);
 		}
 		draw();
 
-		function openclose(element) {
-			element.classList.toggle("closed");
-			document.getElementById(element.htmlFor).classList.toggle("closed");
-		}
 		// p is number between 0 and 1
 		function updatePercent(p) {
 			document.getElementById("percent").innerHTML = "Progress - " + Number(Math.round(p*100+'e2')+'e-2') + "%";

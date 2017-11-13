@@ -89,10 +89,11 @@
         $("ul").each( function() { $(this).empty(); });
         for (var i = 0; i < student.classes.length; i++) {
             for (var j = 0; j < student.classes[i].length; j++) {
-                $("#" + i).children().append("<li><div title='" + student.classes[i][j].name + "'>"
-									+ student.classes[i][j].name + "</div><button><span>(" + student.classes[i][j].credits
-									+ ")</span></button></li>");
-								// console.log($("#" + i), "<li>" + student.classes[i][j].name + "<span>(4)</span></li>");
+                var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+								title.title = student.classes[i][j].name; title.innerHTML = title.title;
+								credits.innerHTML = "(" + student.classes[i][j].credits + ")";
+								$(course).append([title, $(document.createElement('button')).append(credits)]);
+								$("#" + i).children().append(course);
 						}
         }
 				$("#" + student.semester).addClass('current');
