@@ -133,20 +133,22 @@
 				}
 				else if(dragORclick == "drag") {
 					$("td ul li").draggable({
-						start: function() {
-							$(this).addClass("selected");
+						helper: "clone",
+						start: function(event, ui) {
+							$(ui.helper).addClass("selected");
 							selectedClass = $(this).children()[0].innerHTML;
 							selectedSemester = $(this).closest('td').attr('id');
 						},
+						revert: true,
 					});
-					$("td").droppable({
+					$("td:not(:first-child)").droppable({
 						drop: function(event, ui) {
 							moveClass(selectedClass, selectedSemester, $( this ).attr('id'));
 							$(".selected").removeClass("selected");
 							selectedClass=null;
 							selectedSemester=null;
 							draw();
-						}
+						},
 					});
 				}
     }
