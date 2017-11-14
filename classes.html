@@ -269,8 +269,10 @@
 
 
 				$("details").attr("open", true);
-				$("ul li > div:first-child").click(function() {
-					showdesc($(this).parent());
+				$("ul li > div:first-child").click(function() { showdesc($(this).parent()); });
+				$('ul li button').click(function() {
+					selectClass($(this));
+					dialog();
 				});
 			}
 			draw();
@@ -279,37 +281,37 @@
 			var selectedClass = null;
 			var selectedCredits = 0;
 			function selectClass(element) {
-				selectedClass = $(element).closest('li').attr('id');
-				selectedCredits = $(element).closest('li').children()[0].innerHTML;
+				selectedClass = $(element).closest('li').children()[0].innerHTML;
+				selectedCredits = $(element).closest('li').children()[1].innerHTML.substring(1, 2);
 			}
 			function showdesc(element) { $(element).toggleClass("visible"); }
 			function clearTable() {
 				if(selected!=null) {
-					selected.classList.remove('selected');
-					selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits.substring(1, 2)));
+					$('.selected').html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits)));
+					$('.selected').removeClass('selected');
 				}
 			}
 			function loadTable() {
 				for(var i = 1; i < 21; i++) {
-					document.getElementById(i).innerHTML = semCredits(i);
+					$("#" + i).html(semCredits(i));
 				}
 			}
 			function dialog() {
 				selected = null;
-				document.getElementsByTagName('blackout')[0].classList.toggle("open");
+				$('blackout').toggleClass("open");
 				loadTable();
 				$('td:not(:first-child)').click(function() {
 					if(selected != null) {
-						selected.classList.remove('selected');
-						selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits.substring(1, 2)));
+						$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits)));
+						$(selected).removeClass('selected');
 					}
 					if(this != selected) {
 						selected = this;
-						this.classList.add('selected');
-						selected.innerHTML = parseInt(selected.innerHTML) + parseInt(selectedCredits.substring(1, 2));
+						$(selected).addClass('selected');
+						$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedCredits));
 					}
 					else if(this == selected) { selected = null; }
-					document.getElementById("addButton").disabled = selected == null;
+					$("#addButton").attr("disabled", selected == null);
 				});
 			}
 			function addclass(id) {
