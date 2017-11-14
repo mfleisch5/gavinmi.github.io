@@ -194,8 +194,14 @@ section#main_body.unpadded {
   max-width: calc(100% - 35px);
   overflow: hidden;
   display: inline-block;
+  margin: 5px 0px 5px 5px;
 }
-#info_cards card ul li span { float: right; }
+#info_cards card ul li span { float: right; margin: 5px 5px 5px 0px; }
+card summary, card ul { margin-bottom: 5px; }
+card summary { user-select: none; cursor: pointer; }
+card ul { margin-right: 30px; }
+card ul li { margin: 0px; }
+
 
 td ul li { padding: 0px; margin: 0px; }
 td ul li button  {

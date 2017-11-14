@@ -68,10 +68,6 @@
 			}
 
 			#main_body { white-space: nowrap; }
-			card summary, card ul { margin-bottom: 5px; }
-			card summary { user-select: none; cursor: pointer; }
-			card ul { margin-right: 30px; }
-			card ul li:not(:last-child) { margin-bottom: 5px; }
 		</style>
 
 	</head>
@@ -164,12 +160,14 @@
 				upcoming += student.classes[5][j].credits;
 			}
 			$("#upcoming_label").html("Upcoming Semester (" + upcoming + ")");
-			for (var j = 0; j < student.reqs.length; j++) {
-				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
-				title.title = student.reqs[j].name; title.innerHTML = title.title;
-				credits.innerHTML = "(" + student.reqs[j].credits + ")";
-				$("#requirements").append($(course).append([title, credits]));
-				total += student.reqs[j].credits;
+			for(var i = 0; i < 6; i++) {
+				for (var j = 0; j < student.reqs[i].courses.length; j++) {
+					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
+					title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
+					credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")";
+					$("#requirements").append($(course).append([title, credits]));
+					total += student.reqs[i].courses[j].credits;
+				}
 			}
 			$("#reqs_label").html("Major Requirements (" + total + ")");
 
