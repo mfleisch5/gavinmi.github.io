@@ -160,7 +160,7 @@
 					</tr>
 				</table>
 				<span>
-			<button id="addButton" onclick="addclass(selected.id); clearTable(); dialog();">Okay</button>
+			<button id="addButton" onclick="addclass(selected.id);">Okay</button>
 					<button onclick="clearTable(); dialog();">Cancel</button>
 				</span>
 			</card>
@@ -228,6 +228,8 @@
 						}
 						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("None"); }
 						$(add).html("Add");
+						$(add).attr("disabled", hasClass(student.reqs[i].courses[j].name));
+						$(add).attr("title", hasClass(student.reqs[i].courses[j].name) ? "Already in schedule" : undefined);
 
 						$(ul).append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq, add])]));
 					}
@@ -279,15 +281,14 @@
 
 			var selected = null;
 			var selectedClass = null;
-			var selectedCredits = 0;
 			function selectClass(element) {
-				selectedClass = $(element).closest('li').children()[0].innerHTML;
-				selectedCredits = $(element).closest('li').children()[1].innerHTML.substring(1, 2);
+				selectedClass = searchClass($(element).closest('li').children()[0].innerHTML);
 			}
 			function showdesc(element) { $(element).toggleClass("visible"); }
+
 			function clearTable() {
 				if(selected!=null) {
-					$('.selected').html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits)));
+					$('.selected').html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
 					$('.selected').removeClass('selected');
 				}
 			}
@@ -302,24 +303,27 @@
 				loadTable();
 				$('td:not(:first-child)').click(function() {
 					if(selected != null) {
-						$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedCredits)));
+						$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
 						$(selected).removeClass('selected');
 					}
 					if(this != selected) {
 						selected = this;
 						$(selected).addClass('selected');
-						$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedCredits));
+						$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedClass.credits));
 					}
 					else if(this == selected) { selected = null; }
 					$("#addButton").attr("disabled", selected == null);
 				});
 			}
 			function addclass(id) {
-				if(selectedClass != null) {
+				if(selectedClass != null && confirm("Are you sure you want to add " +
+																						selectedClass.name +
+																						" to the selected semester?")) {
 					addClass(selectedClass, id);
+					clearTable(); dialog();
+					alert(selectedClass.name + " added to schedule");
+					selectedClass = null;
 				}
-				selectedClass = null;
-				selectedCredits = 0;
 			}
 		</script>
 

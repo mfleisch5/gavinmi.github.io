@@ -109,7 +109,7 @@
         }
 				//Onclick for delete buttons set to delete class
 				$("td ul li button").click(function() {
-					removeClass($(this).parent().children()[0].innerHTML, $(this).closest('td').attr('id'));
+					removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
 					$(this).closest('li').remove();
 				});
 				//Set current semester to current
@@ -136,7 +136,7 @@
 						helper: "clone",
 						start: function(event, ui) {
 							$(ui.helper).addClass("selected");
-							selectedClass = $(this).children()[0].innerHTML;
+							selectedClass = searchClass($(this).children()[0].innerHTML);
 							selectedSemester = $(this).closest('td').attr('id');
 						},
 						revert: true,

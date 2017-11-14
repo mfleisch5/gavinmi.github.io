@@ -3,7 +3,7 @@
 /******************************************************************************/
 body {
   margin: 0px;
-  font-family: monospace;
+  font-family: sans-serif;
 }
 
 input,
@@ -51,7 +51,7 @@ summary {
   font-size: 1.5em;
   font-weight: bold;
   outline: none;
-  height: 23px; max-height: 23px;
+  height: 28px; max-height: 28px;
   max-width: calc(100%);
   overflow: hidden;
 }
@@ -59,6 +59,8 @@ summary::-webkit-details-marker { display: none; }
 summary::after {
   content: '\25B2';
   float: right;
+  font-size: 90%;
+  margin-top: -2.5px;
   transition: 0.15s ease;
 }
 details[open] summary::after { transform: rotate(180deg) translate(0, -5px); }
@@ -188,8 +190,8 @@ section#main_body.unpadded {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
-#info_cards card ul li div:first-child, td ul li div {
-  height: 15px; max-height: 15px;
+#info_cards card ul li > div:first-child, td ul li div {
+  height: 18px; max-height: 18px;
   width: calc(100% - 35px);
   max-width: calc(100% - 35px);
   overflow: hidden;

@@ -30,40 +30,53 @@ function getStartingSchedule() {
   return [
     [],
     [
-     new Class(null, "Fundamentals of Computer Science I", 4, null, null, null),
-     new Class(null, "Lab for Fundamentals of Computer Science I", 1, null, null, null),
-     new Class(null, "Discrete Structures", 4, null, null, null),
-     new Class(null, "Recitation for Discrete Structures", 1, null, null, null),
-     new Class(null, "First-Year Writing", 4, null, null, null),
-     new Class(null, "Introduction to Psychology", 4, null, null, null),
-     new Class(null, "CS/IS Overview 1", 1, null, null, null),
+      new Class(null, "CS/IS Overview 1", 1, [], [],
+        "Introduces students to the College of Computer and Information Science (CCIS) and begins their preparation for careers in the computing and information fields. Offers students an opportunity to learn how to thrive at Northeastern and within CCIS by developing academic, professional, and interpersonal skills. Covers the variety of careers available in the high-technology professions. Students work in groups to create and deliver presentations on careers in the field."),
+      new Class(null, "Fundamentals of Computer Science I", 4, ["Lab for CS2500"], [],
+        "Introduces the fundamental ideas of computing and the principles of programming. Discusses a systematic approach to word problems, including analytic reading, synthesis, goal setting, planning, plan execution, and testing. Presents several models of computing, starting from nothing more than expression evaluation in the spirit of high school algebra. No prior programming experience is assumed; therefore, suitable for freshman students, majors and nonmajors alike who wish to explore the intellectual ideas in the discipline."),
+      new Class(null, "Lab for CS2500", 1, ["Fundamentals of Computer Science I"], [],
+        "Accompanies CS 2500. Covers topics from the course through various experiments."),
+      new Class(null, "Discrete Structures", 4, ["Recitation for CS 1800"], [],
+        "Introduces the mathematical structures and methods that form the foundation of computer science. Studies structures such as sets, tuples, sequences, lists, trees, and graphs. Discusses functions, relations, ordering, and equivalence relations. Examines inductive and recursive definitions of structures and functions. Discusses principles of proof such as truth tables, inductive proof, and basic logic. Also covers the counting techniques and arguments needed to estimate the size of sets, the growth of functions, and the space-time complexity of algorithms."),
+      new Class(null, "Recitation for CS1800", 1, ["Discrete Structures"], [],
+        "Provides students with additional opportunities to ask questions and to see sample problems solved in detail."),
+      new Class(null, "First-Year Writing", 4, [], [],
+        "Designed for students to study and practice writing in a workshop setting. Students read a range of texts in order to describe and evaluate the choices writers make and apply that knowledge to their own writing and explore how writing functions in a range of academic, professional, and public contexts. Offers students an opportunity to learn how to conduct research using primary and secondary sources; how to write for various purposes and audiences in multiple genres and media; and how to give and receive feedback, to revise their work, and to reflect on their growth as writers."),
+      new Class(null, "Introduction to Jazz", 4, [], ["Object-Oriented Design", "Theory of Computation"],
+        "Examines the evolution of the creative improvisational musical styles commonly called jazz, from its African-American roots to its status as one of America’s classical musics and an internationally valued art form. Explores the contributions of African and European musical traditions and African-American spirituals, work songs, and blues. Examines major contributors and stylistic development and change through selected audio and audio-visual presentations. Also considers the sociocultural dynamics that have affected musical evolution and acceptance."),
    ],
    [
-     new Class(null, "Fundamentals of Computer Science II", 4, null, null, null),
-     new Class(null, "Lab for Fundamentals of Computer Science II", 1, null, null, null),
-     new Class(null, "Games and Society", 4, null, null, null),
-     new Class(null, "Recitation for Games and Society", 1, null, null, null),
-     new Class(null, "Logic and Computation", 4, null, null, null),
-     new Class(null, "Technology and Human Values", 4, null, null, null),
-   ],[],[],[],
+      new Class(null, "Fundamentals of Computer Science II", 4, ["Lab for CS2510"], ["Fundamentals of Computer Science I"],
+        "Continues CS 2500. Examines object-oriented programming and associated algorithms using more complex data structures as the focus. Discusses nested structures and nonlinear structures including hash tables, trees, and graphs. Emphasizes abstraction, encapsulation, inheritance, polymorphism, recursion, and object-oriented design patterns. Applies these ideas to sample applications that illustrate the breadth of computer science."),
+      new Class(null, "Lab for CS2510", 1, ["Fundamentals of Computer Science II"], [],
+        "Accompanies CS 2510. Covers topics from the course through various experiments"),
+      new Class(null, "Games and Society", 4, ["Recitation for GAME 1110"], [],
+        "Provides an historical and cultural perspective on games and other forms of interactive entertainment. Examines the present state and future directions of paper, card, and board games; physical games and sports; and video games. Introduces students to current issues, experiments, and directions in the field of game design. Through weekly lectures and small-group labs, students have an opportunity to develop a critical basis for analyzing game play."),
+      new Class(null, "Recitation for GAME 1110", 1, [], ["Games and Society"],
+        "Provides small-group discussion format to cover material in GAME 1110."),
+      new Class(null, "Logic and Computation", 4, ["Lab for CS 2800"], ["Discrete Structures"],
+        "Introduces formal logic and its connections to computer and information science. Offers an opportunity to learn to translate statements about the behavior of computer programs into logical claims and to gain the ability to prove such assertions both by hand and using automated tools. Considers approaches to proving termination, correctness, and safety for programs. Discusses notations used in logic, propositional and first order logic, logical inference, mathematical induction, and structural induction. Introduces the use of logic for modeling the range of artifacts and phenomena that arise in computer and information science."),
+      new Class(null, "Technology and Human Values", 4, [], [],
+        "Studies philosophy of technology, as well as ethics and modern technology. Considers the relationship between technology and humanity, the social dimensions of technology, and ethical issues raised by emerging technologies. Discusses emerging technologies such as biotechnology, information technology, nanotechnology, and virtual reality."),
+   ],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],
   ];
 }
 
 //Right now Class adding is represented as just a String for the class name- this is ok for now since they just need to see it on the schedule
 
 //Changes the semester a class is in. This will just add the class if it is called with a class that doesn't exist in the semesterFrom semester
-//className    (String) the name of the class
+//c            (Class)  the class
 //semesterFrom (int)    the semester the class is in
 //semesterTo   (int)	  the semester to move the class to
-function moveClass(className, semesterFrom, semesterTo) {
-	  addClass(className, semesterTo);
-    removeClass(className, semesterFrom);
+function moveClass(c, semesterFrom, semesterTo) {
+	  addClass(c, semesterTo);
+    removeClass(c, semesterFrom);
 }
 
 //Adds a class to the schedule. Also stores the change in localStorage
-//className (String) The class to add
+//c         (Class)  The class to add
 //semester  (int)    The semester to add it to
-function addClass(className, semester) {
+function addClass(c, semester) {
 	var stud = load();
 	//console.log(stud);
 	var classArray = stud.classes;
@@ -71,26 +84,25 @@ function addClass(className, semester) {
 		classArray[classArray.length] = [];
 	}
 
-	classArray[semester].push(new Class(null, className, 4, null, null, null));
+	classArray[semester].push(c);
 	var ret = new Student(classArray, stud.semester);
 
 	store(ret);
 }
 
 //Removes a class from the schedule. Also stores the change in localStorage
-//className (String) The class to remove
+//c         (Class)  The class to remove
 //semester  (int)    The semester to remove it from
-function removeClass(className, semester) {
+function removeClass(c, semester) {
 	var stud = load();
 	var classArray = stud.classes;
 
-	if (semester > classArray.length) { return; }
+  if (semester > classArray.length) { return; }
 
 	var index = -1;
 
 	for (var i = 0; i < classArray[semester].length; i++) {
-		var cur = classArray[semester][i];
-		if (cur.name === className) {
+		if (classArray[semester][i].name == c.name) {
 			index = i;
 		}
 	}
@@ -117,73 +129,13 @@ function store(stud) {
 //Retrieves the student from localStorage
 //Returns a Student
 function load() {
-    var j = JSON.parse(localStorage.getItem("user"));
-    if (j === null) {
+    var stud = JSON.parse(localStorage.getItem("user"));
+    if (stud === null) {
   		var classes = getStartingSchedule();
-  		var stud = new Student(classes, 2);
-  		return stud;
+  		stud = new Student(classes, 2);
     }
-    var sem = j.semester;
-
-    var classArray = parseSemesterArray(JSON.stringify(j.classes));
-    var stud = new Student(classArray, sem);
     //console.log(stud);
     return stud;
-}
-
-//The following 3 functions are weird things to parse a JSON object turned into a String back into a Student
-
-//Parses a full schedule
-//sems (String) a schedule in JSON format in a String
-function parseSemesterArray(sems) {
-    var ret = [];
-    var cur = sems;
-    //console.log("Schedule:" + sems);
-    cur = cur.substring(cur.indexOf("[") + 1);
-    while(1) {
-	cur = cur.substring(cur.indexOf("["));
-	//console.log(cur);
-	if (cur.indexOf("[]") === 0) {
-		cur = cur.substring(2);
-		var mt = [];
-		ret.push(mt);
-	}
-	else {
-       	 	sem = cur.substring(1, cur.indexOf("}]") + 1);
-       	 	ret.push(parseSemester(sem));
-		cur = cur.substring(cur.indexOf("}]"));
-	}
-
-	if (cur.indexOf(",") === -1) {
-	    break;
-	}
-    }
-    return ret;
-}
-
-//Parses a single semester
-//sem (String) a semester in JSON format in a String
-function parseSemester(sem) {
-    var ret = [];
-    var cur = sem;
-    //console.log("Semester:  " + sem);
-    while(1) {
-	c = cur.substring(0, cur.indexOf("}") + 1);
-	ret.push(parseClass(c));
-	cur = cur.substring(cur.indexOf("}") + 2);
-	if (cur.indexOf("{") === -1) {
-	    break;
-	}
-    }
-    return ret;
-}
-
-//Parses a single class
-//c (String) a class in JSON format in a String
-function parseClass(c) {
-    // console.log("Class:  " + c);
-    var j = JSON.parse(c);
-    return new Class(j.id, j.name, j.credits, j.corequisites, j.prerequisites, j.description);
 }
 
 //Get number of credits scheduled to be taken in a given semester
@@ -195,6 +147,18 @@ function semCredits(sem) {
     result += load().classes[sem][i].credits;
   }
   return result;
+}
+
+//name   (String)   name of class checked
+function hasClass(name) {
+  for(var i = 0; i < getCSRequirements().length; i++) {
+    for(var j = 0; j < getCSRequirements()[i].courses.length; j++) {
+      if(getCSRequirements()[i].courses[j].name == name) {
+        return true;
+      }
+    }
+  }
+  return false;
 }
 
 
@@ -214,6 +178,16 @@ function test() {
     // console.log(load());
     moveClass("OOD", 7, 2);
     // console.log(load());
+}
+
+function searchClass(name) {
+  for(var i = 0; i < getCSRequirements().length; i++) {
+    for(var j = 0; j < getCSRequirements()[i].courses.length; j++) {
+      if(getCSRequirements()[i].courses[j].name == name) {
+        return getCSRequirements()[i].courses[j];
+      }
+    }
+  }
 }
 
 function getCSRequirements() {
