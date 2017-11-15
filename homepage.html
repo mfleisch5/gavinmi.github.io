@@ -129,119 +129,29 @@
 		</section>
 		<script>
 			student = load();
-			var completed = 0, current = 0, upcoming = 0, total = 0;
+			var completed = 0, total = 0;
 
 			for (var i = 1; i < student.semester; i++) {
 				for (var j = 0; j < student.classes[i].length; j++) {
-					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-							desc_title = document.createElement('h4'), desc = document.createElement('p'),
-							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-							add = document.createElement('button'), body = document.createElement('div');
-					title.title = student.classes[i][j].name; title.innerHTML = title.title;
-					credits.innerHTML = "(" + student.classes[i][j].credits + ")"; completed+=student.classes[i][j].credits;
-					$(desc_title).html("Course Description"); $(desc).html(student.classes[i][j].description);
-					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-					for(var k = 0; k < student.classes[i][j].prerequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.classes[i][j].prerequisites[k]);
-						$(prereq).append(temp);
-					}
-					if(student.classes[i][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-					for(var k = 0; k < student.classes[i][j].corequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.classes[i][j].corequisites[k]);
-						$(coreq).append(temp);
-					}
-					if(student.classes[i][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-					$(add).html("Add");
-
-					$("#completed").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+					$("#completed").append(drawFullClass(student.classes[i][j], false));
+					completed += student.classes[i][j].credits;
 				}
 			}
 			$("#completed_label").html("<span>Completed (" + completed + ")</span>");
 			for (var j = 0; j < student.classes[student.semester].length; j++) {
-				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-						desc_title = document.createElement('h4'), desc = document.createElement('p'),
-						prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-						coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-						add = document.createElement('button'), body = document.createElement('div');
-				title.title = student.classes[student.semester][j].name; title.innerHTML = title.title;
-				credits.innerHTML = "(" + student.classes[student.semester][j].credits + ")"; current+=student.classes[student.semester][j].credits;
-				$(desc_title).html("Course Description"); $(desc).html(student.classes[student.semester][j].description);
-				$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-				for(var k = 0; k < student.classes[student.semester][j].prerequisites.length; k++) {
-					var temp = document.createElement("p");
-					$(temp).html(student.classes[student.semester][j].prerequisites[k]);
-					$(prereq).append(temp);
-				}
-				if(student.classes[student.semester][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-				for(var k = 0; k < student.classes[student.semester][j].corequisites.length; k++) {
-					var temp = document.createElement("p");
-					$(temp).html(student.classes[student.semester][j].corequisites[k]);
-					$(coreq).append(temp);
-				}
-				if(student.classes[student.semester][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-				$(add).html("Add");
-
-				$("#current_semester").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+				$("#current_semester").append(drawFullClass(student.classes[student.semester][j], false));
 			}
-			$("#current_label").html("<span>Current Semester (" + current + ")</span>");
+			$("#current_label").html("<span>Current Semester (" + totalCredits(student.classes[student.semester]) + ")</span>");
 			if(getUpcomingSem() != null) {
 				for (var j = 0; j < student.classes[getUpcomingSem()].length; j++) {
-					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-							desc_title = document.createElement('h4'), desc = document.createElement('p'),
-							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-							add = document.createElement('button'), body = document.createElement('div');
-					title.title = student.classes[getUpcomingSem()][j].name; title.innerHTML = title.title;
-					credits.innerHTML = "(" + student.classes[getUpcomingSem()][j].credits + ")"; upcoming+=student.classes[getUpcomingSem()][j].credits;
-					$(desc_title).html("Course Description"); $(desc).html(student.classes[getUpcomingSem()][j].description);
-					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-					for(var k = 0; k < student.classes[getUpcomingSem()][j].prerequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.classes[getUpcomingSem()][j].prerequisites[k]);
-						$(prereq).append(temp);
-					}
-					if(student.classes[getUpcomingSem()][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-					for(var k = 0; k < student.classes[getUpcomingSem()][j].corequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.classes[getUpcomingSem()][j].corequisites[k]);
-						$(coreq).append(temp);
-					}
-					if(student.classes[getUpcomingSem()][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-					$(add).html("Add");
-
-					$("#upcoming_semester").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+					$("#upcoming_semester").append(drawFullClass(student.classes[getUpcomingSem()][j], false));
 				}
-				$("#upcoming_label").html("<span>Upcoming Semester (" + upcoming + ")</span>");
+				$("#upcoming_label").html("<span>Upcoming Semester (" + totalCredits(student.classes[getUpcomingSem()]) + ")</span>");
 			}
 			for (var i = 0; i < 6; i++) {
 				for (var j = 0; j < student.reqs[i].courses.length; j++) {
-					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-							desc_title = document.createElement('h4'), desc = document.createElement('p'),
-							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-							add = document.createElement('button'), body = document.createElement('div');
-					title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
-					credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")"; total+=student.reqs[i].courses[j].credits;
-					$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
-					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-					for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
-						$(prereq).append(temp);
-					}
-					if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-					for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
-						var temp = document.createElement("p");
-						$(temp).html(student.reqs[i].courses[j].corequisites[k]);
-						$(coreq).append(temp);
-					}
-					if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-					$(add).html("Add");
-
-					$("#requirements").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+					$("#requirements").append(drawFullClass(student.reqs[i].courses[j], false));
+					total += student.reqs[i].courses[j].credits;
 				}
 			}
 			$("#reqs_label").html("<span>Major Requirements (" + total + ")</span>");

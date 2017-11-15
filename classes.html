@@ -41,12 +41,12 @@
 		ul li { padding: 0; }
 		ul li > div:first-child { cursor: pointer; }
 
+		td:not(:first-child):not(.current):not(.past):not(.co-op) { cursor: pointer; }
 		td:not(:first-child) {
 			font-size: 21pt;
 			text-align: center;
 			vertical-align: middle;
 			user-select: none;
-			cursor: pointer;
 		}
 	</style>
 	<script src="data.js" type="text/javascript"></script>
@@ -185,32 +185,7 @@
 					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
 					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
 					for(var j = 0; j < student.reqs[i].courses.length; j++) {
-						var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-								desc_title = document.createElement('h4'), desc = document.createElement('p'),
-								prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-								coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-								add = document.createElement('button'), body = document.createElement('div');
-						title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
-						credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")";
-						$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
-						$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-						for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-							var temp = document.createElement("p");
-							$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
-							$(prereq).append(temp);
-						}
-						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-						for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
-							var temp = document.createElement("p");
-							$(temp).html(student.reqs[i].courses[j].corequisites[k]);
-							$(coreq).append(temp);
-						}
-						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-						$(add).html("Add");
-						$(add).attr("disabled", hasClass(student.reqs[i].courses[j].name));
-						$(add).attr("title", hasClass(student.reqs[i].courses[j].name) ? "Already in schedule" : undefined);
-
-						$(ul).append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq, add])]));
+						$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
 					}
 					$("card:first-child .card_body").append($(section).append(summary, info, ul));
 				}
@@ -221,32 +196,7 @@
 					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
 					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
 					for(var j = 0; j < student.reqs[i].courses.length; j++) {
-						var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-								desc_title = document.createElement('h4'), desc = document.createElement('p'),
-								prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
-								coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
-								add = document.createElement('button'), body = document.createElement('div');
-						title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
-						credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")";
-						$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
-						$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-						for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-							var temp = document.createElement("p");
-							$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
-							$(prereq).append(temp);
-						}
-						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
-						for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
-							var temp = document.createElement("p");
-							$(temp).html(student.reqs[i].courses[j].corequisites[k]);
-							$(coreq).append(temp);
-						}
-						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
-						$(add).html("Add");
-						$(add).attr("disabled", hasClass(student.reqs[i].courses[j].name));
-						$(add).attr("title", hasClass(student.reqs[i].courses[j].name) ? "Already in schedule" : "Add class");
-
-						$(ul).append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq, add])]));
+						$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
 					}
 					$("card:not(:first-child) .card_body").append($(section).append(summary, info, ul));
 				}
@@ -275,16 +225,23 @@
 				}
 			}
 			function loadTable() {
-				for(var i = 1; i < 21; i++) {
-					$("#" + i).html(semCredits(i));
+				for(var i = 1; i < 21; i++) { $("#" + i).html(semCredits(i)); }
+				for(var i = 1; i < student.semester; i++) {
+					$("#" + i).addClass("past");
+					$("#" + i).attr("title", "Cannot add to past semester");
 				}
 				$("#" + student.semester).addClass("current");
+				$("#" + student.semester).attr("title", "Cannot add to a semester in progress");
+				for(var i = 0; i < student.coops.length; i++) {
+					$("#" + student.coops[i]).addClass("co-op");
+					$("#" + student.coops[i]).attr("title", "Cannot add to designated Co-op period");
+				}
 			}
 			function dialog() {
 				selected = null;
 				$('blackout').toggleClass("open");
 				loadTable();
-				$('td:not(:first-child)').click(function() {
+				$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
 					if(selected != null) {
 						$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
 						$(selected).removeClass('selected');
@@ -304,6 +261,11 @@
 																						selectedClass.name +
 																						" to the selected semester?")) {
 					addClass(selectedClass, id);
+					if(selectedClass.corequisites.length > 0) {
+						if(confirm("Add co-requisite for " + selectedClass.name + " as well?")) {
+							addClass(searchClass(selectedClass.corequisites[0]), id);
+						}
+					}
 					clearTable(); dialog();
 					alert(selectedClass.name + " added to schedule");
 					selectedClass = null;

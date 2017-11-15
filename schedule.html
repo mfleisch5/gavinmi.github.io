@@ -14,10 +14,10 @@
 			    width: auto;
 			    margin: 0px;
 			}
-			td ul li { cursor: -webkit-grab; }
+			td:not(.current):not(.past):not(.co-op) ul li { cursor: -webkit-grab; }
+			td:not(.current):not(.past):not(.co-op) ul li:hover, td ul li.selected { background-color:lightblue; }
+			td:not(.current):not(.past):not(.co-op) ul li.selected { cursor: -webkit-grabbing; }
 			td ul li button { margin: 5px 5px 5px 0px; }
-			td ul li:hover, td ul li.selected { background-color:lightblue; }
-			td ul li.selected { cursor: -webkit-grabbing; }
 
 			#main_body { background-color: #222; }
 
@@ -106,22 +106,31 @@
 						$("#" + i).children().append(course);
 					}
         }
-				$("td ul li button").attr("title", "Remove from schedule");
+				$("td:not(.current):not(.past):not(.co-op) ul li button").attr("title", "Remove from schedule");
 				//Onclick for delete buttons set to delete class
-				$("td ul li button").click(function() {
+				$("td:not(.current):not(.past):not(.co-op) ul li button").click(function() {
 					if(confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
 						removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
 						$(this).closest('li').remove();
 					}
 				});
 				//Set current semester to current
+				for(var i = 1; i < student.semester; i++) {
+					$("#" + i).addClass("past");
+					$("#" + i).attr("title", "Past semester");
+				}
 				$("#" + student.semester).addClass('current');
+				$("#" + student.semester).attr('title', "Current semester");
+				for(var i = 0; i < student.coops.length; i++) {
+					$("#" + student.coops[i]).addClass("co-op");
+					$("#" + student.coops[i]).attr("title", "Designated Co-op period");
+				}
 
 				/**********************************************************************/
 				/****THIS IS THE A/B BETWEEN CLICKING TO MOVE CLASSES AND DRAGGING*****/
 				/**********************************************************************/
 				if(dragORclick == "click") {
-					$("li div").click(function () {
+					$("td:not(.current):not(.past):not(.co-op) ul li div").click(function () {
 						if(selectedClass == null) {
 							selectedClass = this.innerHTML;
 							selectedSemester = $(this).closest('td').attr('id');
@@ -134,7 +143,7 @@
 					});
 				}
 				else if(dragORclick == "drag") {
-					$("td ul li").draggable({
+					$("td:not(.current):not(.past):not(.co-op) ul li").draggable({
 						helper: "clone",
 						start: function(event, ui) {
 							$(ui.helper).addClass("selected");
@@ -143,7 +152,7 @@
 						},
 						revert: true,
 					});
-					$("td:not(:first-child)").droppable({
+					$("td:not(:first-child):not(.current):not(.past):not(.co-op)").droppable({
 						drop: function(event, ui) {
 							moveClass(selectedClass, selectedSemester, $( this ).attr('id'));
 							$(".selected").removeClass("selected");
@@ -159,7 +168,7 @@
 		var selectedClass = null;
     var selectedSemester = null;
 		if(dragORclick == "click") {
-			$('td:not(:first-child)').click(function () {
+			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function () {
 	      if (selectedClass != null && $(this).attr('id') != selectedSemester) {
 	        moveClass(selectedClass, selectedSemester, $(this).attr('id'));
 					draw();

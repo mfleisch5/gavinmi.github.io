@@ -96,6 +96,7 @@ td:not(:first-child) {
 }
 th:not(:first-child), td:not(:first-child) { margin-left: -8px; }
 
+td.past, td.co-op { background-color: #ccc; }
 td.current { background-color: rgb(200, 255, 200); }
 td.selected { background-color: lightblue; }
 
@@ -215,13 +216,13 @@ td ul li button  {
   border: none; border-radius: 50%; padding: 0px;
   float: right; vertical-align: middle; cursor: pointer;
 }
-td ul li:hover button span { display: none; }
-td ul li:hover button {
+td:not(.current):not(.past):not(.co-op) ul li:hover button span { display: none; }
+td:not(.current):not(.past):not(.co-op) ul li:hover button {
   color: transparent; background-color: #777; padding: 8px;
   background-image: url('http://limburglaan5.nl/wp-content/themes/limburglaan-child/images/icon_contact_header_close.png');
   background-size: 12px 12px; background-repeat: no-repeat; background-position: center;
 }
-td ul li:hover span:not(:first-child) { display: none; }
+td:not(.current):not(.past):not(.co-op) ul li:hover span:not(:first-child) { display: none; }
 
 /*Progress Color Scheme*/
 /*.completed_class {color: #228B22;}

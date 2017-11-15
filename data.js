@@ -2,10 +2,12 @@
 
 //Constructor for Student
 //classes   (Class[][])  all the classes for the student by semester
-//semester (int)      current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
-function Student(classes, semester) {
+//semester  (int)        current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
+//coops     (Integer[])  array of semester indeces indicating co-op periods
+function Student(classes, semester, coops) {
     this.classes = classes;
     this.semester = semester;
+    this.coops = coops;
     this.reqs = getCSRequirements();
 }
 
@@ -92,7 +94,7 @@ function addClass(c, semester) {
 	}
 
 	classArray[semester].push(c);
-	var ret = new Student(classArray, stud.semester);
+	var ret = new Student(classArray, stud.semester, stud.coops);
 
 	store(ret);
 }
@@ -119,7 +121,7 @@ function removeClass(c, semester) {
 	}
 
 	// console.log(classArray);
-	var ret = new Student(classArray, stud.semester);
+	var ret = new Student(classArray, stud.semester, stud.coops);
 	store(ret);
 }
 
@@ -128,8 +130,6 @@ function removeClass(c, semester) {
 //Stores the student in localStorage
 //stud (Student) the student to store
 function store(stud) {
-    // console.log("storing");
-    // console.log(stud);
     localStorage.setItem("user", JSON.stringify(stud));
 }
 
@@ -139,7 +139,7 @@ function load() {
     var stud = JSON.parse(localStorage.getItem("user"));
     if (stud === null) {
   		var classes = getStartingSchedule();
-  		stud = new Student(classes, 2);
+  		stud = new Student(classes, 2, []);
     }
     //console.log(stud);
     return stud;
@@ -149,11 +149,7 @@ function load() {
 //sem (int) identifies which semester (0-19)
 function semCredits(sem) {
   var classes = load().classes[sem];
-  var result = 0;
-  for(var i =0; i < load().classes[sem].length; i++) {
-    result += load().classes[sem][i].credits;
-  }
-  return result;
+  return totalCredits(classes);
 }
 
 //name   (String)   name of class checked
@@ -168,6 +164,57 @@ function hasClass(name) {
   return false;
 }
 
+//c   (Class)   class to search fulfillment for
+function getFulfillment(c) {
+  for(var i = 0; i < student.reqs.length; i++) {
+    for(var j = 0; j < student.reqs[i].courses.length; j++) {
+      if(student.reqs[i].courses[j].name == c.name) {
+        return student.reqs[i].name;
+      }
+    }
+  }
+  return null;
+}
+
+//c     (Class)    class to be drawn
+//show  (Boolean)  should an "Add" button be drawn?
+function drawFullClass(c, show) {
+  var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
+      creds_title = document.createElement('h4'), creds = document.createElement('p'),
+      desc_title = document.createElement('h4'), desc = document.createElement('p'),
+      prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+      coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
+      fulfill_title = document.createElement('h4'), fulfill = document.createElement('p'),
+      add = document.createElement('button'), body = document.createElement('div');
+  $(title).attr("title", c.name); $(title).html($(title).attr("title"));
+  $(credits).html("(" + c.credits + ")");
+  $(creds_title).html("Credit Hours"); $(creds).html(c.credits + ".000");
+  $(desc_title).html("Course Description"); $(desc).html(c.description);
+  $(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
+  $(fulfill_title).html("Requirements Fulfilled");
+  for(var k = 0; k < c.prerequisites.length; k++) {
+    var temp = document.createElement("p");
+    $(temp).html(c.prerequisites[k]);
+    $(prereq).append(temp);
+  }
+  if(c.prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
+  for(var k = 0; k < c.corequisites.length; k++) {
+    var temp = document.createElement("p");
+    $(temp).html(c.corequisites[k]);
+    $(coreq).append(temp);
+  }
+  if(c.corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
+  $(fulfill).html(getFulfillment(c));
+
+  $(add).css("display", show ? "block" : "none");
+  $(add).html("Add");
+  $(add).attr("disabled", hasClass(c.name));
+  $(add).attr("title", hasClass(c.name) ? "Already in schedule" : undefined);
+
+  return $(course).append([title, credits, $(body).append(
+    [creds_title, creds, desc_title, desc, prereq_title, prereq, coreq_title, coreq, fulfill_title, fulfill, add])]);
+}
+
 
 //misc. function used for testing
 function test() {
@@ -178,7 +225,7 @@ function test() {
     var sem1 = [fundies1, fundies2];
     var sem2 = [fundies2];
     var sched = [transfer, sem1, sem2];
-    var john = new Student(sched, 2);
+    var john = new Student(sched, 2, []);
     store(john);
     // console.log(load());
     addClass("OOD", 7);
@@ -197,6 +244,13 @@ function searchClass(name) {
   }
 }
 
+//array   (Class[])
+function totalCredits(array) {
+  var result = 0;
+  for(var i = 0; i < array.length; i++) { result += array[i].credits; }
+  return result;
+}
+
 function getCSRequirements() {
   return [
     {name: "CS Overview Requirements", desc: null,
@@ -206,19 +260,19 @@ function getCSRequirements() {
                 "Continues the preparation of students for careers in the computing and information fields by discussing co-op and co-op processes. Offers students an opportunity to prepare a professional résumé; practice proper interviewing techniques; explore current job opportunities; learn how to engage in the job and referral process; and to understand co-op policies, procedures, and expectations. Discusses professional behavior and ethical issues in the workplace."),
                new Class(null, "Discrete Structures", 4, ["Recitation for CS 1800"], [],
                 "Introduces the mathematical structures and methods that form the foundation of computer science. Studies structures such as sets, tuples, sequences, lists, trees, and graphs. Discusses functions, relations, ordering, and equivalence relations. Examines inductive and recursive definitions of structures and functions. Discusses principles of proof such as truth tables, inductive proof, and basic logic. Also covers the counting techniques and arguments needed to estimate the size of sets, the growth of functions, and the space-time complexity of algorithms."),
-               new Class(null, "Recitation for CS1800", 1, ["Discrete Structures"], [],
+               new Class(null, "Recitation for CS 1800", 1, ["Discrete Structures"], [],
                 "Provides students with additional opportunities to ask questions and to see sample problems solved in detail."),
                new Class(null, "Fundamentals of Computer Science I", 4, ["Lab for CS2500"], [],
                 "Introduces the fundamental ideas of computing and the principles of programming. Discusses a systematic approach to word problems, including analytic reading, synthesis, goal setting, planning, plan execution, and testing. Presents several models of computing, starting from nothing more than expression evaluation in the spirit of high school algebra. No prior programming experience is assumed; therefore, suitable for freshman students, majors and nonmajors alike who wish to explore the intellectual ideas in the discipline."),
-               new Class(null, "Lab for CS2500", 1, ["Fundamentals of Computer Science I"], [],
+               new Class(null, "Lab for CS 2500", 1, ["Fundamentals of Computer Science I"], [],
                 "Accompanies CS 2500. Covers topics from the course through various experiments."),
                new Class(null, "Fundamentals of Computer Science II", 4, ["Lab for CS2510"], ["Fundamentals of Computer Science I"],
                 "Continues CS 2500. Examines object-oriented programming and associated algorithms using more complex data structures as the focus. Discusses nested structures and nonlinear structures including hash tables, trees, and graphs. Emphasizes abstraction, encapsulation, inheritance, polymorphism, recursion, and object-oriented design patterns. Applies these ideas to sample applications that illustrate the breadth of computer science."),
-               new Class(null, "Lab for CS2510", 1, ["Fundamentals of Computer Science II"], [],
+               new Class(null, "Lab for CS 2510", 1, ["Fundamentals of Computer Science II"], [],
                 "Accompanies CS 2510. Covers topics from the course through various experiments"),
                new Class(null, "Logic and Computation", 4, ["Lab for CS 2800"], ["Discrete Structures"],
                 "Introduces formal logic and its connections to computer and information science. Offers an opportunity to learn to translate statements about the behavior of computer programs into logical claims and to gain the ability to prove such assertions both by hand and using automated tools. Considers approaches to proving termination, correctness, and safety for programs. Discusses notations used in logic, propositional and first order logic, logical inference, mathematical induction, and structural induction. Introduces the use of logic for modeling the range of artifacts and phenomena that arise in computer and information science."),
-               new Class(null, "Lab for CS2800", 1, ["Logic and Computation"], [],
+               new Class(null, "Lab for CS 2800", 1, ["Logic and Computation"], [],
                 "Accompanies CS 2510. Covers topics from the course through various experiments."),
      ]},
      {name: "CS Requirements", desc: null,
