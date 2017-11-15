@@ -25,6 +25,13 @@ function Class(id, name, credits, coreq, prereq, desc) {
     this.description = desc;
 }
 
+function getUpcomingSem() {
+  for(var i = student.semester + 1; i < student.classes.length; i++) {
+    if(student.classes[i].length > 0) { return i; }
+  }
+  return null;
+}
+
 //Makes a sample schedule for testing
 function getStartingSchedule() {
   return [
@@ -151,9 +158,9 @@ function semCredits(sem) {
 
 //name   (String)   name of class checked
 function hasClass(name) {
-  for(var i = 0; i < getCSRequirements().length; i++) {
-    for(var j = 0; j < getCSRequirements()[i].courses.length; j++) {
-      if(getCSRequirements()[i].courses[j].name == name) {
+  for(var i = 0; i < student.classes.length; i++) {
+    for(var j = 0; j < student.classes[i].length; j++) {
+      if(student.classes[i][j].name == name) {
         return true;
       }
     }

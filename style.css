@@ -47,23 +47,28 @@ card.unpadded .card_body { height: calc(100% - 100px); }
 /************************* DETAILS/SUMMARY STYLINGS ***************************/
 /******************************************************************************/
 details { margin-top: 20px; }
-summary {
-  font-size: 1.5em;
+summary { outline: none; }
+summary > :first-child {
+  font-size: 18pt;
   font-weight: bold;
-  outline: none;
   height: 28px; max-height: 28px;
-  max-width: calc(100%);
+  width: calc(100% - 30px);
+  max-width: calc(100% - 30px);
   overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
 }
 summary::-webkit-details-marker { display: none; }
 summary::after {
   content: '\25B2';
   float: right;
-  font-size: 90%;
-  margin-top: -2.5px;
+  font-size: 1.35em;
+  margin-top: 2.5px;
   transition: 0.15s ease;
 }
-details[open] summary::after { transform: rotate(180deg) translate(0, -5px); }
+details[open] summary::after {
+  transform: rotate(180deg) translate(0, 0px);
+}
 
 /******************************************************************************/
 /***************************** TABLE STYLINGS *********************************/
@@ -159,13 +164,6 @@ section#main_body {
 
   background-color: #ccc;
 }
-section#main_body.unpadded {
-  padding: 0px;
-  width: calc(100% - 301px);
-  height: 100%;
-  z-index: 0;
-  overflow: hidden;
-}
 
 /******************************************************************************/
 /******************* INFO CARDS AND EXPANDING LISTS STYLINGS ******************/
@@ -178,13 +176,15 @@ section#main_body.unpadded {
   display: inline-block;
   vertical-align: top;
   max-height: calc(100% - 160px);
-  width: calc(50% - 34px);
+  width: calc(50% - 38px);
   margin-bottom: 10px;
 }
+#info_cards card:first-child { margin-right: 10px; }
 
 #info_cards card summary, card ul { margin-bottom: 5px; }
 #info_cards card summary { user-select: none; cursor: pointer; }
-#info_cards card ul, td ul { padding: 0; list-style: none; }
+#info_cards card ul, td ul { padding: 0; list-style: none; margin-right: 30px; }
+#info_cards card ul li:not(.visible), td ul li { height: 28px; }
 #info_cards card ul li, { padding: 5px 5px 5px 20px; margin: 0; }
 #info_cards card ul li:nth-child(odd), td ul li:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.1);
@@ -196,9 +196,13 @@ section#main_body.unpadded {
   max-width: calc(100% - 35px);
   overflow: hidden;
   display: inline-block;
-  margin: 5px 0px 5px 5px;
+  padding: 5px 0px 5px 5px;
+  white-space: nowrap;
 }
-#info_cards card ul li span { float: right; margin: 5px 5px 5px 0px; }
+#info_cards card ul li span {
+  float: right; margin: 5px 5px 5px 5px;
+  user-select: none; cursor: pointer;
+}
 card summary, card ul { margin-bottom: 5px; }
 card summary { user-select: none; cursor: pointer; }
 card ul { margin-right: 30px; }

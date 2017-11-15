@@ -58,14 +58,6 @@
 			div#prog_bar label.right { margin-left: -60px; text-align: right; }
 			div#prog_bar label.right div:first-child { margin: 0; margin-left: 55px; }
 
-			card {
-				display: inline-block;
-				vertical-align: top;
-				min-height: 180px;
-				max-height: calc(100% - 160px);
-				width: calc(50% - 34px);
-				margin-bottom: 10px;
-			}
 			ul li > div:not(:first-child) {
 				border-top: 1px solid #777;
 				margin: 10 10 0 10; padding: 10 0 10 0;
@@ -92,8 +84,8 @@
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html'">
-			<a class="current" href="homepage.html">Home</a>
-			<a href="classes.html">Class Search</a>
+			<a class="current" href="homepage.html">Dashboard</a>
+			<a href="classes.html">Add/Browse Courses</a>
 			<a href="schedule.html">Semester Plan</a>
 			<a href="old_index.html" disabled>Settings</a>
 		</menu>
@@ -113,26 +105,22 @@
 			<section id="info_cards">
 				<card>
 					<details open>
-						<summary id="current_label">Current Semester (0)</summary>
+						<summary id="current_label"><span>Current Semester (0)</span></summary>
 						<ul id="current_semester"></ul>
 					</details>
 					<details open>
-						<summary id="upcoming_label">Upcoming Semester (0)</summary>
+						<summary id="upcoming_label"><span>Upcoming Semester (0)</span></summary>
 						<ul id="upcoming_semester"></ul>
 					</details>
 				</card>
 
 				<card>
 					<details class="completed_class">
-						<summary id="completed_label">Completed (0)</summary>
+						<summary id="completed_label"><span>Completed (0)</span></summary>
 						<ul id="completed" class="closed"></ul>
 					</details>
-					<details class="inprogress_class">
-						<summary id="inprogress_label">In Progress (0)</summary>
-						<ul id="inprogress" class="closed"></ul>
-					</details>
 					<details open>
-						<summary id="reqs_label">Major Requirements (0)</summary>
+						<summary id="reqs_label"><span>Major Requirements (0)</span></summary>
 						<ul id="requirements"></ul>
 					</details>
 				</card>
@@ -147,118 +135,116 @@
 				for (var j = 0; j < student.classes[i].length; j++) {
 					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
 							desc_title = document.createElement('h4'), desc = document.createElement('p'),
-							prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-							coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
+							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
 							add = document.createElement('button'), body = document.createElement('div');
 					title.title = student.classes[i][j].name; title.innerHTML = title.title;
 					credits.innerHTML = "(" + student.classes[i][j].credits + ")"; completed+=student.classes[i][j].credits;
 					$(desc_title).html("Course Description"); $(desc).html(student.classes[i][j].description);
 					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
 					for(var k = 0; k < student.classes[i][j].prerequisites.length; k++) {
-						var temp = document.createElement("div");
+						var temp = document.createElement("p");
 						$(temp).html(student.classes[i][j].prerequisites[k]);
 						$(prereq).append(temp);
 					}
-					if(student.classes[i][j].prerequisites.length == 0) { $(prereq).html("None"); }
+					if(student.classes[i][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
 					for(var k = 0; k < student.classes[i][j].corequisites.length; k++) {
 						var temp = document.createElement("p");
 						$(temp).html(student.classes[i][j].corequisites[k]);
 						$(coreq).append(temp);
 					}
-					if(student.classes[i][j].corequisites.length == 0) { $(coreq).html("None"); }
+					if(student.classes[i][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
 					$(add).html("Add");
 
 					$("#completed").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
 				}
 			}
-			$("#completed_label").html("Completed (" + completed + ")");
+			$("#completed_label").html("<span>Completed (" + completed + ")</span>");
 			for (var j = 0; j < student.classes[student.semester].length; j++) {
 				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
 						desc_title = document.createElement('h4'), desc = document.createElement('p'),
-						prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-						coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
+						prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+						coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
 						add = document.createElement('button'), body = document.createElement('div');
 				title.title = student.classes[student.semester][j].name; title.innerHTML = title.title;
 				credits.innerHTML = "(" + student.classes[student.semester][j].credits + ")"; current+=student.classes[student.semester][j].credits;
 				$(desc_title).html("Course Description"); $(desc).html(student.classes[student.semester][j].description);
 				$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
 				for(var k = 0; k < student.classes[student.semester][j].prerequisites.length; k++) {
-					var temp = document.createElement("div");
+					var temp = document.createElement("p");
 					$(temp).html(student.classes[student.semester][j].prerequisites[k]);
 					$(prereq).append(temp);
 				}
-				if(student.classes[student.semester][j].prerequisites.length == 0) { $(prereq).html("None"); }
+				if(student.classes[student.semester][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
 				for(var k = 0; k < student.classes[student.semester][j].corequisites.length; k++) {
 					var temp = document.createElement("p");
 					$(temp).html(student.classes[student.semester][j].corequisites[k]);
 					$(coreq).append(temp);
 				}
-				if(student.classes[student.semester][j].corequisites.length == 0) { $(coreq).html("None"); }
+				if(student.classes[student.semester][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
 				$(add).html("Add");
 
 				$("#current_semester").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
-				$("#inprogress").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]).clone());
-
 			}
-			$("#current_label").html("Current Semester (" + current + ")");
-			$("#inprogress_label").html("In Progress (" + current + ")");
-			for (var j = 0; j < student.classes[5].length; j++) {
-				console.log(student.classes[5]);
-				var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
-						desc_title = document.createElement('h4'), desc = document.createElement('p'),
-						prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-						coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
-						add = document.createElement('button'), body = document.createElement('div');
-				title.title = student.classes[5][j].name; title.innerHTML = title.title;
-				credits.innerHTML = "(" + student.classes[5][j].credits + ")"; upcoming+=student.classes[5][j].credits;
-				$(desc_title).html("Course Description"); $(desc).html(student.classes[5][j].description);
-				$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
-				for(var k = 0; k < student.classes[5][j].prerequisites.length; k++) {
-					var temp = document.createElement("div");
-					$(temp).html(student.classes[5][j].prerequisites[k]);
-					$(prereq).append(temp);
-				}
-				if(student.classes[5][j].prerequisites.length == 0) { $(prereq).html("None"); }
-				for(var k = 0; k < student.classes[5][j].corequisites.length; k++) {
-					var temp = document.createElement("p");
-					$(temp).html(student.classes[5][j].corequisites[k]);
-					$(coreq).append(temp);
-				}
-				if(student.classes[5][j].corequisites.length == 0) { $(coreq).html("None"); }
-				$(add).html("Add");
+			$("#current_label").html("<span>Current Semester (" + current + ")</span>");
+			if(getUpcomingSem() != null) {
+				for (var j = 0; j < student.classes[getUpcomingSem()].length; j++) {
+					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
+							desc_title = document.createElement('h4'), desc = document.createElement('p'),
+							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
+							add = document.createElement('button'), body = document.createElement('div');
+					title.title = student.classes[getUpcomingSem()][j].name; title.innerHTML = title.title;
+					credits.innerHTML = "(" + student.classes[getUpcomingSem()][j].credits + ")"; upcoming+=student.classes[getUpcomingSem()][j].credits;
+					$(desc_title).html("Course Description"); $(desc).html(student.classes[getUpcomingSem()][j].description);
+					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
+					for(var k = 0; k < student.classes[getUpcomingSem()][j].prerequisites.length; k++) {
+						var temp = document.createElement("p");
+						$(temp).html(student.classes[getUpcomingSem()][j].prerequisites[k]);
+						$(prereq).append(temp);
+					}
+					if(student.classes[getUpcomingSem()][j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
+					for(var k = 0; k < student.classes[getUpcomingSem()][j].corequisites.length; k++) {
+						var temp = document.createElement("p");
+						$(temp).html(student.classes[getUpcomingSem()][j].corequisites[k]);
+						$(coreq).append(temp);
+					}
+					if(student.classes[getUpcomingSem()][j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
+					$(add).html("Add");
 
-				$("#upcoming_semester").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+					$("#upcoming_semester").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
+				}
+				$("#upcoming_label").html("<span>Upcoming Semester (" + upcoming + ")</span>");
 			}
-			$("#upcoming_label").html("Upcoming Semester (" + upcoming + ")");
 			for (var i = 0; i < 6; i++) {
 				for (var j = 0; j < student.reqs[i].courses.length; j++) {
 					var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
 							desc_title = document.createElement('h4'), desc = document.createElement('p'),
-							prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-							coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
+							prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+							coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
 							add = document.createElement('button'), body = document.createElement('div');
 					title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
 					credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")"; total+=student.reqs[i].courses[j].credits;
 					$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
 					$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
 					for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-						var temp = document.createElement("div");
+						var temp = document.createElement("p");
 						$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
 						$(prereq).append(temp);
 					}
-					if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("None"); }
+					if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
 					for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
 						var temp = document.createElement("p");
 						$(temp).html(student.reqs[i].courses[j].corequisites[k]);
 						$(coreq).append(temp);
 					}
-					if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("None"); }
+					if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
 					$(add).html("Add");
 
 					$("#requirements").append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq])]));
 				}
 			}
-			$("#reqs_label").html("Major Requirements (" + total + ")");
+			$("#reqs_label").html("<span>Major Requirements (" + total + ")</span>");
 
 			$("ul li > div:first-child").click(function() { showdesc($(this).parent()); });
 			function showdesc(element) { $(element).toggleClass("visible"); }

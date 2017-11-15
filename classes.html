@@ -9,30 +9,9 @@
 
 	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 	<style>
-		div#search_area {
-			background-color: #bbb;
-			width: calc(100% - 20px);
-			padding: 10px;
-			text-align: right;
-			margin-bottom: 15px;
-		}
-		div#search_area input#search_bar {
-			width: 250px;
-			background: url("https://image.flaticon.com/icons/png/128/149/149852.png") no-repeat scroll 224px center;
-			background-color: white;
-			background-size: 16px 16px;
-			padding-right: 30px;
-		}
 		#info_cards > card {
-			max-height: calc(100% - 100px);
-		}
-		#info_cards { text-align: center; }
-		#info_cards * { text-align: left; }
-		card {
-			display: inline-block;
-			vertical-align: top;
-			height: 100%;
-			width: 400px;
+			max-height: calc(100%);
+			width: calc(50% - 8px);
 		}
 		card h2, card ul { margin-bottom: 5px; }
 		card h2 { user-select: none; cursor: pointer; }
@@ -43,6 +22,7 @@
 		blackout card table {
 			height: calc(100% - 50px);
 			margin-bottom: 15px;
+			font-family: monospace;
 		}
 		blackout card span { float: right; }
 		ul li > div:not(:first-child) {
@@ -160,7 +140,7 @@
 					</tr>
 				</table>
 				<span>
-			<button id="addButton" onclick="addclass(selected.id);">Okay</button>
+					<button id="addButton" onclick="addclass(selected.id)" title="Select a semester first" disabled>Add class</button>
 					<button onclick="clearTable(); dialog();">Cancel</button>
 				</span>
 			</card>
@@ -169,16 +149,14 @@
 
 		<menu id="nav_bar">
 			<img src="" onclick="location.href='homepage.html';">
-			<a href="homepage.html">Home</a>
-			<a class="current" href="classes.html">Class Search</a>
+			<a href="homepage.html">Dashboard</a>
+			<a class="current" href="classes.html">Add/Browse Courses</a>
 			<a href="schedule.html">Semester Plan</a>
 			<a href="old_index.html" disabled>Settings</a>
 		</menu>
 
 
-		<section id="main_body" class="unpadded">
-
-			<div id="search_area"><input type="text" id="search_bar"></div>
+		<section id="main_body">
 
 			<section id="info_cards">
 
@@ -201,32 +179,33 @@
 			function draw() {
 
 				for(var i = 0; i < 6; i++) {
-					var section = document.createElement("details"), summary = document.createElement("summary"), ul = document.createElement("ul"),
+					var section = document.createElement("details"), sec_title = document.createElement("span"),
+					summary = document.createElement("summary"), ul = document.createElement("ul"),
 					info = document.createElement('span');
 					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
-					$(summary).html(student.reqs[i].name);
+					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
 					for(var j = 0; j < student.reqs[i].courses.length; j++) {
 						var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
 								desc_title = document.createElement('h4'), desc = document.createElement('p'),
-								prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-								coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
+								prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+								coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
 								add = document.createElement('button'), body = document.createElement('div');
 						title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
 						credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")";
 						$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
 						$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
 						for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-							var temp = document.createElement("div");
+							var temp = document.createElement("p");
 							$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
 							$(prereq).append(temp);
 						}
-						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("None"); }
+						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
 						for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
 							var temp = document.createElement("p");
 							$(temp).html(student.reqs[i].courses[j].corequisites[k]);
 							$(coreq).append(temp);
 						}
-						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("None"); }
+						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
 						$(add).html("Add");
 						$(add).attr("disabled", hasClass(student.reqs[i].courses[j].name));
 						$(add).attr("title", hasClass(student.reqs[i].courses[j].name) ? "Already in schedule" : undefined);
@@ -236,33 +215,36 @@
 					$("card:first-child .card_body").append($(section).append(summary, info, ul));
 				}
 				for(var i = 6; i < 8; i++) {
-					var section = document.createElement("details"), summary = document.createElement("summary"), ul = document.createElement("ul"),
+					var section = document.createElement("details"), sec_title = document.createElement("span"),
+					summary = document.createElement("summary"), ul = document.createElement("ul"),
 					info = document.createElement('span');
 					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
-					$(summary).html(student.reqs[i].name);
+					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
 					for(var j = 0; j < student.reqs[i].courses.length; j++) {
 						var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span'),
 								desc_title = document.createElement('h4'), desc = document.createElement('p'),
-								prereq_title = document.createElement('h4'), prereq = document.createElement('p'),
-								coreq_title = document.createElement('h4'), coreq = document.createElement('p'),
+								prereq_title = document.createElement('h4'), prereq = document.createElement('div'),
+								coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
 								add = document.createElement('button'), body = document.createElement('div');
 						title.title = student.reqs[i].courses[j].name; title.innerHTML = title.title;
 						credits.innerHTML = "(" + student.reqs[i].courses[j].credits + ")";
 						$(desc_title).html("Course Description"); $(desc).html(student.reqs[i].courses[j].description);
 						$(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
 						for(var k = 0; k < student.reqs[i].courses[j].prerequisites.length; k++) {
-							var temp = document.createElement("div");
+							var temp = document.createElement("p");
 							$(temp).html(student.reqs[i].courses[j].prerequisites[k]);
 							$(prereq).append(temp);
 						}
-						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("None"); }
+						if(student.reqs[i].courses[j].prerequisites.length == 0) { $(prereq).html("<p>None</p>"); }
 						for(var k = 0; k < student.reqs[i].courses[j].corequisites.length; k++) {
 							var temp = document.createElement("p");
 							$(temp).html(student.reqs[i].courses[j].corequisites[k]);
 							$(coreq).append(temp);
 						}
-						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("None"); }
+						if(student.reqs[i].courses[j].corequisites.length == 0) { $(coreq).html("<p>None</p>"); }
 						$(add).html("Add");
+						$(add).attr("disabled", hasClass(student.reqs[i].courses[j].name));
+						$(add).attr("title", hasClass(student.reqs[i].courses[j].name) ? "Already in schedule" : "Add class");
 
 						$(ul).append($(course).append([title, credits, $(body).append([desc_title, desc, prereq_title, prereq, coreq_title, coreq, add])]));
 					}
@@ -296,6 +278,7 @@
 				for(var i = 1; i < 21; i++) {
 					$("#" + i).html(semCredits(i));
 				}
+				$("#" + student.semester).addClass("current");
 			}
 			function dialog() {
 				selected = null;
@@ -312,7 +295,8 @@
 						$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedClass.credits));
 					}
 					else if(this == selected) { selected = null; }
-					$("#addButton").attr("disabled", selected == null);
+					$('#addButton').attr("disabled", selected == null);
+					$('#addButton').attr("title", selected == null ? "Select a semester first" : "Add class");
 				});
 			}
 			function addclass(id) {
