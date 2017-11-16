@@ -120,7 +120,7 @@
 						<ul id="completed" class="closed"></ul>
 					</details>
 					<details open>
-						<summary id="reqs_label"><span>Major Requirements (0)</span></summary>
+						<summary id="reqs_label"><span>Not Completed (0)</span></summary>
 						<ul id="requirements"></ul>
 					</details>
 				</card>
@@ -148,13 +148,15 @@
 				}
 				$("#upcoming_label").html("<span>Upcoming Semester (" + totalCredits(student.classes[getUpcomingSem()]) + ")</span>");
 			}
-			for (var i = 0; i < 6; i++) {
+			for (var i = 0; i < student.reqs.length; i++) {
 				for (var j = 0; j < student.reqs[i].courses.length; j++) {
-					$("#requirements").append(drawFullClass(student.reqs[i].courses[j], false));
-					total += student.reqs[i].courses[j].credits;
+					if(!hasClass(student.reqs[i].courses[j].name)) {
+						$("#requirements").append(drawFullClass(student.reqs[i].courses[j], false));
+						total += student.reqs[i].courses[j].credits;
+					}
 				}
 			}
-			$("#reqs_label").html("<span>Major Requirements (" + total + ")</span>");
+			$("#reqs_label").html("<span>Not Completed (" + total + ")</span>");
 
 			$("ul li > div:first-child").click(function() { showdesc($(this).parent()); });
 			function showdesc(element) { $(element).toggleClass("visible"); }

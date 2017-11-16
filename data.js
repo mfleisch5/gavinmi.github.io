@@ -65,6 +65,8 @@ function getStartingSchedule() {
         "Provides small-group discussion format to cover material in GAME 1110."),
       new Class(null, "Logic and Computation", 4, ["Lab for CS 2800"], ["Discrete Structures"],
         "Introduces formal logic and its connections to computer and information science. Offers an opportunity to learn to translate statements about the behavior of computer programs into logical claims and to gain the ability to prove such assertions both by hand and using automated tools. Considers approaches to proving termination, correctness, and safety for programs. Discusses notations used in logic, propositional and first order logic, logical inference, mathematical induction, and structural induction. Introduces the use of logic for modeling the range of artifacts and phenomena that arise in computer and information science."),
+      new Class(null, "Lab for CS 2800", 1, ["Logic and Computation"], [],
+        "Accompanies CS 2510. Covers topics from the course through various experiments."),
       new Class(null, "Technology and Human Values", 4, [], [],
         "Studies philosophy of technology, as well as ethics and modern technology. Considers the relationship between technology and humanity, the social dimensions of technology, and ethical issues raised by emerging technologies. Discusses emerging technologies such as biotechnology, information technology, nanotechnology, and virtual reality."),
    ],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],[],
@@ -187,7 +189,7 @@ function drawFullClass(c, show) {
       fulfill_title = document.createElement('h4'), fulfill = document.createElement('p'),
       add = document.createElement('button'), body = document.createElement('div');
   $(title).attr("title", c.name); $(title).html($(title).attr("title"));
-  $(credits).html("(" + c.credits + ")");
+  $(credits).html("(" + c.credits + ")"); $(credits).attr("title", c.credits + " credit hours");
   $(creds_title).html("Credit Hours"); $(creds).html(c.credits + ".000");
   $(desc_title).html("Course Description"); $(desc).html(c.description);
   $(prereq_title).html("Prerequisites"); $(coreq_title).html("Co-requisites");
