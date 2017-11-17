@@ -1,279 +1,363 @@
-<link rel="stylesheet" type = "text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <!-- <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
 <!DOCTYPE HTML>
 
 <html>
+
 <head>
 	<title>DA+ Class</title>
 
 	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 	<style>
-		#info_cards > card {
+		#info_cards>card {
 			max-height: calc(100%);
 			width: calc(50% - 8px);
 		}
-		card h2, card ul { margin-bottom: 5px; }
-		card h2 { user-select: none; cursor: pointer; }
-		card label img { transform: rotate(0deg); transition: 0.1s ease; }
-		card ul { margin-right: 10px; padding-left: 20px; }
-		card ul.closed { display: none; }
-		card label.closed img { transform: rotate(-90deg); }
+
+		card h2,
+		card ul {
+			margin-bottom: 5px;
+		}
+
+		card h2 {
+			user-select: none;
+			cursor: pointer;
+		}
+
+		card label img {
+			transform: rotate(0deg);
+			transition: 0.1s ease;
+		}
+
+		card ul {
+			margin-right: 10px;
+			padding-left: 20px;
+		}
+
+		card ul.closed {
+			display: none;
+		}
+
+		card label.closed img {
+			transform: rotate(-90deg);
+		}
+
 		blackout card table {
 			height: calc(100% - 150px);
 			margin-bottom: 15px;
 			font-family: monospace;
 		}
-		blackout card span { float: right; }
-		ul li > div:not(:first-child) {
+
+		blackout card span {
+			float: right;
+		}
+
+		ul li>div:not(:first-child) {
 			border-top: 1px solid #777;
-			margin: 10 10 0 10; padding: 10 0 10 0;
+			margin: 10 10 0 10;
+			padding: 10 0 10 0;
 			display: none;
 		}
-		ul li.visible > div:not(:first-child) {display: block;}
-		ul li > div:not(:first-child) h4 { margin: 0; padding: 0; }
-		ul li > div:not(:first-child) p { margin: 0 0 10px 20px; }
-		ul li > div:not(:first-child) button {
+
+		ul li.visible>div:not(:first-child) {
+			display: block;
+		}
+
+		ul li>div:not(:first-child) h4 {
+			margin: 0;
+			padding: 0;
+		}
+
+		ul li>div:not(:first-child) p {
+			margin: 0 0 10px 20px;
+		}
+
+		ul li>div:not(:first-child) button {
 			padding: 4px 10px;
 			background-color: #F5F5F5;
 		}
 
-		ul li { padding: 0; }
-		ul li > div:first-child { cursor: pointer; }
+		ul li {
+			padding: 0;
+		}
 
-		td:not(:first-child):not(.current):not(.past):not(.co-op) { cursor: pointer; }
+		ul li>div:first-child {
+			cursor: pointer;
+		}
+
+		td:not(:first-child):not(.current):not(.past):not(.co-op) {
+			cursor: pointer;
+		}
+
 		td:not(:first-child) {
 			font-size: 21pt;
 			text-align: center;
 			vertical-align: middle;
 			user-select: none;
 		}
+
 	</style>
 	<script src="data.js" type="text/javascript"></script>
 	<script>
-        var selected = null;
-        var selectedClass = null;
-        function openclose(element) {
-            element.classList.toggle("closed");
-            document.getElementById(element.htmlFor).classList.toggle("closed");
-        }
+		var selected = null;
+		var selectedClass = null;
 
-        function selectClass(element) {
-            selectedClass = $(element).closest('li').attr('id');
-					}
-        function showdesc(element) {
-            element.classList.toggle("visible");
-        }
-        function clearTable() {
-            if(selected!=null) { selected.classList.remove('selected'); }
-            // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-        }
-        function dialog() {
-            selected = null;
-            document.getElementsByTagName('blackout')[0].classList.toggle("open");
-						$('#' + load().semester).addClass('current');
-            $('td:not(:first-child)').click(function() {
-                if(selected != null) {
-                    selected.classList.remove('selected');
-                    // selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
-                }
-                if(this != selected) {
-                    selected = this;
-                    this.classList.add('selected');
-                    // selected.innerHTML = parseInt(selected.innerHTML) + 4;
-                }
-                else if(this == selected) { selected = null; }
-                $("#addButton").attr("disabled", selected == null);
-            });
-        }
-        function addclass(id) {
-            if(selectedClass != null) { addClass(selectedClass, id); }
-						selectedClass = null;
-        }
+		function openclose(element) {
+			element.classList.toggle("closed");
+			document.getElementById(element.htmlFor).classList.toggle("closed");
+		}
+
+		function selectClass(element) {
+			selectedClass = $(element).closest('li').attr('id');
+		}
+
+		function showdesc(element) {
+			element.classList.toggle("visible");
+		}
+
+		function clearTable() {
+			if (selected != null) {
+				selected.classList.remove('selected');
+			}
+			// selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+		}
+
+		function dialog() {
+			selected = null;
+			document.getElementsByTagName('blackout')[0].classList.toggle("open");
+			$('#' + load().semester).addClass('current');
+			$('td:not(:first-child)').click(function() {
+				if (selected != null) {
+					selected.classList.remove('selected');
+					// selected.innerHTML = Math.max(0, parseInt(selected.innerHTML) - 4);
+				}
+				if (this != selected) {
+					selected = this;
+					this.classList.add('selected');
+					// selected.innerHTML = parseInt(selected.innerHTML) + 4;
+				} else if (this == selected) {
+					selected = null;
+				}
+				$("#addButton").attr("disabled", selected == null);
+			});
+		}
+
+		function addclass(id) {
+			if (selectedClass != null) {
+				addClass(selectedClass, id);
+			}
+			selectedClass = null;
+		}
+
 	</script>
 </head>
+
 <body>
-		<blackout>
-			<card class="centered" style="width: 50%; height: 50%;">
-				<h1>Select a semester</h1><br>
-				<table>
-					<tr>
-						<th></th>
-						<th>Fall</th>
-						<th>Spring</th>
-						<th>Summer I</th>
-						<th>Summer II</th>
-					</tr>
-					<tr>
-						<td>1</td>
-						<td id="1"></td>
-						<td id="2"></td>
-						<td id="3"></td>
-						<td id="4"></td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td id="5"></td>
-						<td id="6"></td>
-						<td id="7"></td>
-						<td id="8"></td>
-					</tr>
-					<tr>
-						<td>3</td>
-						<td id="9"></td>
-						<td id="10"></td>
-						<td id="11"></td>
-						<td id="12"></td>
-					</tr>
-					<tr>
-						<td>4</td>
-						<td id="13"></td>
-						<td id="14"></td>
-						<td id="15"></td>
-						<td id="16"></td>
-					</tr>
-					<tr>
-						<td>5</td>
-						<td id="17"></td>
-						<td id="18"></td>
-						<td id="19"></td>
-						<td id="20"></td>
-					</tr>
-				</table>
-				<span>
+	<blackout>
+		<card class="centered" style="width: 50%; height: 50%;">
+			<h1>Select a semester</h1><br>
+			<table>
+				<tr>
+					<th></th>
+					<th>Fall</th>
+					<th>Spring</th>
+					<th>Summer I</th>
+					<th>Summer II</th>
+				</tr>
+				<tr>
+					<td>1</td>
+					<td id="1"></td>
+					<td id="2"></td>
+					<td id="3"></td>
+					<td id="4"></td>
+				</tr>
+				<tr>
+					<td>2</td>
+					<td id="5"></td>
+					<td id="6"></td>
+					<td id="7"></td>
+					<td id="8"></td>
+				</tr>
+				<tr>
+					<td>3</td>
+					<td id="9"></td>
+					<td id="10"></td>
+					<td id="11"></td>
+					<td id="12"></td>
+				</tr>
+				<tr>
+					<td>4</td>
+					<td id="13"></td>
+					<td id="14"></td>
+					<td id="15"></td>
+					<td id="16"></td>
+				</tr>
+				<tr>
+					<td>5</td>
+					<td id="17"></td>
+					<td id="18"></td>
+					<td id="19"></td>
+					<td id="20"></td>
+				</tr>
+			</table>
+			<span>
 					<button id="addButton" onclick="addclass(selected.id)" title="Select a semester first" disabled>Add class</button>
 					<button onclick="clearTable(); dialog();">Cancel</button>
 				</span>
+		</card>
+	</blackout>
+
+
+	<menu id="nav_bar">
+		<img src="" onclick="location.href='homepage.html';">
+		<a href="homepage.html">Dashboard</a>
+		<a class="current" href="classes.html">Add/Browse Courses</a>
+		<a href="schedule.html">Semester Plan</a>
+		<a href="old_index.html" disabled>Settings</a>
+	</menu>
+
+
+	<section id="main_body">
+
+		<section id="info_cards">
+
+			<card class="unpadded">
+				<header>Required Classes</header>
+				<section class="card_body"></section>
 			</card>
-		</blackout>
 
-
-		<menu id="nav_bar">
-			<img src="" onclick="location.href='homepage.html';">
-			<a href="homepage.html">Dashboard</a>
-			<a class="current" href="classes.html">Add/Browse Courses</a>
-			<a href="schedule.html">Semester Plan</a>
-			<a href="old_index.html" disabled>Settings</a>
-		</menu>
-
-
-		<section id="main_body">
-
-			<section id="info_cards">
-
-				<card class="unpadded">
-					<header>Required Classes</header>
-					<section class="card_body"></section>
-				</card>
-
-				<card class="unpadded">
-					<header>Electives</header>
-					<section class="card_body"></section>
-				</card>
-			</section>
-
+			<card class="unpadded">
+				<header>Electives</header>
+				<section class="card_body"></section>
+			</card>
 		</section>
-		<script>
 
-			var student = load();
+	</section>
+	<script>
+		var student = load();
 
-			function draw() {
+		function draw() {
 
-				for(var i = 0; i < 6; i++) {
-					var section = document.createElement("details"), sec_title = document.createElement("span"),
-					summary = document.createElement("summary"), ul = document.createElement("ul"),
+			for (var i = 0; i < 6; i++) {
+				var section = document.createElement("details"),
+					sec_title = document.createElement("span"),
+					summary = document.createElement("summary"),
+					ul = document.createElement("ul"),
 					info = document.createElement('span');
-					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
-					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
-					for(var j = 0; j < student.reqs[i].courses.length; j++) {
-						$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
-					}
-					$("card:first-child .card_body").append($(section).append(summary, info, ul));
+				if (student.reqs[i].desc != null) {
+					$(info).html("<i>" + student.reqs[i].desc + "</i>");
 				}
-				for(var i = 6; i < 8; i++) {
-					var section = document.createElement("details"), sec_title = document.createElement("span"),
-					summary = document.createElement("summary"), ul = document.createElement("ul"),
+				$(sec_title).html(student.reqs[i].name);
+				$(summary).append(sec_title);
+				for (var j = 0; j < student.reqs[i].courses.length; j++) {
+					$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
+				}
+				$("card:first-child .card_body").append($(section).append(summary, info, ul));
+			}
+			for (var i = 6; i < 8; i++) {
+				var section = document.createElement("details"),
+					sec_title = document.createElement("span"),
+					summary = document.createElement("summary"),
+					ul = document.createElement("ul"),
 					info = document.createElement('span');
-					if(student.reqs[i].desc != null) { $(info).html("<i>" + student.reqs[i].desc + "</i>"); }
-					$(sec_title).html(student.reqs[i].name); $(summary).append(sec_title);
-					for(var j = 0; j < student.reqs[i].courses.length; j++) {
-						$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
-					}
-					$("card:not(:first-child) .card_body").append($(section).append(summary, info, ul));
+				if (student.reqs[i].desc != null) {
+					$(info).html("<i>" + student.reqs[i].desc + "</i>");
 				}
+				$(sec_title).html(student.reqs[i].name);
+				$(summary).append(sec_title);
+				for (var j = 0; j < student.reqs[i].courses.length; j++) {
+					$(ul).append(drawFullClass(student.reqs[i].courses[j], true));
+				}
+				$("card:not(:first-child) .card_body").append($(section).append(summary, info, ul));
+			}
 
 
-				$("details").attr("open", true);
-				$("ul li > div:first-child").click(function() { showdesc($(this).parent()); });
-				$('ul li button').click(function() {
-					selectClass($(this));
-					dialog();
-				});
-			}
-			draw();
+			$("details").attr("open", true);
+			$("ul li > div:first-child").click(function() {
+				showdesc($(this).parent());
+			});
+			$('ul li button').click(function() {
+				selectClass($(this));
+				dialog();
+			});
+		}
+		draw();
 
-			var selected = null;
-			var selectedClass = null;
-			function selectClass(element) {
-				selectedClass = searchClass($(element).closest('li').children()[0].innerHTML);
-			}
-			function showdesc(element) { $(element).toggleClass("visible"); }
+		var selected = null;
+		var selectedClass = null;
 
-			function clearTable() {
-				if(selected!=null) {
-					$('.selected').html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
-					$('.selected').removeClass('selected');
-				}
+		function selectClass(element) {
+			selectedClass = searchClass($(element).closest('li').children()[0].innerHTML);
+		}
+
+		function showdesc(element) {
+			$(element).toggleClass("visible");
+		}
+
+		function clearTable() {
+			if (selected != null) {
+				$('.selected').html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
+				$('.selected').removeClass('selected');
 			}
-			function loadTable() {
-				for(var i = 1; i < 21; i++) { $("#" + i).html(semCredits(i)); }
-				for(var i = 1; i < student.semester; i++) {
-					$("#" + i).addClass("past");
-					$("#" + i).attr("title", "Cannot add to past semester");
-				}
-				$("#" + student.semester).addClass("current");
-				$("#" + student.semester).attr("title", "Cannot add to a semester in progress");
-				for(var i = 0; i < student.coops.length; i++) {
-					$("#" + student.coops[i]).addClass("co-op");
-					$("#" + student.coops[i]).attr("title", "Cannot add to designated Co-op period");
-				}
+		}
+
+		function loadTable() {
+			for (var i = 1; i < 21; i++) {
+				$("#" + i).html(semCredits(i));
 			}
-			function dialog() {
-				selected = null;
-				$('blackout').toggleClass("open");
-				loadTable();
-				$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
-					if(selected != null) {
-						$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
-						$(selected).removeClass('selected');
+			for (var i = 1; i < student.semester; i++) {
+				$("#" + i).addClass("past");
+				$("#" + i).attr("title", "Cannot add to past semester");
+			}
+			$("#" + student.semester).addClass("current");
+			$("#" + student.semester).attr("title", "Cannot add to a semester in progress");
+			for (var i = 0; i < student.coops.length; i++) {
+				$("#" + student.coops[i]).addClass("co-op");
+				$("#" + student.coops[i]).attr("title", "Cannot add to designated Co-op period");
+			}
+		}
+
+		function dialog() {
+			selected = null;
+			$('blackout').toggleClass("open");
+			loadTable();
+			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
+				if (selected != null) {
+					$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
+					$(selected).removeClass('selected');
+				}
+				if (this != selected) {
+					selected = this;
+					$(selected).addClass('selected');
+					$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedClass.credits));
+				} else if (this == selected) {
+					selected = null;
+				}
+				$('#addButton').attr("disabled", selected == null);
+				$('#addButton').attr("title", selected == null ? "Select a semester first" : "Add class");
+			});
+		}
+
+		function addclass(id) {
+			if (selectedClass != null && confirm("Are you sure you want to add " +
+					selectedClass.name +
+					" to the selected semester?")) {
+				addClass(selectedClass, id);
+				if (selectedClass.corequisites.length > 0) {
+					if (confirm("Add co-requisite for " + selectedClass.name + " as well?")) {
+						addClass(searchClass(selectedClass.corequisites[0]), id);
 					}
-					if(this != selected) {
-						selected = this;
-						$(selected).addClass('selected');
-						$(selected).html(parseInt(selected.innerHTML) + parseInt(selectedClass.credits));
-					}
-					else if(this == selected) { selected = null; }
-					$('#addButton').attr("disabled", selected == null);
-					$('#addButton').attr("title", selected == null ? "Select a semester first" : "Add class");
-				});
-			}
-			function addclass(id) {
-				if(selectedClass != null && confirm("Are you sure you want to add " +
-																						selectedClass.name +
-																						" to the selected semester?")) {
-					addClass(selectedClass, id);
-					if(selectedClass.corequisites.length > 0) {
-						if(confirm("Add co-requisite for " + selectedClass.name + " as well?")) {
-							addClass(searchClass(selectedClass.corequisites[0]), id);
-						}
-					}
-					clearTable(); dialog();
-					alert(selectedClass.name + " added to schedule");
-					selectedClass = null;
-					location.reload();
 				}
+				clearTable();
+				dialog();
+				alert(selectedClass.name + " added to schedule");
+				selectedClass = null;
+				location.reload();
 			}
-		</script>
+		}
+
+	</script>
 
 </body>
 <html>

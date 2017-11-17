@@ -1,184 +1,247 @@
-<link rel="stylesheet" type = "text/css" href="style.css">
+<link rel="stylesheet" type="text/css" href="style.css">
 <!DOCTYPE HTML>
 
 <html>
-	<head>
-		<title>DA+ Schedule</title>
 
-		<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
-		<style>
+<head>
+	<title>DA+ Schedule</title>
 
-			td ul {
-			    max-height: 100%;
-			    min-height: auto;
-			    width: auto;
-			    margin: 0px;
-			}
-			td:not(.current):not(.past):not(.co-op) ul li { cursor: -webkit-grab; }
-			td:not(.current):not(.past):not(.co-op) ul li:hover, td ul li.selected { background-color:lightblue; }
-			td:not(.current):not(.past):not(.co-op) ul li.selected { cursor: -webkit-grabbing; }
-			td ul li button { margin: 5px 5px 5px 0px; }
+	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
+	<style>
+		td ul {
+			max-height: 100%;
+			min-height: auto;
+			width: auto;
+			margin: 0px;
+		}
 
-			#main_body { background-color: #222; }
+		td:not(.current):not(.past):not(.co-op) ul li {
+			cursor: -webkit-grab;
+		}
 
-		</style>
-	</head>
-	<body>
+		td:not(.current):not(.past):not(.co-op) ul li:hover,
+		td ul li.selected {
+			background-color: lightblue;
+		}
+
+		td:not(.current):not(.past):not(.co-op) ul li.selected {
+			cursor: -webkit-grabbing;
+		}
+
+		td ul li button {
+			margin: 5px 5px 5px 0px;
+		}
+
+		#main_body {
+			background-color: #222;
+		}
+
+	</style>
+</head>
+
+<body>
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	<script src="data.js" type="text/javascript"></script>
-		<menu id="nav_bar">
-			<img src="" onclick="location.href='homepage.html';">
-			<a href="homepage.html">Dashboard</a>
-			<a href="classes.html">Add/Browse Courses</a>
-			<a class="current" href="schedule.html">Semester Plan</a>
-			<a href="old_index.html" disabled>Settings</a>
-		</menu>
+	<menu id="nav_bar">
+		<img src="" onclick="location.href='homepage.html';">
+		<a href="homepage.html">Dashboard</a>
+		<a href="classes.html">Add/Browse Courses</a>
+		<a class="current" href="schedule.html">Semester Plan</a>
+		<a href="old_index.html" disabled>Settings</a>
+	</menu>
 
-		<section id="main_body">
-			<table>
-				<tr>
-					<th></th>
-					<th>Fall</th>
-					<th>Spring</th>
-					<th>Summer I</th>
-					<th>Summer II</th>
-				</tr>
-				<tr>
-					<td>1</td>
-					<td id="1"><ul></ul></td>
-					<td id="2"><ul></ul></td>
-					<td id="3"><ul></ul></td>
-					<td id="4"><ul></ul></td>
-				</tr>
-				<tr>
-					<td>2</td>
-					<td id="5"><ul></ul></td>
-					<td id="6"><ul></ul></td>
-					<td id="7"><ul></ul></td>
-					<td id="8"><ul></ul></td>
-				</tr>
-				<tr>
-					<td>3</td>
-					<td id="9"><ul></ul></td>
-					<td id="10"><ul></ul></td>
-					<td id="11"><ul></ul></td>
-					<td id="12"><ul></ul></td>
-				</tr>
-				<tr>
-					<td>4</td>
-					<td id="13"><ul></ul></td>
-					<td id="14"><ul></ul></td>
-					<td id="15"><ul></ul></td>
-					<td id="16"><ul></ul></td>
-				</tr>
-				<tr>
-					<td>5</td>
-					<td id="17"><ul></ul></td>
-					<td id="18"><ul></ul></td>
-					<td id="19"><ul></ul></td>
-					<td id="20"><ul></ul></td>
-				</tr>
-			</table>
-		</section>
+	<section id="main_body">
+		<table>
+			<tr>
+				<th></th>
+				<th>Fall</th>
+				<th>Spring</th>
+				<th>Summer I</th>
+				<th>Summer II</th>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td id="1">
+					<ul></ul>
+				</td>
+				<td id="2">
+					<ul></ul>
+				</td>
+				<td id="3">
+					<ul></ul>
+				</td>
+				<td id="4">
+					<ul></ul>
+				</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td id="5">
+					<ul></ul>
+				</td>
+				<td id="6">
+					<ul></ul>
+				</td>
+				<td id="7">
+					<ul></ul>
+				</td>
+				<td id="8">
+					<ul></ul>
+				</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td id="9">
+					<ul></ul>
+				</td>
+				<td id="10">
+					<ul></ul>
+				</td>
+				<td id="11">
+					<ul></ul>
+				</td>
+				<td id="12">
+					<ul></ul>
+				</td>
+			</tr>
+			<tr>
+				<td>4</td>
+				<td id="13">
+					<ul></ul>
+				</td>
+				<td id="14">
+					<ul></ul>
+				</td>
+				<td id="15">
+					<ul></ul>
+				</td>
+				<td id="16">
+					<ul></ul>
+				</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td id="17">
+					<ul></ul>
+				</td>
+				<td id="18">
+					<ul></ul>
+				</td>
+				<td id="19">
+					<ul></ul>
+				</td>
+				<td id="20">
+					<ul></ul>
+				</td>
+			</tr>
+		</table>
+	</section>
 	<script>
-
 		//Either "drag" or "click"
 		//For A/B testing purposes
 		var dragORclick = "drag";
 
 		//Draw function to be called on load and on refresh
-    function draw() {
-        student = load();
-				for(var i = 1; i < 21; i++) {
-					if(i < student.semester) { $("#" + i).children().addClass("completed_class"); }
-					else if(i > student.semester) { $("#" + i).children().addClass("inprogress_class"); }
-					else { $("#" + i).children().addClass("incomplete_class"); }
+		function draw() {
+			student = load();
+			for (var i = 1; i < 21; i++) {
+				if (i < student.semester) {
+					$("#" + i).children().addClass("completed_class");
+				} else if (i > student.semester) {
+					$("#" + i).children().addClass("inprogress_class");
+				} else {
+					$("#" + i).children().addClass("incomplete_class");
 				}
-				//Draw all classes
-        $("ul").each( function() { $(this).empty(); });
-        for (var i = 0; i < student.classes.length; i++) {
-          for (var j = 0; j < student.classes[i].length; j++) {
-            var course = document.createElement('li'), title = document.createElement('div'), credits = document.createElement('span');
-						title.title = student.classes[i][j].name; title.innerHTML = title.title;
-						credits.innerHTML = "(" + student.classes[i][j].credits + ")";
-						$(course).append([title, $(document.createElement('button')).append(credits)]);
-						$("#" + i).children().append(course);
-					}
-        }
-				$("td:not(.current):not(.past):not(.co-op) ul li button").attr("title", "Remove from schedule");
-				//Onclick for delete buttons set to delete class
-				$("td:not(.current):not(.past):not(.co-op) ul li button").click(function() {
-					if(confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
-						removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
-						$(this).closest('li').remove();
+			}
+			//Draw all classes
+			$("ul").each(function() {
+				$(this).empty();
+			});
+			for (var i = 0; i < student.classes.length; i++) {
+				for (var j = 0; j < student.classes[i].length; j++) {
+					var course = document.createElement('li'),
+						title = document.createElement('div'),
+						credits = document.createElement('span');
+					title.title = student.classes[i][j].name;
+					title.innerHTML = title.title;
+					credits.innerHTML = "(" + student.classes[i][j].credits + ")";
+					$(course).append([title, $(document.createElement('button')).append(credits)]);
+					$("#" + i).children().append(course);
+				}
+			}
+			$("td:not(.current):not(.past):not(.co-op) ul li button").attr("title", "Remove from schedule");
+			//Onclick for delete buttons set to delete class
+			$("td:not(.current):not(.past):not(.co-op) ul li button").click(function() {
+				if (confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
+					removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
+					$(this).closest('li').remove();
+				}
+			});
+			//Set current semester to current
+			for (var i = 1; i < student.semester; i++) {
+				$("#" + i).addClass("past");
+				$("#" + i).attr("title", "Past semester");
+			}
+			$("#" + student.semester).addClass('current');
+			$("#" + student.semester).attr('title', "Current semester");
+			for (var i = 0; i < student.coops.length; i++) {
+				$("#" + student.coops[i]).addClass("co-op");
+				$("#" + student.coops[i]).attr("title", "Designated Co-op period");
+			}
+
+			/**********************************************************************/
+			/****THIS IS THE A/B BETWEEN CLICKING TO MOVE CLASSES AND DRAGGING*****/
+			/**********************************************************************/
+			if (dragORclick == "click") {
+				$("td:not(.current):not(.past):not(.co-op) ul li div").click(function() {
+					if (selectedClass == null) {
+						selectedClass = this.innerHTML;
+						selectedSemester = $(this).closest('td').attr('id');
+						$(this).parent().addClass('selected');
+					} else if ($(this).parent().hasClass('selected')) {
+						selectedClass = null;
+						selectedSemester = null;
+						$(this).parent().removeClass("selected");
 					}
 				});
-				//Set current semester to current
-				for(var i = 1; i < student.semester; i++) {
-					$("#" + i).addClass("past");
-					$("#" + i).attr("title", "Past semester");
-				}
-				$("#" + student.semester).addClass('current');
-				$("#" + student.semester).attr('title', "Current semester");
-				for(var i = 0; i < student.coops.length; i++) {
-					$("#" + student.coops[i]).addClass("co-op");
-					$("#" + student.coops[i]).attr("title", "Designated Co-op period");
-				}
-
-				/**********************************************************************/
-				/****THIS IS THE A/B BETWEEN CLICKING TO MOVE CLASSES AND DRAGGING*****/
-				/**********************************************************************/
-				if(dragORclick == "click") {
-					$("td:not(.current):not(.past):not(.co-op) ul li div").click(function () {
-						if(selectedClass == null) {
-							selectedClass = this.innerHTML;
-							selectedSemester = $(this).closest('td').attr('id');
-							$(this).parent().addClass('selected');
-						} else if($(this).parent().hasClass('selected')) {
-							selectedClass = null;
-							selectedSemester = null;
-							$(this).parent().removeClass("selected");
-						}
-					});
-				}
-				else if(dragORclick == "drag") {
-					$("td:not(.current):not(.past):not(.co-op) ul li").draggable({
-						helper: "clone",
-						start: function(event, ui) {
-							$(ui.helper).addClass("selected");
-							selectedClass = searchClass($(this).children()[0].innerHTML);
-							selectedSemester = $(this).closest('td').attr('id');
-						},
-						revert: true,
-					});
-					$("td:not(:first-child):not(.current):not(.past):not(.co-op)").droppable({
-						drop: function(event, ui) {
-							moveClass(selectedClass, selectedSemester, $( this ).attr('id'));
-							$(".selected").removeClass("selected");
-							selectedClass=null;
-							selectedSemester=null;
-							draw();
-						},
-					});
-				}
-    }
-    draw();
+			} else if (dragORclick == "drag") {
+				$("td:not(.current):not(.past):not(.co-op) ul li").draggable({
+					helper: "clone",
+					start: function(event, ui) {
+						$(ui.helper).addClass("selected");
+						selectedClass = searchClass($(this).children()[0].innerHTML);
+						selectedSemester = $(this).closest('td').attr('id');
+					},
+					revert: true,
+				});
+				$("td:not(:first-child):not(.current):not(.past):not(.co-op)").droppable({
+					drop: function(event, ui) {
+						moveClass(selectedClass, selectedSemester, $(this).attr('id'));
+						$(".selected").removeClass("selected");
+						selectedClass = null;
+						selectedSemester = null;
+						draw();
+					},
+				});
+			}
+		}
+		draw();
 
 		var selectedClass = null;
-    var selectedSemester = null;
-		if(dragORclick == "click") {
-			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function () {
-	      if (selectedClass != null && $(this).attr('id') != selectedSemester) {
-	        moveClass(selectedClass, selectedSemester, $(this).attr('id'));
+		var selectedSemester = null;
+		if (dragORclick == "click") {
+			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
+				if (selectedClass != null && $(this).attr('id') != selectedSemester) {
+					moveClass(selectedClass, selectedSemester, $(this).attr('id'));
 					draw();
-					selectedClass=null;
-					selectedSemester=null;
+					selectedClass = null;
+					selectedSemester = null;
 					$("li.selected").removeClass("selected");
 				}
 			});
 		}
 
 	</script>
-	</body>
+</body>
 <html>
