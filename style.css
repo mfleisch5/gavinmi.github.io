@@ -201,7 +201,7 @@ section#main_body {
   white-space: nowrap;
 }
 #info_cards card ul li span {
-  float: right; margin: 5px 5px 5px 5px;
+  float: right; margin: 4px 5px 5px 5px;
   user-select: none; cursor: pointer;
 }
 card summary, card ul { margin-bottom: 5px; }

@@ -5,10 +5,10 @@
 //semester  (int)        current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
 //coops     (Integer[])  array of semester indeces indicating co-op periods
 function Student(classes, semester, coops) {
-    this.classes = classes;
-    this.semester = semester;
-    this.coops = coops;
-    this.reqs = getCSRequirements();
+	this.classes = classes;
+  this.semester = semester;
+  this.coops = coops;
+  this.reqs = getCSRequirements();
 }
 
 //Constructor for Class
@@ -19,12 +19,12 @@ function Student(classes, semester, coops) {
 //prereq  (Class[])  prerequisites for class
 //desc    (String)   class description
 function Class(id, name, credits, coreq, prereq, desc) {
-    this.id = id;
-    this.name = name;
-    this.credits = credits;
-    this.corequisites = coreq;
-    this.prerequisites = prereq;
-    this.description = desc;
+  this.id = id;
+  this.name = name;
+  this.credits = credits;
+  this.corequisites = coreq;
+  this.prerequisites = prereq;
+  this.description = desc;
 }
 
 function getUpcomingSem() {
