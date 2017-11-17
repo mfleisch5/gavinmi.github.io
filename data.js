@@ -188,6 +188,7 @@ function drawFullClass(c, show) {
       coreq_title = document.createElement('h4'), coreq = document.createElement('div'),
       fulfill_title = document.createElement('h4'), fulfill = document.createElement('p'),
       add = document.createElement('button'), body = document.createElement('div');
+  $(course).attr("id", c.name);
   $(title).attr("title", c.name); $(title).html($(title).attr("title"));
   $(credits).html("(" + c.credits + ")"); $(credits).attr("title", c.credits + " credit hours");
   $(creds_title).html("Credit Hours"); $(creds).html(c.credits + ".000");

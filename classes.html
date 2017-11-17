@@ -83,7 +83,7 @@
                     // selected.innerHTML = parseInt(selected.innerHTML) + 4;
                 }
                 else if(this == selected) { selected = null; }
-                document.getElementById("addButton").disabled = selected == null;
+                $("#addButton").attr("disabled", selected == null);
             });
         }
         function addclass(id) {
@@ -270,6 +270,7 @@
 					clearTable(); dialog();
 					alert(selectedClass.name + " added to schedule");
 					selectedClass = null;
+					location.reload();
 				}
 			}
 		</script>
