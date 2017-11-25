@@ -6,7 +6,7 @@
 <html>
 
 <head>
-	<title>DA+ Class</title>
+	<title>DA+ Add/Browse Courses</title>
 
 	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 	<style>
@@ -21,13 +21,22 @@
 		}
 
 		card h2 {
-			user-select: none;
 			cursor: pointer;
+
+			-webkit-user-select: none;
+
+			   -moz-user-select: none;
+
+			    -ms-user-select: none;
+
+			        user-select: none;
 		}
 
 		card label img {
-			transform: rotate(0deg);
+			-webkit-transition: 0.1s ease;
 			transition: 0.1s ease;
+			-webkit-transform: rotate(0deg);
+			        transform: rotate(0deg);
 		}
 
 		card ul {
@@ -40,12 +49,13 @@
 		}
 
 		card label.closed img {
-			transform: rotate(-90deg);
+			-webkit-transform: rotate(-90deg);
+			        transform: rotate(-90deg);
 		}
 
 		blackout card table {
-			height: calc(100% - 150px);
 			margin-bottom: 15px;
+			height: calc(100% - 150px);
 			font-family: monospace;
 		}
 
@@ -54,10 +64,10 @@
 		}
 
 		ul li>div:not(:first-child) {
-			border-top: 1px solid #777;
+			display: none;
 			margin: 10 10 0 10;
 			padding: 10 0 10 0;
-			display: none;
+			border-top: 1px solid #777;
 		}
 
 		ul li.visible>div:not(:first-child) {
@@ -86,15 +96,23 @@
 			cursor: pointer;
 		}
 
-		td:not(:first-child):not(.current):not(.past):not(.co-op) {
+		td:not(:first-child):not(.current):not(.past):not(.co-op),
+		td.free {
 			cursor: pointer;
 		}
 
 		td:not(:first-child) {
-			font-size: 21pt;
-			text-align: center;
 			vertical-align: middle;
-			user-select: none;
+			text-align: center;
+			font-size: 21pt;
+
+			-webkit-user-select: none;
+
+			   -moz-user-select: none;
+
+			    -ms-user-select: none;
+
+			        user-select: none;
 		}
 
 	</style>
@@ -214,7 +232,7 @@
 		<a href="homepage.html">Dashboard</a>
 		<a class="current" href="classes.html">Add/Browse Courses</a>
 		<a href="schedule.html">Semester Plan</a>
-		<a href="old_index.html" disabled>Settings</a>
+		<a href="account.html">My Account</a>
 	</menu>
 
 
@@ -235,7 +253,8 @@
 
 	</section>
 	<script>
-		var student = load();
+		var student = load(),
+				selector = student.free == true ? "td" : "td:not(.current):not(.past):not(.co-op)";
 
 		function draw() {
 
@@ -308,13 +327,16 @@
 			}
 			for (var i = 1; i < student.semester; i++) {
 				$("#" + i).addClass("past");
-				$("#" + i).attr("title", "Cannot add to past semester");
+				$("#" + i).attr("title", student.free == true ? "Past semester" : "Cannot add to past semester");
 			}
 			$("#" + student.semester).addClass("current");
-			$("#" + student.semester).attr("title", "Cannot add to a semester in progress");
+			$("#" + student.semester).attr("title", student.free == true ? "Current semester" : "Cannot add to a semester in progress");
 			for (var i = 0; i < student.coops.length; i++) {
 				$("#" + student.coops[i]).addClass("co-op");
-				$("#" + student.coops[i]).attr("title", "Cannot add to designated Co-op period");
+				$("#" + student.coops[i]).attr("title", student.free == true ? "Designated Co-op period" : "Cannot add to designated Co-op period");
+			}
+			if(student.free) {
+				$(".current, .past, .co-op").addClass("free");
 			}
 		}
 
@@ -322,7 +344,7 @@
 			selected = null;
 			$('blackout').toggleClass("open");
 			loadTable();
-			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
+			$(selector + ':not(:first-child)').click(function() {
 				if (selected != null) {
 					$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
 					$(selected).removeClass('selected');

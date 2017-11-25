@@ -1,0 +1,116 @@
+<html>
+<link rel="stylesheet" type="text/css" href="style.css">
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<title>DA+ My Account</title>
+
+	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
+	<style>
+		card {
+			margin: 0 auto;
+			min-width: 500px;
+			width: calc(50%);
+			height: -webkit-max-content;
+			height: -moz-max-content;
+			height: max-content;
+		}
+
+		input,
+		select {
+			margin-bottom: 15px;
+		}
+
+		input {
+			width: 45px;
+		}
+
+		button {
+			float: right;
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="data.js" type="text/javascript"></script>
+
+	<menu id="nav_bar">
+		<img src="" onclick="location.href='homepage.html'">
+		<a href="homepage.html">Dashboard</a>
+		<a href="classes.html">Add/Browse Courses</a>
+		<a href="schedule.html">Semester Plan</a>
+		<a class="current" href="account.html">My Account</a>
+	</menu>
+
+	<section id="main_body">
+
+		<card class="unpadded">
+			<header>Account Preferences</header>
+			<section class="card_body">
+
+				<label for="current">Current Semester</label>
+				<span id="current">
+					<input type="number" id="cur_year" value=1 min=1 max=5>
+					<select name="" id="cur_term">
+						<option value="Fall">Fall</option>
+						<option selected value="Spring">Spring</option>
+						<option value="Summer I">Summer I</option>
+						<option value="Summer II">Summer II</option>
+					</select>
+				</span><br>
+
+				<label for="coop_cycle">Co-op Cycle</label>
+				<select id="coop_cycle">
+					<option selected value="Spring">Spring</option>
+					<option value="Fall">Fall</option>
+				</select><br>
+
+				<label for="free_plan">Enable editing of invalid semesters?</label>
+				<input type="checkbox" id="free_plan"><br>
+
+				<button onclick="saveChanges()">Save Changes</button>
+
+			</section>
+		</card>
+
+	</section>
+
+	<script>
+		var student = load(),
+			year = $("#cur_year")[0],
+			term = $("#cur_term")[0],
+			coop = $("#coop_cycle")[0],
+			free = $("#free_plan")[0];
+
+		year.value = Math.floor(student.semester / 4) + 1;
+		term.selectedIndex = student.semester % 4 - 1;
+		coop.selectedIndex = student.coops[0] == 6 ? 0 : 1;
+		free.checked = student.free;
+
+		function saveChanges() {
+
+			student.semester = (year.value - 1) * 4 + term.selectedIndex + 1;
+			student.coops = coop.selectedIndex == 0 ? [6, 7, 10, 11, 14, 15] : [8, 9, 12, 13, 16, 17];
+			student.free = free.checked;
+
+			if (confirm("Are you sure you want to edit schedule settings?" + (student.free == true ? "" : " Conflicts will be removed."))) {
+				if (!student.free) {
+					for (var i = 0; i < student.coops.length; i++) {
+						student.classes[student.coops[i]] = [];
+					}
+				}
+				store(student);
+				alert("Preferences edited");
+			}
+
+		}
+	</script>
+
+</body>
+
+</html>

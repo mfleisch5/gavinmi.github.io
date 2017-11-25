@@ -4,27 +4,30 @@
 <html>
 
 <head>
-	<title>DA+ Schedule</title>
+	<title>DA+ Semester Plan</title>
 
 	<!-- ONLY PUT PAGE-SPECIFIC STYLE IN HERE -->
 	<style>
 		td ul {
-			max-height: 100%;
-			min-height: auto;
-			width: auto;
 			margin: 0px;
+			min-height: auto;
+			max-height: 100%;
+			width: auto;
 		}
 
-		td:not(.current):not(.past):not(.co-op) ul li {
+		td:not(.current):not(.past):not(.co-op) ul li,
+		td.free ul li {
 			cursor: -webkit-grab;
 		}
 
 		td:not(.current):not(.past):not(.co-op) ul li:hover,
+		td.free ul li:hover,
 		td ul li.selected {
 			background-color: lightblue;
 		}
 
-		td:not(.current):not(.past):not(.co-op) ul li.selected {
+		td:not(.current):not(.past):not(.co-op) ul li.selected,
+		td.free ul li.selected {
 			cursor: -webkit-grabbing;
 		}
 
@@ -35,7 +38,6 @@
 		#main_body {
 			background-color: #222;
 		}
-
 	</style>
 </head>
 
@@ -48,7 +50,7 @@
 		<a href="homepage.html">Dashboard</a>
 		<a href="classes.html">Add/Browse Courses</a>
 		<a class="current" href="schedule.html">Semester Plan</a>
-		<a href="old_index.html" disabled>Settings</a>
+		<a href="account.html">My Account</a>
 	</menu>
 
 	<section id="main_body">
@@ -138,22 +140,14 @@
 		</table>
 	</section>
 	<script>
-		//Either "drag" or "click"
-		//For A/B testing purposes
-		var dragORclick = "drag";
+		
+		var selectedClass = null,
+				selectedSemester = null;
 
 		//Draw function to be called on load and on refresh
 		function draw() {
-			student = load();
-			for (var i = 1; i < 21; i++) {
-				if (i < student.semester) {
-					$("#" + i).children().addClass("completed_class");
-				} else if (i > student.semester) {
-					$("#" + i).children().addClass("inprogress_class");
-				} else {
-					$("#" + i).children().addClass("incomplete_class");
-				}
-			}
+			var student = load(),
+					selector = student.free == true ? "td" : "td:not(.current):not(.past):not(.co-op)";
 			//Draw all classes
 			$("ul").each(function() {
 				$(this).empty();
@@ -161,8 +155,8 @@
 			for (var i = 0; i < student.classes.length; i++) {
 				for (var j = 0; j < student.classes[i].length; j++) {
 					var course = document.createElement('li'),
-						title = document.createElement('div'),
-						credits = document.createElement('span');
+							title = document.createElement('div'),
+							credits = document.createElement('span');
 					title.title = student.classes[i][j].name;
 					title.innerHTML = title.title;
 					credits.innerHTML = "(" + student.classes[i][j].credits + ")";
@@ -170,9 +164,9 @@
 					$("#" + i).children().append(course);
 				}
 			}
-			$("td:not(.current):not(.past):not(.co-op) ul li button").attr("title", "Remove from schedule");
+			$(selector + " ul li button").attr("title", "Remove from schedule");
 			//Onclick for delete buttons set to delete class
-			$("td:not(.current):not(.past):not(.co-op) ul li button").click(function() {
+			$(selector + " ul li button").click(function() {
 				if (confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
 					removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
 					$(this).closest('li').remove();
@@ -183,65 +177,37 @@
 				$("#" + i).addClass("past");
 				$("#" + i).attr("title", "Past semester");
 			}
-			$("#" + student.semester).addClass('current');
-			$("#" + student.semester).attr('title', "Current semester");
 			for (var i = 0; i < student.coops.length; i++) {
 				$("#" + student.coops[i]).addClass("co-op");
 				$("#" + student.coops[i]).attr("title", "Designated Co-op period");
 			}
-
-			/**********************************************************************/
-			/****THIS IS THE A/B BETWEEN CLICKING TO MOVE CLASSES AND DRAGGING*****/
-			/**********************************************************************/
-			if (dragORclick == "click") {
-				$("td:not(.current):not(.past):not(.co-op) ul li div").click(function() {
-					if (selectedClass == null) {
-						selectedClass = this.innerHTML;
-						selectedSemester = $(this).closest('td').attr('id');
-						$(this).parent().addClass('selected');
-					} else if ($(this).parent().hasClass('selected')) {
-						selectedClass = null;
-						selectedSemester = null;
-						$(this).parent().removeClass("selected");
-					}
-				});
-			} else if (dragORclick == "drag") {
-				$("td:not(.current):not(.past):not(.co-op) ul li").draggable({
-					helper: "clone",
-					start: function(event, ui) {
-						$(ui.helper).addClass("selected");
-						selectedClass = searchClass($(this).children()[0].innerHTML);
-						selectedSemester = $(this).closest('td').attr('id');
-					},
-					revert: true,
-				});
-				$("td:not(:first-child):not(.current):not(.past):not(.co-op)").droppable({
-					drop: function(event, ui) {
-						moveClass(selectedClass, selectedSemester, $(this).attr('id'));
-						$(".selected").removeClass("selected");
-						selectedClass = null;
-						selectedSemester = null;
-						draw();
-					},
-				});
+			$("#" + student.semester).addClass('current');
+			$("#" + student.semester).attr('title', "Current semester");
+			
+			if(student.free) {
+				$(".current, .past, .co-op").addClass("free");
 			}
-		}
-		draw();
 
-		var selectedClass = null;
-		var selectedSemester = null;
-		if (dragORclick == "click") {
-			$('td:not(:first-child):not(.current):not(.past):not(.co-op)').click(function() {
-				if (selectedClass != null && $(this).attr('id') != selectedSemester) {
+			$(selector + " ul li").draggable({
+				helper: "clone",
+				start: function(event, ui) {
+					$(ui.helper).addClass("selected");
+					selectedClass = searchClass($(this).children()[0].innerHTML);
+					selectedSemester = $(this).closest('td').attr('id');
+				},
+				revert: true,
+			});
+			$(selector + ":not(:first-child)").droppable({
+				drop: function(event, ui) {
 					moveClass(selectedClass, selectedSemester, $(this).attr('id'));
-					draw();
+					$(".selected").removeClass("selected");
 					selectedClass = null;
 					selectedSemester = null;
-					$("li.selected").removeClass("selected");
-				}
+					draw();
+				},
 			});
 		}
-
+		draw();
 	</script>
 </body>
 <html>

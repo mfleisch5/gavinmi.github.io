@@ -10,20 +10,22 @@ body {
 }
 
 input,
-button {
-	padding: 8px;
-	border-radius: 4px;
-	border: 1px solid gray;
+button,
+select {
 	display: inline-block;
+	padding: 8px;
+	border: 1px solid gray;
+	border-radius: 4px;
 }
 
 card {
-	padding: 15px;
 	display: block;
+	overflow-x: hidden;
+	padding: 15px;
 	border-radius: 4px;
 	background-color: white;
+	-webkit-box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
 	box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3);
-	overflow-x: hidden;
 }
 
 card:not(.unpadded),
@@ -42,24 +44,25 @@ card.unpadded {
 
 card.unpadded header,
 card.unpadded section.card_body {
-	width: calc(100% - 30px);
 	padding: 15px;
+	width: calc(100% - 30px);
+}
+
+card.unpadded section.card_body {
+	max-height: calc(100% - 100px);
 }
 
 card.unpadded header {
-	font-size: 24pt;
 	background-color: #333;
 	color: white;
-}
-
-card.unpadded .card_body {
-	height: calc(100% - 100px);
+	font-size: 24pt;
 }
 
 .centered {
 	position: absolute;
-	left: 50%;
 	top: 50%;
+	left: 50%;
+	-webkit-transform: translate(-50%, -50%);
 	transform: translate(-50%, -50%);
 }
 
@@ -78,15 +81,15 @@ summary {
 }
 
 summary > :first-child {
-	font-size: 18pt;
-	font-weight: bold;
-	height: 28px;
+	display: inline-block;
+	overflow: hidden;
+	max-width: calc(100% - 30px);
 	max-height: 28px;
 	width: calc(100% - 30px);
-	max-width: calc(100% - 30px);
-	overflow: hidden;
+	height: 28px;
 	white-space: nowrap;
-	display: inline-block;
+	font-weight: bold;
+	font-size: 18pt;
 }
 
 summary::-webkit-details-marker {
@@ -94,14 +97,16 @@ summary::-webkit-details-marker {
 }
 
 summary::after {
-	content: '\25B2';
 	float: right;
-	font-size: 1.35em;
 	margin-top: 2.5px;
+	content: '\25B2';
+	font-size: 1.35em;
+	-webkit-transition: 0.15s ease;
 	transition: 0.15s ease;
 }
 
 details[open] summary::after {
+	-webkit-transform: rotate(180deg) translate(0, 0px);
 	transform: rotate(180deg) translate(0, 0px);
 }
 
@@ -114,8 +119,8 @@ details[open] summary::after {
 table {
 	width: 100%;
 	height: 100%;
-	border-collapse: collapse;
 	border-spacing: 0;
+	border-collapse: collapse;
 }
 
 th:not(:first-child),
@@ -137,9 +142,9 @@ td {
 }
 
 td:not(:first-child) {
-	background-color: white;
 	width: 22.5%;
 	height: 18%;
+	background-color: white;
 	vertical-align: top;
 }
 
@@ -148,9 +153,12 @@ td:not(:first-child) {
 	margin-left: -8px;
 }
 
-td.past,
-td.co-op {
+td.past {
 	background-color: #ccc;
+}
+
+td.co-op {
+	background-color: lightpink;
 }
 
 td.current {
@@ -169,11 +177,11 @@ td.selected {
 
 blackout {
 	position: absolute;
-	height: 100%;
-	width: 100%;
-	background-color: rgba(0, 0, 0, 0.6);
 	z-index: 1;
 	display: none;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.6);
 }
 
 blackout.open {
@@ -187,31 +195,33 @@ blackout.open {
 /******************************************************************************/
 
 menu#nav_bar {
-	color: white;
-	background-color: #333;
-
-	height: 100%;
-	width: 300px;
 	display: inline-block;
-
 	margin: 0;
 	padding: 0;
+	width: 300px;
+	height: 100%;
+	background-color: #333;
+	color: white;
 }
 
 menu#nav_bar img {
 	width: 300px;
 	height: 150px;
-	cursor: pointer;
 	background-color: rgba(0, 0, 0, 0.25);
+	cursor: pointer;
 }
 
 menu#nav_bar a {
 	display: block;
 	padding: 10px;
-	color: white;
-	font-size: 12pt;
-	text-decoration: none;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+	color: white;
+	text-decoration: none;
+	font-size: 12pt;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 }
 
@@ -236,8 +246,8 @@ menu#nav_bar a.current {
 }
 
 menu#nav_bar a[disabled] {
-	pointer-events: none;
 	color: rgba(255, 255, 255, 0.25);
+	pointer-events: none;
 }
 
 /******************************************************************************/
@@ -248,14 +258,12 @@ menu#nav_bar a[disabled] {
 
 section#main_body {
 	display: inline-block;
-	vertical-align: top;
 	margin-left: -7px;
 	padding: 15px;
-
 	width: calc(100% - 331px);
 	height: calc(100% - 30px);
-
 	background-color: #ccc;
+	vertical-align: top;
 }
 
 /******************************************************************************/
@@ -274,10 +282,10 @@ section#main_body {
 
 #info_cards card {
 	display: inline-block;
-	vertical-align: top;
+	margin-bottom: 10px;
 	max-height: calc(100% - 160px);
 	width: calc(50% - 38px);
-	margin-bottom: 10px;
+	vertical-align: top;
 }
 
 #info_cards card:first-child {
@@ -290,15 +298,19 @@ card ul {
 }
 
 #info_cards card summary {
-	user-select: none;
 	cursor: pointer;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 #info_cards card ul,
 td ul {
+	margin-right: 30px;
 	padding: 0;
 	list-style: none;
-	margin-right: 30px;
 }
 
 #info_cards card ul li:not(.visible),
@@ -308,8 +320,8 @@ td ul li {
 
 #info_cards card ul li,
 	{
-	padding: 5px 5px 5px 20px;
 	margin: 0;
+	padding: 5px 5px 5px 20px;
 }
 
 #info_cards card ul li:nth-child(odd),
@@ -319,21 +331,25 @@ td ul li:nth-child(odd) {
 
 #info_cards card ul li > div:first-child,
 td ul li div {
-	height: 18px;
+	display: inline-block;
+	overflow: hidden;
+	padding: 5px 0px 5px 5px;
+	max-width: calc(100% - 35px);
 	max-height: 18px;
 	width: calc(100% - 35px);
-	max-width: calc(100% - 35px);
-	overflow: hidden;
-	display: inline-block;
-	padding: 5px 0px 5px 5px;
+	height: 18px;
 	white-space: nowrap;
 }
 
 #info_cards card ul li span {
 	float: right;
 	margin: 4px 5px 5px 5px;
-	user-select: none;
 	cursor: pointer;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 card summary,
@@ -342,8 +358,12 @@ card ul {
 }
 
 card summary {
-	user-select: none;
 	cursor: pointer;
+
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
 }
 
 card ul {
@@ -356,36 +376,39 @@ card ul li {
 
 
 td ul li {
-	padding: 0px;
 	margin: 0px;
+	padding: 0px;
 }
 
 td ul li button {
-	background-color: transparent;
-	text-align: center;
+	float: right;
+	padding: 0px;
 	border: none;
 	border-radius: 50%;
-	padding: 0px;
-	float: right;
+	background-color: transparent;
 	vertical-align: middle;
+	text-align: center;
 	cursor: pointer;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover button span {
+td:not(.current):not(.past):not(.co-op) ul li:hover button span,
+td.free ul li:hover button span {
 	display: none;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover button {
-	color: transparent;
-	background-color: #777;
+td:not(.current):not(.past):not(.co-op) ul li:hover button,
+td.free ul li:hover button {
 	padding: 8px;
+	background-color: #777;
 	background-image: url('http://limburglaan5.nl/wp-content/themes/limburglaan-child/images/icon_contact_header_close.png');
+	background-position: center;
 	background-size: 12px 12px;
 	background-repeat: no-repeat;
-	background-position: center;
+	color: transparent;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover span:not(:first-child) {
+td:not(.current):not(.past):not(.co-op) ul li:hover span:not(:first-child),
+td.free ul li:hover span:not(:first-child) {
 	display: none;
 }
 
