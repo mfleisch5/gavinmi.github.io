@@ -96,8 +96,7 @@
 			cursor: pointer;
 		}
 
-		td:not(:first-child):not(.current):not(.past):not(.co-op),
-		td.free {
+		td:not(:first-child):not(.past) {
 			cursor: pointer;
 		}
 
@@ -253,9 +252,8 @@
 
 	</section>
 	<script>
-		var student = load(),
-				selector = student.free == true ? "td" : "td:not(.current):not(.past):not(.co-op)";
-
+		var student = load();
+		
 		function draw() {
 
 			for (var i = 0; i < 6; i++) {
@@ -327,24 +325,17 @@
 			}
 			for (var i = 1; i < student.semester; i++) {
 				$("#" + i).addClass("past");
-				$("#" + i).attr("title", student.free == true ? "Past semester" : "Cannot add to past semester");
+				$("#" + i).attr("title", "Cannot add to past semester");
 			}
 			$("#" + student.semester).addClass("current");
-			$("#" + student.semester).attr("title", student.free == true ? "Current semester" : "Cannot add to a semester in progress");
-			for (var i = 0; i < student.coops.length; i++) {
-				$("#" + student.coops[i]).addClass("co-op");
-				$("#" + student.coops[i]).attr("title", student.free == true ? "Designated Co-op period" : "Cannot add to designated Co-op period");
-			}
-			if(student.free) {
-				$(".current, .past, .co-op").addClass("free");
-			}
+
 		}
 
 		function dialog() {
 			selected = null;
 			$('blackout').toggleClass("open");
 			loadTable();
-			$(selector + ':not(:first-child)').click(function() {
+			$('td:not(.past):not(:first-child)').click(function() {
 				if (selected != null) {
 					$(selected).html(Math.max(0, parseInt(selected.innerHTML) - parseInt(selectedClass.credits)));
 					$(selected).removeClass('selected');

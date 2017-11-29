@@ -15,24 +15,25 @@
 			width: auto;
 		}
 
-		td:not(.current):not(.past):not(.co-op) ul li,
-		td.free ul li {
+		td:not(.past) ul li {
 			cursor: -webkit-grab;
 		}
 
-		td:not(.current):not(.past):not(.co-op) ul li:hover,
-		td.free ul li:hover,
+		td:not(.past) ul li:hover,
 		td ul li.selected {
 			background-color: lightblue;
 		}
 
-		td:not(.current):not(.past):not(.co-op) ul li.selected,
-		td.free ul li.selected {
+		td:not(.past) ul li.selected {
 			cursor: -webkit-grabbing;
 		}
 
 		td ul li button {
 			margin: 5px 5px 5px 0px;
+		}
+		
+		td.past ul li button {
+			outline: none;
 		}
 
 		#main_body {
@@ -146,8 +147,7 @@
 
 		//Draw function to be called on load and on refresh
 		function draw() {
-			var student = load(),
-					selector = student.free == true ? "td" : "td:not(.current):not(.past):not(.co-op)";
+			var student = load();
 			//Draw all classes
 			$("ul").each(function() {
 				$(this).empty();
@@ -158,37 +158,31 @@
 							title = document.createElement('div'),
 							credits = document.createElement('span');
 					title.title = student.classes[i][j].name;
-					title.innerHTML = title.title;
-					credits.innerHTML = "(" + student.classes[i][j].credits + ")";
+					$(title).html(title.title);
+					$(credits).html("(" + student.classes[i][j].credits + ")");
+					$(credits).attr("title", student.classes[i][j].credits + " credit hours");
 					$(course).append([title, $(document.createElement('button')).append(credits)]);
 					$("#" + i).children().append(course);
 				}
 			}
-			$(selector + " ul li button").attr("title", "Remove from schedule");
-			//Onclick for delete buttons set to delete class
-			$(selector + " ul li button").click(function() {
-				if (confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
-					removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
-					$(this).closest('li').remove();
-				}
-			});
 			//Set current semester to current
 			for (var i = 1; i < student.semester; i++) {
 				$("#" + i).addClass("past");
 				$("#" + i).attr("title", "Past semester");
 			}
-			for (var i = 0; i < student.coops.length; i++) {
-				$("#" + student.coops[i]).addClass("co-op");
-				$("#" + student.coops[i]).attr("title", "Designated Co-op period");
-			}
 			$("#" + student.semester).addClass('current');
 			$("#" + student.semester).attr('title', "Current semester");
 			
-			if(student.free) {
-				$(".current, .past, .co-op").addClass("free");
-			}
-
-			$(selector + " ul li").draggable({
+			$("td:not(.past) ul li button").attr("title", "Remove from schedule");
+			//Onclick for delete buttons set to delete class
+			$("td:not(.past) ul li button").click(function() {
+				if (confirm("Delete " + $(this).parent().children()[0].innerHTML + " from your schedule?")) {
+					removeClass(searchClass($(this).parent().children()[0].innerHTML), $(this).closest('td').attr('id'));
+					$(this).closest('li').remove();
+				}
+			});
+		
+			$("td:not(.past) ul li").draggable({
 				helper: "clone",
 				start: function(event, ui) {
 					$(ui.helper).addClass("selected");
@@ -197,7 +191,7 @@
 				},
 				revert: true,
 			});
-			$(selector + ":not(:first-child)").droppable({
+			$("td:not(.past):not(:first-child)").droppable({
 				drop: function(event, ui) {
 					moveClass(selectedClass, selectedSemester, $(this).attr('id'));
 					$(".selected").removeClass("selected");

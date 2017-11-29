@@ -12,24 +12,101 @@
 		card {
 			margin: 0 auto;
 			min-width: 500px;
-			width: calc(50%);
+			width: 100%;
 			height: -webkit-max-content;
 			height: -moz-max-content;
 			height: max-content;
-		}
-
-		input,
-		select {
 			margin-bottom: 15px;
 		}
-
+		
+		div:not(:last-child) {
+			margin-bottom: 30px;
+			margin-top: 10px;
+		}
+		
+		div > * {
+			vertical-align: middle;
+		}
+		
 		input {
 			width: 45px;
 		}
+		
+		select {
+			width: 117px;
+		}
 
+		#current,
+		#coop_cycle,
+		#free_plan > *,
 		button {
 			float: right;
+			margin-top: -10px;
 		}
+		
+		#email,
+		#nuid {
+			float: right;
+		}
+		
+		#free_plan > * {
+			margin-top: -4px;
+		}
+		
+		#current input {
+			margin-right: 6px;
+		}
+
+		/* Hide the browser's default checkbox */
+		#free_plan input {
+			position: absolute;
+			opacity: 0;
+		}
+
+		/* Create a custom checkbox */
+		.checkmark {
+			height: 25px;
+			width: 25px;
+			border: 1px solid gray;
+			border-radius: 4px;
+		}
+
+		/* On mouse-over, add a grey background color */
+		#free_plan:hover input ~ .checkmark {
+			background-color: #ccc;
+		}
+
+		/* When the checkbox is checked, add a blue background */
+		#free_plan input:checked ~ .checkmark {
+			background-color: rgb(75, 75, 255);
+		}
+
+		/* Create the checkmark/indicator (hidden when not checked) */
+		.checkmark:after {
+			content: "";
+/*			position: absolute;*/
+			display: none;
+		}
+
+		/* Show the checkmark when checked */
+		#free_plan input:checked ~ .checkmark:after {
+			display: block;
+		}
+
+		/* Style the checkmark/indicator */
+		#free_plan .checkmark:after {
+			margin-left: 9px;
+			margin-top: 4px;
+			width: 5px;
+			height: 10px;
+			border: solid white;
+			border-width: 0 3px 3px 0;
+			-webkit-transform:  rotate(45deg);
+			-ms-transform:  rotate(45deg);
+			transform:  rotate(45deg);
+		}
+		
+		
 	</style>
 
 </head>
@@ -52,27 +129,27 @@
 		<card class="unpadded">
 			<header>Account Preferences</header>
 			<section class="card_body">
-
-				<label for="current">Current Semester</label>
-				<span id="current">
-					<input type="number" id="cur_year" value=1 min=1 max=5>
-					<select name="" id="cur_term">
-						<option value="Fall">Fall</option>
-						<option selected value="Spring">Spring</option>
-						<option value="Summer I">Summer I</option>
-						<option value="Summer II">Summer II</option>
-					</select>
-				</span><br>
-
-				<label for="coop_cycle">Co-op Cycle</label>
-				<select id="coop_cycle">
-					<option selected value="Spring">Spring</option>
-					<option value="Fall">Fall</option>
-				</select><br>
-
-				<label for="free_plan">Enable editing of invalid semesters?</label>
-				<input type="checkbox" id="free_plan"><br>
-
+				<div>
+					<label for="email">myNEU Username</label>
+					<span id="email">doe.john</span>
+				</div>
+				<div>
+					<label for="nuid">NUID</label>
+					<span id="nuid">123456789</span>
+				</div>
+				<div>
+					<label for="current">Current Year and Semester</label>
+					<span id="current">
+						<input type="number" id="cur_year" value=1 min=1 max=5>
+						<select name="" id="cur_term">
+							<option value="Fall">Fall</option>
+							<option selected value="Spring">Spring</option>
+							<option value="Summer I">Summer I</option>
+							<option value="Summer II">Summer II</option>
+						</select>
+					</span>
+				</div><br>
+				
 				<button onclick="saveChanges()">Save Changes</button>
 
 			</section>
@@ -83,27 +160,16 @@
 	<script>
 		var student = load(),
 			year = $("#cur_year")[0],
-			term = $("#cur_term")[0],
-			coop = $("#coop_cycle")[0],
-			free = $("#free_plan")[0];
-
+			term = $("#cur_term")[0];
+		
 		year.value = Math.floor(student.semester / 4) + 1;
 		term.selectedIndex = student.semester % 4 - 1;
-		coop.selectedIndex = student.coops[0] == 6 ? 0 : 1;
-		free.checked = student.free;
-
+		
 		function saveChanges() {
 
 			student.semester = (year.value - 1) * 4 + term.selectedIndex + 1;
-			student.coops = coop.selectedIndex == 0 ? [6, 7, 10, 11, 14, 15] : [8, 9, 12, 13, 16, 17];
-			student.free = free.checked;
 
-			if (confirm("Are you sure you want to edit schedule settings?" + (student.free == true ? "" : " Conflicts will be removed."))) {
-				if (!student.free) {
-					for (var i = 0; i < student.coops.length; i++) {
-						student.classes[student.coops[i]] = [];
-					}
-				}
+			if (confirm("Are you sure you want to edit schedule settings?")) {
 				store(student);
 				alert("Preferences edited");
 			}

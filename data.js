@@ -2,12 +2,11 @@
 //classes   (Class[][])  all the classes for the student by semester
 //semester  (int)        current semester (0 is transfer credit, 1 is 1st semester, 2 is 2nd, etc)
 //coops     (Integer[])  array of semester indeces indicating co-op periods
-function Student(classes, semester, coops, free) {
+function Student(classes, semester, coops) {
 	this.classes = classes;
 	this.semester = semester;
 	this.coops = coops;
 	this.reqs = getCSRequirements();
-	this.free = free;
 }
 
 //Constructor for Class
@@ -90,7 +89,7 @@ function addClass(c, semester) {
 	}
 
 	classArray[semester].push(c);
-	var ret = new Student(classArray, stud.semester, stud.coops, stud.free);
+	var ret = new Student(classArray, stud.semester, stud.coops);
 
 	store(ret);
 }
@@ -119,7 +118,7 @@ function removeClass(c, semester) {
 	}
 
 	// console.log(classArray);
-	var ret = new Student(classArray, stud.semester, stud.coops, stud.free);
+	var ret = new Student(classArray, stud.semester, stud.coops);
 	store(ret);
 }
 
@@ -137,7 +136,7 @@ function load() {
 	var stud = JSON.parse(localStorage.getItem("user"));
 	if (stud === null) {
 		var classes = getStartingSchedule();
-		stud = new Student(classes, 2, [6, 7, 10, 11, 14, 15], false);
+		stud = new Student(classes, 2, [6, 7, 10, 11, 14, 15]);
 	}
 	//console.log(stud);
 	return stud;

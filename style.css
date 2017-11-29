@@ -388,15 +388,17 @@ td ul li button {
 	background-color: transparent;
 	vertical-align: middle;
 	text-align: center;
+}
+td:not(.past) ul li button {
 	cursor: pointer;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover button span,
+td:not(.past) ul li:hover button span,
 td.free ul li:hover button span {
 	display: none;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover button,
+td:not(.past) ul li:hover button,
 td.free ul li:hover button {
 	padding: 8px;
 	background-color: #777;
@@ -407,7 +409,7 @@ td.free ul li:hover button {
 	color: transparent;
 }
 
-td:not(.current):not(.past):not(.co-op) ul li:hover span:not(:first-child),
+td:not(.past) ul li:hover span:not(:first-child),
 td.free ul li:hover span:not(:first-child) {
 	display: none;
 }
